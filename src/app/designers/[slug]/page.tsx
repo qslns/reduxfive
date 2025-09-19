@@ -257,11 +257,40 @@ export default function DesignerPage({ params }: Props) {
                   </div>
                   
                   {/* Bio */}
-                  <div className="mb-8 mobile-bio-section">
-                    <div className="max-w-full lg:max-w-[500px] w-full" style={{minHeight: 'auto', height: 'auto'}}>
-                      <p className="text-white/80 text-base md:text-lg leading-relaxed whitespace-pre-wrap break-words" style={{display: 'block', height: 'auto', overflow: 'visible'}}>
-                        {designer.bio}
-                      </p>
+                  <div className="mb-8">
+                    <div className="max-w-full lg:max-w-[500px] w-full">
+                      {isClient && window.innerWidth <= 768 ? (
+                        // Mobile version - no restrictions
+                        <div style={{
+                          width: '100%',
+                          height: 'auto',
+                          minHeight: 'auto',
+                          maxHeight: 'none',
+                          overflow: 'visible',
+                          display: 'block'
+                        }}>
+                          <p style={{
+                            color: 'rgba(255, 255, 255, 0.8)',
+                            fontSize: '14px',
+                            lineHeight: '1.8',
+                            display: 'block',
+                            width: '100%',
+                            height: 'auto',
+                            overflow: 'visible',
+                            whiteSpace: 'pre-wrap',
+                            wordBreak: 'break-word',
+                            WebkitLineClamp: 'unset',
+                            textOverflow: 'unset'
+                          }}>
+                            {designer.bio}
+                          </p>
+                        </div>
+                      ) : (
+                        // Desktop version
+                        <p className="text-white/80 text-lg leading-relaxed">
+                          {designer.bio}
+                        </p>
+                      )}
                     </div>
                   </div>
                   
@@ -286,27 +315,37 @@ export default function DesignerPage({ params }: Props) {
                 </div>
                 
                 {/* Profile Image */}
-                <div className="relative mobile-profile-container">
-                  <div
-                    className="relative w-full max-w-[400px] mx-auto overflow-hidden rounded-lg bg-gray-50"
-                    style={{
-                      height: 'auto',
-                      minHeight: '500px'
-                    }}
-                  >
-                    <OptimizedImage
-                      src={profileCMS.currentUrl || designer.profileImage}
-                      alt={`${designer.name} Profile`}
-                      width={400}
-                      height={500}
-                      priority={true}
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700 ease-out"
-                      style={{
-                        filter: 'contrast(1.1) brightness(0.9)',
-                        display: 'block'
-                      }}
-                    />
+                <div className="relative">
+                  <div className="relative w-full max-w-[400px] mx-auto rounded-lg bg-gray-50">
+                    {isClient && window.innerWidth <= 768 ? (
+                      // Mobile version - show full image
+                      <img
+                        src={profileCMS.currentUrl || designer.profileImage}
+                        alt={`${designer.name} Profile`}
+                        className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700"
+                        style={{
+                          display: 'block',
+                          maxWidth: '100%',
+                          height: 'auto',
+                          objectFit: 'contain',
+                          filter: 'contrast(1.1) brightness(0.9)'
+                        }}
+                      />
+                    ) : (
+                      // Desktop version
+                      <OptimizedImage
+                        src={profileCMS.currentUrl || designer.profileImage}
+                        alt={`${designer.name} Profile`}
+                        width={400}
+                        height={500}
+                        priority={true}
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-700 ease-out"
+                        style={{
+                          filter: 'contrast(1.1) brightness(0.9)'
+                        }}
+                      />
+                    )}
                     
                     {/* 프로필 이미지 CMS */}
                     {isAuthenticated && (
@@ -621,44 +660,6 @@ export default function DesignerPage({ params }: Props) {
           }
         }
         
-        /* Mobile First Approach - Complete Override */
-        @media (max-width: 768px) {
-          .mobile-profile-container > div {
-            height: auto !important;
-            min-height: unset !important;
-            max-height: none !important;
-          }
-
-          .mobile-profile-container img {
-            width: 100% !important;
-            height: auto !important;
-            object-fit: contain !important;
-            max-width: 100% !important;
-          }
-
-          .mobile-bio-section {
-            width: 100% !important;
-            height: auto !important;
-            min-height: unset !important;
-            max-height: none !important;
-            overflow: visible !important;
-          }
-
-          .mobile-bio-section p {
-            display: block !important;
-            width: 100% !important;
-            height: auto !important;
-            min-height: unset !important;
-            max-height: none !important;
-            overflow: visible !important;
-            white-space: pre-wrap !important;
-            word-break: break-word !important;
-            -webkit-line-clamp: unset !important;
-            line-clamp: unset !important;
-            text-overflow: clip !important;
-          }
-        }
-
         @media (max-width: 768px) {
           /* 모든 컨테이너 너비 제한 */
           * {
@@ -791,22 +792,10 @@ export default function DesignerPage({ params }: Props) {
             line-height: 1.1 !important;
           }
           
-          /* Complete override for profile image container */
-          .mobile-profile-container {
-            width: 100% !important;
-            padding: 0 20px !important;
-            margin-bottom: 2rem !important;
-          }
-
-          .mobile-profile-container > div {
+          /* Override all image and text restrictions on mobile */
+          img {
+            max-width: 100% !important;
             height: auto !important;
-            min-height: unset !important;
-          }
-
-          .mobile-profile-container img {
-            width: 100% !important;
-            height: auto !important;
-            object-fit: contain !important;
           }
           
           .portfolio-section {
