@@ -177,11 +177,11 @@ export default function MemoryPage() {
           </p>
         </div>
         
-        <div className="gallery-grid [columns:4] [column-gap:2px] max-w-[1800px] mx-auto max-[1400px]:[columns:3] max-[1024px]:[columns:2] max-[1024px]:[column-gap:1px] max-[768px]:[columns:1]">
+        <div className="gallery-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 max-w-[1800px] mx-auto">
           {galleryImages.map((image, index) => (
             <div 
               key={index}
-              className="gallery-item [break-inside:avoid] mb-[2px] relative overflow-hidden opacity-0 cursor-pointer transition-all duration-[400ms] [transition-timing-function:cubic-bezier(0.25,0.8,0.25,1)] hover:transform hover:scale-[1.02] hover:z-10 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] max-[1024px]:mb-[1px]"
+              className="gallery-item relative aspect-[3/4] overflow-hidden opacity-0 cursor-pointer transition-all duration-[400ms] [transition-timing-function:cubic-bezier(0.25,0.8,0.25,1)] hover:transform hover:scale-[1.02] hover:z-10 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] rounded-lg"
               style={{ 
                 '--index': index,
                 animation: `fadeInSequential 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards`,
@@ -196,7 +196,7 @@ export default function MemoryPage() {
                 height={600}
                 priority={index < 6}
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                className="w-full h-auto block transition-all duration-[600ms] [transition-timing-function:cubic-bezier(0.25,0.8,0.25,1)] [filter:brightness(0.9)_contrast(1.1)] hover:[filter:brightness(1)_contrast(1.2)_saturate(1.1)] hover:transform hover:scale-105"
+                className="w-full h-full object-cover transition-all duration-[600ms] [transition-timing-function:cubic-bezier(0.25,0.8,0.25,1)] [filter:brightness(0.9)_contrast(1.1)] hover:[filter:brightness(1)_contrast(1.2)_saturate(1.1)] hover:transform hover:scale-105"
               />
               <div className="gallery-overlay absolute top-0 left-0 right-0 bottom-0 bg-[linear-gradient(45deg,rgba(0,0,0,0.7)_0%,transparent_30%,transparent_70%,rgba(183,175,163,0.3)_100%)] opacity-0 transition-opacity duration-[400ms] [transition-timing-function:cubic-bezier(0.25,0.8,0.25,1)] flex items-end p-5 hover:opacity-100">
                 <p className="gallery-caption font-['Inter'] text-xs font-light tracking-[0.1em] text-white uppercase [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">
@@ -239,7 +239,7 @@ export default function MemoryPage() {
         {isAuthenticated && (
           <div className="max-w-[1800px] mx-auto mt-10 px-5">
             <div 
-              className="[break-inside:avoid] mb-[2px] relative overflow-hidden bg-gray-800/50 border-2 border-dashed border-gray-600 hover:border-amber-300 transition-all duration-300 min-h-[200px] flex items-center justify-center"
+              className="relative aspect-[3/4] overflow-hidden bg-gray-800/50 border-2 border-dashed border-gray-600 hover:border-amber-300 transition-all duration-300 flex items-center justify-center rounded-lg"
               style={{ 
                 animation: `fadeInSequential 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards`,
                 animationDelay: `${galleryImages.length * 50}ms`
@@ -410,12 +410,12 @@ export default function MemoryPage() {
           }
           
           .gallery-grid {
-            columns: 2 !important;
-            column-gap: 1px !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 0.5rem !important;
           }
-          
+
           .gallery-item {
-            margin-bottom: 1px !important;
+            aspect-ratio: 3/4 !important;
           }
         }
         
@@ -434,12 +434,12 @@ export default function MemoryPage() {
           }
           
           .gallery-grid {
-            columns: 1 !important;
-            column-gap: 0 !important;
+            grid-template-columns: 1fr !important;
+            gap: 0.5rem !important;
           }
-          
+
           .gallery-item {
-            margin-bottom: 0.5px !important;
+            aspect-ratio: 3/4 !important;
           }
         }
         

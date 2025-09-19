@@ -26,6 +26,7 @@ export default function DesignerPage({ params }: Props) {
   const [isLoading, setIsLoading] = useState(true);
   const [isClient, setIsClient] = useState(false);
   const [resolvedParams, setResolvedParams] = useState<{ slug: string } | null>(null);
+  const [isTextExpanded, setIsTextExpanded] = useState(false);
   
   // CMS 인증
   const { isAuthenticated } = useSimpleAuth();
@@ -257,9 +258,19 @@ export default function DesignerPage({ params }: Props) {
                   
                   {/* Bio */}
                   <div className="mb-8">
-                    <p className="text-white/80 text-lg leading-relaxed max-w-full lg:max-w-[500px] w-full">
-                      {designer.bio}
-                    </p>
+                    <div className="max-w-full lg:max-w-[500px] w-full">
+                      <p className={`text-white/80 text-lg leading-relaxed transition-all duration-300 ${!isTextExpanded ? 'line-clamp-4' : ''}`}>
+                        {designer.bio}
+                      </p>
+                      {designer.bio && designer.bio.length > 200 && (
+                        <button
+                          onClick={() => setIsTextExpanded(!isTextExpanded)}
+                          className="mt-2 text-amber-300 hover:text-amber-400 text-sm font-medium transition-colors duration-300 underline-offset-2 hover:underline"
+                        >
+                          {isTextExpanded ? '접기' : '더보기'}
+                        </button>
+                      )}
+                    </div>
                   </div>
                   
                   {/* Details */}
@@ -284,21 +295,19 @@ export default function DesignerPage({ params }: Props) {
                 
                 {/* Profile Image */}
                 <div className="relative">
-                  <div 
-                    className="relative w-full max-w-[400px] mx-auto"
+                  <div
+                    className="relative w-full max-w-[400px] mx-auto aspect-[4/5] overflow-hidden rounded-lg"
                   >
-                    <OptimizedImage 
+                    <OptimizedImage
                       src={profileCMS.currentUrl || designer.profileImage}
                       alt={`${designer.name} Profile`}
                       width={400}
                       height={500}
                       priority={true}
                       sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="w-full h-auto object-contain grayscale hover:grayscale-0 transition-all duration-700 ease-out"
+                      className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out"
                       style={{
-                        filter: 'contrast(1.1) brightness(0.9)',
-                        maxHeight: '500px',
-                        minHeight: '300px'
+                        filter: 'contrast(1.1) brightness(0.9)'
                       }}
                     />
                     
@@ -692,17 +701,20 @@ export default function DesignerPage({ params }: Props) {
             word-break: break-word !important;
             overflow-wrap: break-word !important;
             white-space: normal !important;
-            text-overflow: unset !important;
             font-size: 15px !important;
             line-height: 1.7 !important;
-            margin-bottom: 1.5rem !important;
+            margin-bottom: 0.5rem !important;
             padding: 0 10px !important;
             text-align: left !important;
             display: block !important;
-            height: auto !important;
-            min-height: auto !important;
-            overflow: visible !important;
             box-sizing: border-box !important;
+          }
+
+          .designer-info .line-clamp-4 {
+            display: -webkit-box !important;
+            -webkit-line-clamp: 4 !important;
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
           }
           
           /* 모든 디자이너 역할 텍스트 */
@@ -739,14 +751,13 @@ export default function DesignerPage({ params }: Props) {
             order: 0 !important;
             padding: 0 20px !important;
           }
-          
+
           .profile-image img,
           .hero-section .relative:has(OptimizedImage) img {
             width: 100% !important;
-            height: auto !important;
-            object-fit: contain !important;
-            max-height: 400px !important;
-            min-height: 250px !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            aspect-ratio: 4/5 !important;
           }
           
           .portfolio-section {
