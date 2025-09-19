@@ -257,9 +257,9 @@ export default function DesignerPage({ params }: Props) {
                   </div>
                   
                   {/* Bio */}
-                  <div className="mb-8">
-                    <div className="max-w-full lg:max-w-[500px] w-full bio-container">
-                      <p className="text-white/80 text-base md:text-lg leading-relaxed transition-all duration-300">
+                  <div className="mb-8 mobile-bio-section">
+                    <div className="max-w-full lg:max-w-[500px] w-full" style={{minHeight: 'auto', height: 'auto'}}>
+                      <p className="text-white/80 text-base md:text-lg leading-relaxed whitespace-pre-wrap break-words" style={{display: 'block', height: 'auto', overflow: 'visible'}}>
                         {designer.bio}
                       </p>
                     </div>
@@ -286,9 +286,13 @@ export default function DesignerPage({ params }: Props) {
                 </div>
                 
                 {/* Profile Image */}
-                <div className="relative">
+                <div className="relative mobile-profile-container">
                   <div
-                    className="relative w-full max-w-[400px] mx-auto h-[400px] md:h-[500px] md:aspect-[4/5] overflow-hidden rounded-lg bg-gray-50"
+                    className="relative w-full max-w-[400px] mx-auto overflow-hidden rounded-lg bg-gray-50"
+                    style={{
+                      height: 'auto',
+                      minHeight: '500px'
+                    }}
                   >
                     <OptimizedImage
                       src={profileCMS.currentUrl || designer.profileImage}
@@ -297,10 +301,10 @@ export default function DesignerPage({ params }: Props) {
                       height={500}
                       priority={true}
                       sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="w-full h-full object-cover md:object-contain grayscale hover:grayscale-0 transition-all duration-700 ease-out"
+                      className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700 ease-out"
                       style={{
                         filter: 'contrast(1.1) brightness(0.9)',
-                        objectPosition: 'center top'
+                        display: 'block'
                       }}
                     />
                     
@@ -617,6 +621,44 @@ export default function DesignerPage({ params }: Props) {
           }
         }
         
+        /* Mobile First Approach - Complete Override */
+        @media (max-width: 768px) {
+          .mobile-profile-container > div {
+            height: auto !important;
+            min-height: unset !important;
+            max-height: none !important;
+          }
+
+          .mobile-profile-container img {
+            width: 100% !important;
+            height: auto !important;
+            object-fit: contain !important;
+            max-width: 100% !important;
+          }
+
+          .mobile-bio-section {
+            width: 100% !important;
+            height: auto !important;
+            min-height: unset !important;
+            max-height: none !important;
+            overflow: visible !important;
+          }
+
+          .mobile-bio-section p {
+            display: block !important;
+            width: 100% !important;
+            height: auto !important;
+            min-height: unset !important;
+            max-height: none !important;
+            overflow: visible !important;
+            white-space: pre-wrap !important;
+            word-break: break-word !important;
+            -webkit-line-clamp: unset !important;
+            line-clamp: unset !important;
+            text-overflow: clip !important;
+          }
+        }
+
         @media (max-width: 768px) {
           /* 모든 컨테이너 너비 제한 */
           * {
@@ -650,13 +692,14 @@ export default function DesignerPage({ params }: Props) {
             overflow-y: visible !important;
           }
           
-          /* Bio 섹션 완전 표시 */
-          .designer-info .mb-8 {
+          /* Remove all restrictions on bio section */
+          .designer-info .mb-8,
+          .mobile-bio-section {
             margin-bottom: 1.5rem !important;
             width: 100% !important;
             max-width: 100% !important;
             height: auto !important;
-            min-height: auto !important;
+            min-height: unset !important;
             max-height: none !important;
             overflow: visible !important;
             display: block !important;
@@ -748,27 +791,22 @@ export default function DesignerPage({ params }: Props) {
             line-height: 1.1 !important;
           }
           
-          /* 프로필 이미지 모바일 최적화 */
-          .profile-image,
-          .hero-section .relative:has(OptimizedImage),
-          .hero-section .relative > div {
-            max-width: 100% !important;
+          /* Complete override for profile image container */
+          .mobile-profile-container {
             width: 100% !important;
-            margin: 0 auto 2rem !important;
-            order: 0 !important;
             padding: 0 20px !important;
-            height: 400px !important;
-            aspect-ratio: unset !important;
+            margin-bottom: 2rem !important;
           }
 
-          .profile-image img,
-          .hero-section .relative:has(OptimizedImage) img,
-          .hero-section img {
+          .mobile-profile-container > div {
+            height: auto !important;
+            min-height: unset !important;
+          }
+
+          .mobile-profile-container img {
             width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            object-position: center top !important;
-            aspect-ratio: unset !important;
+            height: auto !important;
+            object-fit: contain !important;
           }
           
           .portfolio-section {
