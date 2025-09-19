@@ -112,15 +112,23 @@ export function useGalleryCMS(slotId: string, initialImages?: string[]) {
       if (stored) {
         try {
           const data = JSON.parse(stored);
-          if (Array.isArray(data)) {
+          // 빈 배열이 아닌 경우에만 사용, 빈 배열이면 initialImages 사용
+          if (Array.isArray(data) && data.length > 0) {
             setCurrentImages(data);
+          } else if (initialImages && initialImages.length > 0) {
+            // localStorage에 빈 배열이 있으면 initialImages로 복원
+            setCurrentImages(initialImages);
+            localStorage.setItem(storageKey, JSON.stringify(initialImages));
           }
         } catch (error) {
           console.warn('Failed to parse gallery data:', error);
         }
+      } else if (initialImages && initialImages.length > 0) {
+        // localStorage에 데이터가 없으면 initialImages 사용
+        setCurrentImages(initialImages);
       }
     }
-  }, [storageKey]);
+  }, [storageKey, initialImages]);
 
   // 갤러리 업데이트
   const updateGallery = (newImages: string[]) => {
