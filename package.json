@@ -1,0 +1,61 @@
+{
+  "name": "redux-portfolio",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Modern designer portfolio built with Next.js 15 and TypeScript",
+  "scripts": {
+    "dev": "next dev --turbo",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "analyze": "ANALYZE=true next build",
+    "vercel": "vercel",
+    "vercel:prod": "vercel --prod"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@vercel/analytics": "^1.4.0",
+    "@vercel/speed-insights": "^1.0.12",
+    "@vercel/toolbar": "^0.1.22",
+    "autoprefixer": "^10.4.20",
+    "clsx": "^2.1.1",
+    "cookie": "^1.0.2",
+    "imagekit": "^5.2.0",
+    "imagekit-javascript": "^4.0.1",
+    "lucide-react": "^0.478.0",
+    "next": "^15.4.6",
+    "postcss": "^8.4.49",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-error-boundary": "^6.0.0",
+    "resend": "^6.0.1",
+    "sharp": "^0.34.2",
+    "tailwind-merge": "^3.0.0",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.9.2",
+    "zod": "^3.24.1",
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
+    "critters": "^0.0.23",
+    "eslint": "^9.17.0",
+    "eslint-config-next": "15.1.0",
+    "glob": "^11.0.3",
+    "nodemon": "^3.1.9"
+  },
+  "keywords": [
+    "next.js",
+    "typescript",
+    "imagekit",
+    "portfolio",
+    "design"
+  ],
+  "author": "Redux Team",
+  "license": "MIT"
+}
