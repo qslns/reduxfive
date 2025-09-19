@@ -258,8 +258,8 @@ export default function DesignerPage({ params }: Props) {
                   
                   {/* Bio */}
                   <div className="mb-8">
-                    <div className="max-w-full lg:max-w-[500px] w-full">
-                      <p className="text-white/80 text-lg leading-relaxed transition-all duration-300">
+                    <div className="max-w-full lg:max-w-[500px] w-full bio-container">
+                      <p className="text-white/80 text-base md:text-lg leading-relaxed transition-all duration-300">
                         {designer.bio}
                       </p>
                     </div>
@@ -288,7 +288,7 @@ export default function DesignerPage({ params }: Props) {
                 {/* Profile Image */}
                 <div className="relative">
                   <div
-                    className="relative w-full max-w-[400px] mx-auto aspect-[4/5] overflow-hidden rounded-lg"
+                    className="relative w-full max-w-[400px] mx-auto h-[400px] md:h-[500px] md:aspect-[4/5] overflow-hidden rounded-lg bg-gray-50"
                   >
                     <OptimizedImage
                       src={profileCMS.currentUrl || designer.profileImage}
@@ -297,10 +297,10 @@ export default function DesignerPage({ params }: Props) {
                       height={500}
                       priority={true}
                       sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="w-full h-full object-contain bg-black/5 grayscale hover:grayscale-0 transition-all duration-700 ease-out"
+                      className="w-full h-full object-cover md:object-contain grayscale hover:grayscale-0 transition-all duration-700 ease-out"
                       style={{
                         filter: 'contrast(1.1) brightness(0.9)',
-                        objectPosition: 'center center'
+                        objectPosition: 'center top'
                       }}
                     />
                     
@@ -642,21 +642,24 @@ export default function DesignerPage({ params }: Props) {
           
           .hero-section {
             height: auto !important;
-            min-height: 100vh !important;
+            min-height: unset !important;
             width: 100vw !important;
             max-width: 100vw !important;
-            padding: 120px 15px 60px !important;
+            padding: 120px 15px 40px !important;
             overflow-x: hidden !important;
             overflow-y: visible !important;
           }
           
-          /* Bio 섹션 특별 처리 */
+          /* Bio 섹션 완전 표시 */
           .designer-info .mb-8 {
-            margin-bottom: 2rem !important;
+            margin-bottom: 1.5rem !important;
             width: 100% !important;
             max-width: 100% !important;
             height: auto !important;
+            min-height: auto !important;
+            max-height: none !important;
             overflow: visible !important;
+            display: block !important;
           }
           
           .hero-section .max-w-\\[1600px\\] {
@@ -684,27 +687,39 @@ export default function DesignerPage({ params }: Props) {
             box-sizing: border-box !important;
           }
           
+          /* Bio 텍스트 완전한 표시 */
+          .bio-container {
+            max-width: 100% !important;
+            width: 100% !important;
+            height: auto !important;
+            min-height: auto !important;
+            overflow: visible !important;
+          }
+
+          .bio-container p,
           .designer-info p,
           .designer-info .text-white\/80,
-          .designer-info .leading-relaxed,
-          .designer-info .text-lg {
+          .designer-info .leading-relaxed {
             max-width: 100% !important;
             width: 100% !important;
             word-wrap: break-word !important;
             word-break: break-word !important;
             overflow-wrap: break-word !important;
             white-space: normal !important;
-            font-size: 15px !important;
-            line-height: 1.7 !important;
-            margin-bottom: 0.5rem !important;
-            padding: 0 10px !important;
+            font-size: 14px !important;
+            line-height: 1.8 !important;
+            margin-bottom: 1rem !important;
+            padding: 0 5px !important;
             text-align: left !important;
             display: block !important;
             box-sizing: border-box !important;
             overflow: visible !important;
             height: auto !important;
+            min-height: auto !important;
+            max-height: none !important;
             -webkit-line-clamp: unset !important;
             -webkit-box-orient: unset !important;
+            text-overflow: clip !important;
           }
           
           /* 모든 디자이너 역할 텍스트 */
@@ -733,22 +748,27 @@ export default function DesignerPage({ params }: Props) {
             line-height: 1.1 !important;
           }
           
+          /* 프로필 이미지 모바일 최적화 */
           .profile-image,
-          .hero-section .relative:has(OptimizedImage) {
+          .hero-section .relative:has(OptimizedImage),
+          .hero-section .relative > div {
             max-width: 100% !important;
             width: 100% !important;
-            margin: 0 auto !important;
+            margin: 0 auto 2rem !important;
             order: 0 !important;
             padding: 0 20px !important;
+            height: 400px !important;
+            aspect-ratio: unset !important;
           }
 
           .profile-image img,
-          .hero-section .relative:has(OptimizedImage) img {
+          .hero-section .relative:has(OptimizedImage) img,
+          .hero-section img {
             width: 100% !important;
             height: 100% !important;
-            object-fit: contain !important;
-            aspect-ratio: 4/5 !important;
-            background: rgba(0,0,0,0.02) !important;
+            object-fit: cover !important;
+            object-position: center top !important;
+            aspect-ratio: unset !important;
           }
           
           .portfolio-section {

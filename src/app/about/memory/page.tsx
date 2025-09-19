@@ -177,11 +177,11 @@ export default function MemoryPage() {
           </p>
         </div>
         
-        <div className="gallery-grid grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 sm:gap-3 md:gap-4 max-w-[1800px] mx-auto px-2 sm:px-4">
+        <div className="gallery-grid max-w-[1800px] mx-auto px-4">
           {galleryImages.map((image, index) => (
             <div 
               key={index}
-              className="gallery-item relative aspect-[3/4] overflow-hidden opacity-0 cursor-pointer transition-all duration-[400ms] [transition-timing-function:cubic-bezier(0.25,0.8,0.25,1)] hover:transform hover:scale-[1.02] hover:z-10 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] rounded-md sm:rounded-lg"
+              className="gallery-item overflow-hidden opacity-0 cursor-pointer transition-all duration-[400ms] [transition-timing-function:cubic-bezier(0.25,0.8,0.25,1)] hover:transform hover:scale-[1.02] hover:z-10 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] rounded-md"
               style={{ 
                 '--index': index,
                 animation: `fadeInSequential 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards`,
@@ -379,19 +379,32 @@ export default function MemoryPage() {
           --accent-deep: #9A9086;
           --accent-neutral: #F8F6F4;
         }
+
+        /* Gallery Grid - Responsive Grid Layout */
+        .gallery-grid {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 1rem;
+        }
+
+        .gallery-item {
+          position: relative;
+          aspect-ratio: 3/4;
+          width: 100%;
+        }
+
+        @media (max-width: 1400px) {
+          .gallery-grid {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
         
         /* Enhanced Mobile Responsive adjustments */
-        /* Mobile-specific grid adjustments */
         @media (max-width: 1024px) {
           .gallery-grid {
-            display: grid !important;
             grid-template-columns: repeat(3, 1fr) !important;
             gap: 0.75rem !important;
             padding: 0 1rem !important;
-          }
-
-          .gallery-item {
-            aspect-ratio: 3/4 !important;
           }
         }
 
@@ -424,16 +437,9 @@ export default function MemoryPage() {
           }
           
           .gallery-grid {
-            display: grid !important;
             grid-template-columns: repeat(2, 1fr) !important;
             gap: 0.5rem !important;
-            padding: 0 0.5rem !important;
-          }
-
-          .gallery-item {
-            aspect-ratio: 3/4 !important;
-            width: 100% !important;
-            height: auto !important;
+            padding: 0 0.75rem !important;
           }
         }
         
@@ -452,22 +458,9 @@ export default function MemoryPage() {
           }
           
           .gallery-grid {
-            display: grid !important;
-            grid-template-columns: 1fr !important;
-            gap: 0.5rem !important;
-            padding: 0 0.25rem !important;
-          }
-
-          .gallery-item {
-            aspect-ratio: 3/4 !important;
-            width: 100% !important;
-            height: auto !important;
-          }
-
-          .gallery-item img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 0.4rem !important;
+            padding: 0 0.5rem !important;
           }
         }
         
