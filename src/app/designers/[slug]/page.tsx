@@ -259,17 +259,9 @@ export default function DesignerPage({ params }: Props) {
                   {/* Bio */}
                   <div className="mb-8">
                     <div className="max-w-full lg:max-w-[500px] w-full">
-                      <p className={`text-white/80 text-lg leading-relaxed transition-all duration-300 ${!isTextExpanded ? 'line-clamp-4' : ''}`}>
+                      <p className="text-white/80 text-lg leading-relaxed transition-all duration-300">
                         {designer.bio}
                       </p>
-                      {designer.bio && designer.bio.length > 200 && (
-                        <button
-                          onClick={() => setIsTextExpanded(!isTextExpanded)}
-                          className="mt-2 text-amber-300 hover:text-amber-400 text-sm font-medium transition-colors duration-300 underline-offset-2 hover:underline"
-                        >
-                          {isTextExpanded ? '접기' : '더보기'}
-                        </button>
-                      )}
                     </div>
                   </div>
                   
@@ -305,9 +297,10 @@ export default function DesignerPage({ params }: Props) {
                       height={500}
                       priority={true}
                       sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out"
+                      className="w-full h-full object-contain bg-black/5 grayscale hover:grayscale-0 transition-all duration-700 ease-out"
                       style={{
-                        filter: 'contrast(1.1) brightness(0.9)'
+                        filter: 'contrast(1.1) brightness(0.9)',
+                        objectPosition: 'center center'
                       }}
                     />
                     
@@ -708,13 +701,10 @@ export default function DesignerPage({ params }: Props) {
             text-align: left !important;
             display: block !important;
             box-sizing: border-box !important;
-          }
-
-          .designer-info .line-clamp-4 {
-            display: -webkit-box !important;
-            -webkit-line-clamp: 4 !important;
-            -webkit-box-orient: vertical !important;
-            overflow: hidden !important;
+            overflow: visible !important;
+            height: auto !important;
+            -webkit-line-clamp: unset !important;
+            -webkit-box-orient: unset !important;
           }
           
           /* 모든 디자이너 역할 텍스트 */
@@ -756,8 +746,9 @@ export default function DesignerPage({ params }: Props) {
           .hero-section .relative:has(OptimizedImage) img {
             width: 100% !important;
             height: 100% !important;
-            object-fit: cover !important;
+            object-fit: contain !important;
             aspect-ratio: 4/5 !important;
+            background: rgba(0,0,0,0.02) !important;
           }
           
           .portfolio-section {
