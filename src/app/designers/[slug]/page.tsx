@@ -259,38 +259,9 @@ export default function DesignerPage({ params }: Props) {
                   {/* Bio */}
                   <div className="mb-8">
                     <div className="max-w-full lg:max-w-[500px] w-full">
-                      {isClient && window.innerWidth <= 768 ? (
-                        // Mobile version - no restrictions
-                        <div style={{
-                          width: '100%',
-                          height: 'auto',
-                          minHeight: 'auto',
-                          maxHeight: 'none',
-                          overflow: 'visible',
-                          display: 'block'
-                        }}>
-                          <p style={{
-                            color: 'rgba(255, 255, 255, 0.8)',
-                            fontSize: '14px',
-                            lineHeight: '1.8',
-                            display: 'block',
-                            width: '100%',
-                            height: 'auto',
-                            overflow: 'visible',
-                            whiteSpace: 'pre-wrap',
-                            wordBreak: 'break-word',
-                            WebkitLineClamp: 'unset',
-                            textOverflow: 'unset'
-                          }}>
-                            {designer.bio}
-                          </p>
-                        </div>
-                      ) : (
-                        // Desktop version
-                        <p className="text-white/80 text-lg leading-relaxed">
-                          {designer.bio}
-                        </p>
-                      )}
+                      <p className="text-white/80 text-base md:text-lg leading-relaxed break-words">
+                        {designer.bio}
+                      </p>
                     </div>
                   </div>
                   
@@ -316,36 +287,20 @@ export default function DesignerPage({ params }: Props) {
                 
                 {/* Profile Image */}
                 <div className="relative">
-                  <div className="relative w-full max-w-[400px] mx-auto rounded-lg bg-gray-50">
-                    {isClient && window.innerWidth <= 768 ? (
-                      // Mobile version - show full image
-                      <img
-                        src={profileCMS.currentUrl || designer.profileImage}
-                        alt={`${designer.name} Profile`}
-                        className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700"
-                        style={{
-                          display: 'block',
-                          maxWidth: '100%',
-                          height: 'auto',
-                          objectFit: 'contain',
-                          filter: 'contrast(1.1) brightness(0.9)'
-                        }}
-                      />
-                    ) : (
-                      // Desktop version
-                      <OptimizedImage
-                        src={profileCMS.currentUrl || designer.profileImage}
-                        alt={`${designer.name} Profile`}
-                        width={400}
-                        height={500}
-                        priority={true}
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-700 ease-out"
-                        style={{
-                          filter: 'contrast(1.1) brightness(0.9)'
-                        }}
-                      />
-                    )}
+                  <div className="relative w-full max-w-[400px] mx-auto rounded-lg bg-gray-50 md:aspect-[4/5] md:overflow-hidden">
+                    <OptimizedImage
+                      src={profileCMS.currentUrl || designer.profileImage}
+                      alt={`${designer.name} Profile`}
+                      width={400}
+                      height={500}
+                      priority={true}
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="w-full h-auto md:h-full md:w-full grayscale hover:grayscale-0 transition-all duration-700 ease-out"
+                      style={{
+                        filter: 'contrast(1.1) brightness(0.9)',
+                        objectFit: 'contain'
+                      }}
+                    />
                     
                     {/* 프로필 이미지 CMS */}
                     {isAuthenticated && (
@@ -731,39 +686,18 @@ export default function DesignerPage({ params }: Props) {
             box-sizing: border-box !important;
           }
           
-          /* Bio 텍스트 완전한 표시 */
-          .bio-container {
-            max-width: 100% !important;
-            width: 100% !important;
-            height: auto !important;
-            min-height: auto !important;
-            overflow: visible !important;
-          }
-
-          .bio-container p,
-          .designer-info p,
-          .designer-info .text-white\/80,
-          .designer-info .leading-relaxed {
-            max-width: 100% !important;
-            width: 100% !important;
-            word-wrap: break-word !important;
-            word-break: break-word !important;
-            overflow-wrap: break-word !important;
-            white-space: normal !important;
-            font-size: 14px !important;
-            line-height: 1.8 !important;
-            margin-bottom: 1rem !important;
-            padding: 0 5px !important;
-            text-align: left !important;
+          /* Remove ALL text truncation */
+          .designer-info p {
+            display: -webkit-box !important;
             display: block !important;
-            box-sizing: border-box !important;
-            overflow: visible !important;
-            height: auto !important;
-            min-height: auto !important;
-            max-height: none !important;
-            -webkit-line-clamp: unset !important;
+            -webkit-line-clamp: none !important;
             -webkit-box-orient: unset !important;
-            text-overflow: clip !important;
+            overflow: visible !important;
+            text-overflow: unset !important;
+            height: auto !important;
+            max-height: none !important;
+            white-space: normal !important;
+            word-break: break-word !important;
           }
           
           /* 모든 디자이너 역할 텍스트 */
@@ -792,9 +726,21 @@ export default function DesignerPage({ params }: Props) {
             line-height: 1.1 !important;
           }
           
-          /* Override all image and text restrictions on mobile */
-          img {
-            max-width: 100% !important;
+          /* Force full image display on mobile */
+          .hero-section img {
+            width: 100% !important;
+            height: auto !important;
+            object-fit: contain !important;
+            max-height: none !important;
+          }
+
+          /* Force full text display on mobile */
+          .hero-section p {
+            display: block !important;
+            overflow: visible !important;
+            text-overflow: unset !important;
+            -webkit-line-clamp: unset !important;
+            max-height: none !important;
             height: auto !important;
           }
           
