@@ -175,8 +175,7 @@ export default function MemoryPage() {
   // 블랙스크린 방지 - SSR에서도 콘텐츠 렌더링
 
   return (
-    <>
-
+    <main className="memory-page-wrapper">
       {/* Professional Gallery - White theme version */}
       <div className="gallery-container min-h-screen pt-[100px] pr-5 pb-[60px] pl-5 relative bg-gradient-to-br from-white via-gray-50 to-gray-100">
         {/* Background texture */}
@@ -203,12 +202,18 @@ export default function MemoryPage() {
             <div 
               key={index}
               className="gallery-item overflow-hidden opacity-0 cursor-pointer transition-all duration-[400ms] [transition-timing-function:cubic-bezier(0.25,0.8,0.25,1)] hover:transform hover:scale-[1.02] hover:z-10 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] rounded-md"
-              style={{ 
+              style={{
                 '--index': index,
                 animation: `fadeInSequential 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards`,
-                animationDelay: `${index * 50}ms`
+                animationDelay: `${index * 50}ms`,
+                position: 'relative',
+                zIndex: 1
               } as React.CSSProperties}
-              onClick={() => openLightbox(index)}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                openLightbox(index);
+              }}
             >
               <OptimizedImage 
                 src={image}
@@ -285,13 +290,15 @@ export default function MemoryPage() {
       {/* Professional Lightbox - White theme version */}
       {isLightboxOpen && (
         <div
-          className="lightbox fixed inset-0 bg-black/90 backdrop-blur-[20px] z-[9998] opacity-100 transition-opacity duration-[400ms] [transition-timing-function:cubic-bezier(0.25,0.8,0.25,1)]"
+          className="lightbox fixed inset-0 bg-black/90 backdrop-blur-[20px] opacity-100 transition-opacity duration-[400ms] [transition-timing-function:cubic-bezier(0.25,0.8,0.25,1)]"
           onClick={handleLightboxClick}
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
-          }}
+            justifyContent: 'center',
+            position: 'fixed',
+            zIndex: 9998,
+            pointerEvents: 'auto'
         >
           <div className="lightbox-content max-w-[90vw] max-h-[90vh] relative">
             <button
@@ -366,6 +373,24 @@ export default function MemoryPage() {
 
       {/* CSS for animations matching HTML version */}
       <style jsx>{`
+        /* Fix for navigation blocking */
+        .memory-page-wrapper {
+          position: relative;
+          z-index: 1;
+        }
+
+        .gallery-container {
+          position: relative;
+          z-index: 1;
+          pointer-events: auto;
+        }
+
+        .lightbox {
+          position: fixed;
+          z-index: 9998;
+          pointer-events: auto;
+        }
+
         @keyframes fadeInUp {
           to {
             opacity: 1;
@@ -534,7 +559,7 @@ export default function MemoryPage() {
           }
         }
       `}</style>
-    </>
+    </main>
   );
 }
 

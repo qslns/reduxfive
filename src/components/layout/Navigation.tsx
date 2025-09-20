@@ -174,14 +174,28 @@ export default function Navigation() {
       <div className="noise-overlay" />
 
       {/* Navigation */}
-      <nav 
+      <nav
         className={`redux-nav ${scrolled ? 'redux-nav--scrolled' : ''}`}
         role="navigation"
         aria-label="Main navigation"
+        style={{
+          zIndex: 10001,
+          pointerEvents: 'auto',
+          isolation: 'isolate'
+        }}
       >
-        <div className="redux-nav__container">
+        <div className="redux-nav__container" style={{ pointerEvents: 'auto' }}>
           {/* Logo */}
-          <Link href="/" className="redux-nav__logo" aria-label="REDUX Home" onClick={closeMobileMenu}>
+          <Link
+            href="/"
+            className="redux-nav__logo"
+            aria-label="REDUX Home"
+            onClick={(e) => {
+              e.stopPropagation();
+              closeMobileMenu();
+            }}
+            style={{ pointerEvents: 'auto', cursor: 'pointer' }}
+          >
             REDUX
           </Link>
 
@@ -408,6 +422,28 @@ export default function Navigation() {
           --nav-blur: blur(20px);
           --nav-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
           --nav-z-index: 10001;
+        }
+
+        /* Ensure navigation is always on top and clickable */
+        nav.redux-nav {
+          pointer-events: auto !important;
+          isolation: isolate !important;
+          z-index: 10001 !important;
+        }
+
+        .redux-nav * {
+          pointer-events: auto !important;
+        }
+
+        .redux-nav__container {
+          pointer-events: auto !important;
+        }
+
+        .redux-nav__logo,
+        .redux-nav__menu a,
+        .redux-nav__menu button {
+          pointer-events: auto !important;
+          cursor: pointer !important;
         }
 
         /* Navigation Base - Simplified */
