@@ -97,23 +97,32 @@ export default function VisualArtPage() {
   return (
     <>
 
-      {/* Hero Section - HTML 버전과 완전 동일 */}
-      <section className="hero-section h-screen relative flex items-center justify-center bg-[--gray-light] overflow-hidden pt-[80px]">
-        <div className="hero-bg absolute top-0 left-0 w-full h-full opacity-10">
+      {/* Hero Section - White theme version */}
+      <section className="hero-section h-screen relative flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-gray-100 overflow-hidden pt-[80px]">
+        <div className="hero-bg absolute top-0 left-0 w-full h-full opacity-[0.03]">
           <div className="hero-pattern absolute w-[200%] h-[200%] -top-1/2 -left-1/2 animate-[patternMove_20s_linear_infinite]"
                style={{
-                 backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, var(--primary-black) 35px, var(--primary-black) 70px)'
+                 backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, #666666 35px, #666666 70px)'
                }}>
           </div>
         </div>
+
+        {/* Background texture */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'2\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' opacity=\'1\'/%3E%3C/svg%3E")'
+          }}
+        />
+
         <div className="hero-content text-center z-[1]">
-          <h1 
-            className="hero-title font-thin uppercase text-black opacity-0 transform translate-y-[50px] animate-[heroFade_1.5s_ease_forwards] tracking-[0.2em]"
-            style={{ fontSize: 'clamp(60px, 10vw, 160px)' }}
+          <h1
+            className="hero-title font-thin uppercase text-gray-900 opacity-0 transform translate-y-[50px] animate-[heroFade_1.5s_ease_forwards] tracking-[0.2em]"
+            style={{ fontSize: 'clamp(60px, 10vw, 160px)', textShadow: '0 0 30px rgba(0,0,0,0.1)' }}
           >
             Visual Art
           </h1>
-          <p className="hero-subtitle text-base tracking-[3px] text-[--gray-medium] mt-5 opacity-0 animate-[heroFade_1.5s_ease_forwards] [animation-delay:0.3s]">
+          <p className="hero-subtitle text-base tracking-[3px] text-[#8B7D6B] mt-5 opacity-0 animate-[heroFade_1.5s_ease_forwards] [animation-delay:0.3s]">
             Beyond Fashion, Into Art
           </p>
         </div>
@@ -122,10 +131,10 @@ export default function VisualArtPage() {
       {/* Visual Grid Section - HTML 버전과 완전 동일 */}
       <section className="visual-grid-section py-[120px] px-10 bg-white">
         <div className="section-intro max-w-[800px] mx-auto mb-[120px] text-center">
-          <h2 className="text-4xl font-light tracking-[3px] text-black mb-[30px]">
+          <h2 className="text-4xl font-light tracking-[3px] text-gray-900 mb-[30px]">
             시각적 경험의 확장
           </h2>
-          <p className="text-base leading-[2] text-[--gray-dark]">
+          <p className="text-base leading-[2] text-gray-600">
             REDUX는 패션을 넘어 다양한 시각 예술로 표현의 영역을 확장합니다.
             각 작품은 우리의 철학과 감성을 담아 새로운 시각적 언어를 만들어냅니다.
           </p>
@@ -153,11 +162,11 @@ export default function VisualArtPage() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 67vw"
                   className="object-cover transition-transform duration-[1s] ease-in-out [filter:contrast(0.9)] hover:transform hover:scale-105 hover:[filter:contrast(1.1)]"
                 />
-                <div className="visual-overlay absolute top-0 left-0 w-full h-full bg-black/70 flex flex-col justify-center items-center text-white opacity-0 transition-opacity duration-500 ease-in-out p-10 text-center hover:opacity-100">
-                  <h3 className="visual-title text-2xl font-light tracking-[2px] mb-[10px]">
+                <div className="visual-overlay absolute top-0 left-0 w-full h-full bg-white/95 backdrop-blur-sm flex flex-col justify-center items-center text-gray-800 opacity-0 transition-opacity duration-500 ease-in-out p-10 text-center hover:opacity-100 shadow-lg">
+                  <h3 className="visual-title text-2xl font-light tracking-[2px] mb-[10px] text-[#8B7D6B]">
                     {meta.title}
                   </h3>
-                  <p className="visual-description text-sm leading-[1.6] opacity-80">
+                  <p className="visual-description text-sm leading-[1.6] opacity-80 text-gray-600">
                     {meta.description}
                   </p>
                 </div>
@@ -167,49 +176,49 @@ export default function VisualArtPage() {
         </div>
       </section>
 
-      {/* Process Section - HTML 버전과 완전 동일 */}
-      <section className="process-section py-[120px] px-10 bg-[--gray-light]">
-        <h2 className="process-title text-5xl font-light tracking-[4px] text-center mb-20 text-black">
+      {/* Process Section - White theme version */}
+      <section className="process-section py-[120px] px-10 bg-gradient-to-b from-gray-50 to-white">
+        <h2 className="process-title text-5xl font-light tracking-[4px] text-center mb-20 text-gray-900">
           CREATIVE PROCESS
         </h2>
         <div className="process-grid grid grid-cols-3 gap-[60px] max-w-[1200px] mx-auto max-[1024px]:grid-cols-1 max-[1024px]:gap-[60px]">
           
-          <div className="process-item text-center">
-            <div className="process-number text-[80px] font-thin text-[--gray-medium] opacity-30 mb-5">
+          <div className="process-item text-center bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+            <div className="process-number text-[80px] font-thin text-[#8B7D6B] opacity-40 mb-5">
               01
             </div>
-            <h3 className="process-name text-2xl font-light tracking-[2px] mb-5 text-black">
+            <h3 className="process-name text-2xl font-light tracking-[2px] mb-5 text-gray-900">
               CONCEPT
             </h3>
-            <p className="process-description text-sm leading-[1.8] text-[--gray-dark]">
+            <p className="process-description text-sm leading-[1.8] text-gray-600">
               아이디어의 시작부터 컨셉 정립까지,
               끊임없는 대화와 실험을 통해
               우리만의 시각적 언어를 만듭니다.
             </p>
           </div>
-          
-          <div className="process-item text-center">
-            <div className="process-number text-[80px] font-thin text-[--gray-medium] opacity-30 mb-5">
+
+          <div className="process-item text-center bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+            <div className="process-number text-[80px] font-thin text-[#8B7D6B] opacity-40 mb-5">
               02
             </div>
-            <h3 className="process-name text-2xl font-light tracking-[2px] mb-5 text-black">
+            <h3 className="process-name text-2xl font-light tracking-[2px] mb-5 text-gray-900">
               CREATION
             </h3>
-            <p className="process-description text-sm leading-[1.8] text-[--gray-dark]">
+            <p className="process-description text-sm leading-[1.8] text-gray-600">
               다양한 매체와 기법을 활용하여
               컨셉을 시각적으로 구현하고
               새로운 표현의 가능성을 탐구합니다.
             </p>
           </div>
-          
-          <div className="process-item text-center">
-            <div className="process-number text-[80px] font-thin text-[--gray-medium] opacity-30 mb-5">
+
+          <div className="process-item text-center bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+            <div className="process-number text-[80px] font-thin text-[#8B7D6B] opacity-40 mb-5">
               03
             </div>
-            <h3 className="process-name text-2xl font-light tracking-[2px] mb-5 text-black">
+            <h3 className="process-name text-2xl font-light tracking-[2px] mb-5 text-gray-900">
               CONNECTION
             </h3>
-            <p className="process-description text-sm leading-[1.8] text-[--gray-dark]">
+            <p className="process-description text-sm leading-[1.8] text-gray-600">
               작품을 통해 관객과 소통하고
               감정적 연결을 만들어내며
               기억에 남을 순간을 디자인합니다.
@@ -218,20 +227,20 @@ export default function VisualArtPage() {
         </div>
       </section>
 
-      {/* CMS Admin Interface - 안전하게 조건부 렌더링 */}
+      {/* CMS Admin Interface - White theme version */}
       {isAuthenticated && isClient && visualArtSlot && (
-        <section className="cms-admin-section py-[80px] px-10 bg-gray-50">
+        <section className="cms-admin-section py-[80px] px-10 bg-white">
           <div className="max-w-[1600px] mx-auto">
             <div style={{
-              background: 'rgba(255, 255, 255, 0.95)',
+              background: 'rgba(255, 255, 255, 0.98)',
               backdropFilter: 'blur(10px)',
               borderRadius: '16px',
-              border: '1px solid rgba(0, 0, 0, 0.1)',
+              border: '1px solid rgba(139, 125, 107, 0.2)',
               padding: '32px',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)'
+              boxShadow: '0 8px 32px rgba(139, 125, 107, 0.1)'
             }}>
               <div style={{
-                color: '#000',
+                color: '#8B7D6B',
                 fontSize: '20px',
                 fontWeight: 600,
                 marginBottom: '24px',
@@ -241,7 +250,7 @@ export default function VisualArtPage() {
               }}>
                 🎨 Visual Art Gallery Management
               </div>
-              
+
               <MediaSlot
                 slot={visualArtSlot}
                 currentFiles={galleryImages}

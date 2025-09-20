@@ -85,10 +85,10 @@ export default function EditableImage({
 
       {/* CMS Edit Overlay */}
       {enableCMS && (
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center bg-black/20 backdrop-blur-sm">
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center bg-white/20 backdrop-blur-sm">
           <button
             onClick={handleImageClick}
-            className="w-10 h-10 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+            className="w-10 h-10 bg-[#8B7D6B] hover:bg-[#7A6F5E] text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg"
             title="이미지 변경"
           >
             <Edit3 className="w-4 h-4" />
@@ -100,14 +100,14 @@ export default function EditableImage({
       {isEditing && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-fade-in">
           <div
-            className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full mx-4 animate-scale-in"
+            className="bg-white rounded-lg p-6 max-w-md w-full mx-4 animate-scale-in shadow-xl"
           >
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">
                 이미지 변경
               </h3>
               
               <div className="space-y-4">
-                <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                   <input
                     ref={fileInputRef}
                     type="file"
@@ -115,18 +115,18 @@ export default function EditableImage({
                     onChange={handleFileSelect}
                     className="hidden"
                   />
-                  
+
                   {isUploading ? (
                     <div className="flex flex-col items-center gap-2">
-                      <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
-                      <p className="text-sm text-gray-600 dark:text-gray-400">업로드 중...</p>
+                      <Loader2 className="w-8 h-8 text-[#8B7D6B] animate-spin" />
+                      <p className="text-sm text-gray-600">업로드 중...</p>
                     </div>
                   ) : (
                     <div className="flex flex-col items-center gap-2">
                       <Upload className="w-8 h-8 text-gray-400" />
                       <button
                         onClick={() => fileInputRef.current?.click()}
-                        className="text-blue-600 hover:text-blue-700 font-medium"
+                        className="text-[#8B7D6B] hover:text-[#7A6F5E] font-medium"
                       >
                         새 이미지 선택
                       </button>
@@ -138,7 +138,7 @@ export default function EditableImage({
                 <div className="flex gap-3">
                   <button
                     onClick={() => setIsEditing(false)}
-                    className="flex-1 px-4 py-2 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                    className="flex-1 px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors shadow-sm"
                   >
                     취소
                   </button>

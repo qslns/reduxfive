@@ -36,11 +36,11 @@ function DesignerCard({ designer, index, isAuthenticated, onClick }: DesignerCar
 
   return (
     <div 
-      className="designer-card relative h-[65vh] min-h-[450px] max-h-[600px] overflow-hidden cursor-pointer bg-black transition-all duration-[600ms] ease-out hover:transform hover:scale-[1.002] hover:z-10"
+      className="designer-card relative h-[65vh] min-h-[450px] max-h-[600px] overflow-hidden cursor-pointer bg-gray-50 transition-all duration-[600ms] ease-out hover:transform hover:scale-[1.002] hover:z-10 shadow-md hover:shadow-xl"
       onClick={onClick}
       style={{
-        borderRight: (index + 1) % 3 !== 0 ? '1px solid rgba(255, 255, 255, 0.05)' : 'none',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+        borderRight: (index + 1) % 3 !== 0 ? '1px solid rgba(0, 0, 0, 0.05)' : 'none',
+        borderBottom: '1px solid rgba(0, 0, 0, 0.05)',
       }}
     >
       <div 
@@ -50,13 +50,13 @@ function DesignerCard({ designer, index, isAuthenticated, onClick }: DesignerCar
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundImage: hasDisplayImage ? `url('${displayImage}')` : 'none',
-          background: !hasDisplayImage ? 'linear-gradient(135deg, #2a2a2a, #4a4a4a)' : undefined,
-          filter: 'grayscale(100%) contrast(1.2)',
-          opacity: 0.7,
+          background: !hasDisplayImage ? 'linear-gradient(135deg, #f5f5f5, #e0e0e0)' : undefined,
+          filter: 'grayscale(80%) contrast(1.1) brightness(1.1)',
+          opacity: 0.85,
         }}
       >
         {!hasDisplayImage && (
-          <div className="absolute inset-0 flex items-center justify-center text-6xl text-white/30">
+          <div className="absolute inset-0 flex items-center justify-center text-6xl text-gray-400">
             📷
           </div>
         )}
@@ -64,7 +64,7 @@ function DesignerCard({ designer, index, isAuthenticated, onClick }: DesignerCar
       
       
       <span 
-        className="absolute top-[40px] right-[40px] text-[120px] font-light text-white/10 transition-all duration-[600ms] ease-out"
+        className="absolute top-[40px] right-[40px] text-[120px] font-light text-gray-300 transition-all duration-[600ms] ease-out"
       >
         {designer.number}
       </span>
@@ -72,37 +72,37 @@ function DesignerCard({ designer, index, isAuthenticated, onClick }: DesignerCar
       {/* Film indicator for designers with videos */}
       {designer.hasVideo && (
         <div 
-          className="absolute top-[40px] left-[40px] w-[40px] h-[40px] bg-white/10 backdrop-blur-[10px] rounded-full flex items-center justify-center text-white transition-all duration-[600ms] ease-out"
+          className="absolute top-[40px] left-[40px] w-[40px] h-[40px] bg-white/80 backdrop-blur-[10px] rounded-full flex items-center justify-center text-gray-700 shadow-sm transition-all duration-[600ms] ease-out"
         >
           ▶
         </div>
       )}
       
       <div 
-        className="absolute bottom-0 left-0 w-full p-[60px_40px] bg-gradient-to-t from-black/90 to-transparent transform translate-y-[60%] transition-transform duration-[600ms] ease-out"
+        className="absolute bottom-0 left-0 w-full p-[60px_40px] bg-gradient-to-t from-white/95 via-white/80 to-transparent transform translate-y-[60%] transition-transform duration-[600ms] ease-out"
       >
         <h3 
-          className="text-[32px] font-light tracking-[3px] text-white mb-[10px]"
+          className="text-[32px] font-light tracking-[3px] text-gray-900 mb-[10px]"
         >
           {designer.name}
         </h3>
         <p 
-          className="text-[16px] tracking-[2px] text-white uppercase mb-[8px] font-medium"
+          className="text-[16px] tracking-[2px] text-gray-800 uppercase mb-[8px] font-medium"
         >
           {designer.mainRole}
         </p>
         <p 
-          className="text-[12px] tracking-[1px] text-gray-400 uppercase mb-[20px]"
+          className="text-[12px] tracking-[1px] text-gray-600 uppercase mb-[20px]"
         >
           {designer.role}
         </p>
         <p 
-          className="text-[16px] text-white mb-[30px] opacity-80"
+          className="text-[16px] text-gray-700 mb-[30px] opacity-90"
         >
           {designer.brand}
         </p>
         <span 
-          className="inline-block py-[12px] px-[30px] border border-white text-white text-[12px] tracking-[2px] uppercase transition-all duration-300 ease-out opacity-0"
+          className="inline-block py-[12px] px-[30px] border border-gray-800 text-gray-800 text-[12px] tracking-[2px] uppercase transition-all duration-300 ease-out opacity-0 hover:bg-gray-800 hover:text-white"
         >
           View Profile
         </span>
@@ -204,7 +204,7 @@ export default function DesignersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 text-gray-900">
       {/* Hero Section */}
       <section 
         className="hero-section flex items-center justify-center relative overflow-hidden"
@@ -217,12 +217,10 @@ export default function DesignersPage() {
         <div 
           className="absolute inset-0 opacity-50"
           style={{
-            background: 'linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%)',
+            background: 'linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%)',
           }}
         ></div>
-        <div 
-          className="text-center z-10 text-white"
-        >
+        <div className="text-center z-10">
           <h1 
             className="hero-title font-['Playfair_Display'] font-light tracking-[0.2em] mb-5 opacity-0 transform translate-y-[30px]"
             style={{
@@ -233,7 +231,7 @@ export default function DesignersPage() {
             {heroTitle}
           </h1>
           <p 
-            className="hero-subtitle text-[18px] text-gray-400 tracking-[2px] opacity-0"
+            className="hero-subtitle text-[18px] text-gray-600 tracking-[2px] opacity-0"
             style={{
               animation: 'fadeInUp 1s ease forwards',
               animationDelay: '0.2s'
@@ -294,13 +292,13 @@ export default function DesignersPage() {
         }
         
         .designer-card:hover .designer-image {
-          filter: grayscale(0%) contrast(1) !important;
+          filter: grayscale(0%) contrast(1) brightness(1) !important;
           opacity: 1 !important;
           transform: scale(1.05) !important;
         }
         
         .designer-card:hover .designer-number {
-          color: rgba(255, 255, 255, 0.2) !important;
+          color: rgba(0, 0, 0, 0.1) !important;
           transform: scale(1.2) !important;
         }
         
@@ -313,13 +311,14 @@ export default function DesignersPage() {
         }
         
         .designer-card:hover .film-indicator {
-          background: rgba(255, 255, 255, 0.2) !important;
+          background: rgba(255, 255, 255, 0.95) !important;
           transform: scale(1.1) !important;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
         }
         
         .designer-link:hover {
-          background: #fff !important;
-          color: #000 !important;
+          background: #1a1a1a !important;
+          color: #fff !important;
         }
         
         /* Touch feedback for mobile */
@@ -384,7 +383,7 @@ export default function DesignersPage() {
           .designers-grid {
             grid-template-columns: 1fr !important;
             gap: 2px !important;
-            background: rgba(255, 255, 255, 0.05) !important;
+            background: rgba(0, 0, 0, 0.02) !important;
             padding: 2px !important;
           }
           
@@ -394,7 +393,8 @@ export default function DesignersPage() {
             max-height: 450px !important;
             border-right: none !important;
             border-bottom: none !important;
-            background: #000 !important;
+            background: #fff !important;
+            border: 1px solid rgba(0,0,0,0.05) !important;
           }
           
           .designer-number {
@@ -418,7 +418,7 @@ export default function DesignersPage() {
           .designer-content {
             padding: 40px 20px !important;
             transform: translateY(0) !important;
-            background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.7), transparent) !important;
+            background: linear-gradient(to top, rgba(255,255,255,0.98), rgba(255,255,255,0.9), transparent) !important;
           }
           
           .designer-link {

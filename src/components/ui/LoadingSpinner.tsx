@@ -19,8 +19,8 @@ export default function LoadingSpinner({ size = 'medium' }: { size?: 'small' | '
         <div className={`absolute inset-0 ${borderClasses[size]} border-gray-300 rounded-full opacity-20`} />
         
         {/* 애니메이션 원 */}
-        <div 
-          className={`absolute inset-0 ${borderClasses[size]} border-black border-t-transparent rounded-full`}
+        <div
+          className={`absolute inset-0 ${borderClasses[size]} border-gray-600 border-t-transparent rounded-full`}
           style={{
             animation: 'spinMinimal 1s linear infinite'
           }}

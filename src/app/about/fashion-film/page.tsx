@@ -216,12 +216,12 @@ function FashionFilmContent() {
       </section>
 
       {/* Films Grid Section */}
-      <section className="films-section py-[120px] px-10 bg-black">
+      <section className="films-section py-[120px] px-10 bg-white">
         <div className="section-intro max-w-[800px] mx-auto mb-[120px] text-center">
-          <h2 className="text-4xl font-['Playfair_Display'] font-light tracking-[3px] text-white mb-[30px]">
+          <h2 className="text-4xl font-['Playfair_Display'] font-light tracking-[3px] text-gray-900 mb-[30px]">
             5인 5색의 시각적 서사
           </h2>
-          <p className="text-base leading-[2] text-white/70">
+          <p className="text-base leading-[2] text-gray-600">
             REDUX의 5명 디자이너가 각자의 시선으로 풀어낸 패션 필름 컬렉션입니다.<br />
             의상을 넘어선 이야기, 움직임을 통해 전달되는 감정을 경험해보세요.
           </p>
@@ -276,23 +276,23 @@ function FashionFilmContent() {
                   className="object-cover transition-all duration-[800ms] group-hover:scale-105"
                 />
                 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-                  <div className="text-white">
-                    <h3 className="text-xl font-['Playfair_Display'] font-medium tracking-[2px] mb-2 text-amber-300">
+                {/* Overlay - White theme version */}
+                <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 shadow-lg">
+                  <div className="text-gray-800">
+                    <h3 className="text-xl font-['Playfair_Display'] font-medium tracking-[2px] mb-2 text-[#8B7D6B]">
                       {film.title}
                     </h3>
-                    <p className="text-sm tracking-[1px] mb-1 uppercase">
+                    <p className="text-sm tracking-[1px] mb-1 uppercase text-gray-700">
                       {film.name}
                     </p>
-                    <p className="text-xs opacity-80 leading-relaxed">
+                    <p className="text-xs opacity-80 leading-relaxed text-gray-600">
                       {film.description}
                     </p>
                   </div>
-                  
+
                   {/* Play icon */}
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                    <div className="w-16 h-16 bg-[#8B7D6B]/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
                       <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1"></div>
                     </div>
                   </div>

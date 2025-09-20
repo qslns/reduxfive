@@ -60,41 +60,41 @@ export default function ExhibitionsPage() {
   }, [lightboxOpen, closeLightbox]);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-gradient-to-br from-white to-gray-50 text-gray-900">
       {/* Main Content - Navigation은 layout.tsx에서 렌더링됨 */}
       <div className="pt-[100px]">
         {/* Hero Section */}
-        <section className="relative h-[70vh] min-h-[500px] overflow-hidden flex items-center justify-center">
+        <section className="relative h-[70vh] min-h-[500px] overflow-hidden flex items-center justify-center bg-gradient-to-br from-gray-50 to-white">
           <div className="text-center">
-            <h1 
-              className="font-['Playfair_Display'] font-bold text-white mb-8 tracking-[-0.02em] leading-[0.9]"
-              style={{ 
+            <h1
+              className="font-['Playfair_Display'] font-bold text-gray-900 mb-8 tracking-[-0.02em] leading-[0.9]"
+              style={{
                 fontSize: 'clamp(3rem, 8vw, 6rem)',
-                textShadow: '0 0 30px rgba(255,255,255,0.1)'
+                textShadow: '0 4px 20px rgba(0,0,0,0.1)'
               }}
             >
               EXHIBITIONS
             </h1>
-            <p className="text-white/80 text-xl tracking-[0.2em] uppercase">
+            <p className="text-gray-600 text-xl tracking-[0.2em] uppercase">
               Redefining Fashion Through Space
             </p>
           </div>
         </section>
 
         {/* CINE MODE Section */}
-        <section id="cine-mode" className="py-20 px-10">
+        <section id="cine-mode" className="py-20 px-10 bg-white shadow-sm">
           <div className="max-w-[1600px] mx-auto">
             {/* Content Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
               {/* Text Content */}
               <div>
-                <h2 
-                  className="font-['Playfair_Display'] font-bold text-white mb-8 tracking-[-0.02em] leading-[0.9]"
+                <h2
+                  className="font-['Playfair_Display'] font-bold text-gray-900 mb-8 tracking-[-0.02em] leading-[0.9]"
                   style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}
                 >
                   CINE<br />MODE
                 </h2>
-                <div className="space-y-6 text-white/80 text-lg leading-relaxed">
+                <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
                   <p>
                     REDUX의 'CINE MODE' 패션 필름 전시회는 단순한 스타일 전시를 넘어 영상에 각자의 이야기를 담아 관객들과의 유대감 형성에 집중한 전시입니다.
                   </p>
@@ -102,8 +102,8 @@ export default function ExhibitionsPage() {
                     5인의 디자이너가 각자의 관점으로 풀어낸 패션 필름을 통해 시각적 서사를 경험할 수 있습니다.
                   </p>
                 </div>
-                <button 
-                  className="mt-8 px-8 py-4 border border-amber-300 text-amber-300 bg-transparent hover:bg-amber-300 hover:text-black transition-all duration-300 tracking-[0.1em] uppercase"
+                <button
+                  className="mt-8 px-8 py-4 border-2 border-[#8B7D6B] text-[#8B7D6B] bg-transparent hover:bg-[#8B7D6B] hover:text-white transition-all duration-300 tracking-[0.1em] uppercase shadow-md hover:shadow-lg"
                   onClick={() => alert('Exhibition Details Coming Soon')}
                 >
                   Explore Exhibition
@@ -112,14 +112,14 @@ export default function ExhibitionsPage() {
               
               {/* Featured Image */}
               <div className="relative">
-                <OptimizedImage 
+                <OptimizedImage
                   src={cinemode1CMS.currentUrl || "/images/exhibitions/cinemode/1.jpg"}
                   alt="CINE MODE Exhibition"
                   width={600}
                   height={400}
                   priority={true}
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="w-full h-auto object-cover cursor-pointer transition-all duration-[600ms] hover:scale-[1.02]"
+                  className="w-full h-auto object-cover cursor-pointer transition-all duration-[600ms] hover:scale-[1.02] shadow-lg hover:shadow-xl rounded-lg"
                   onClick={() => openLightbox(cinemode1CMS.currentUrl || '/images/exhibitions/cinemode/1.jpg', 'CINE MODE Exhibition')}
                 />
                 
@@ -154,8 +154,8 @@ export default function ExhibitionsPage() {
                 { num: 3, cms: cinemode3CMS },
                 { num: 4, cms: cinemode4CMS }
               ].map(({ num, cms }) => (
-                <div key={num} className="relative aspect-square overflow-hidden">
-                  <OptimizedImage 
+                <div key={num} className="relative aspect-square overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                  <OptimizedImage
                     src={cms.currentUrl || `/images/exhibitions/cinemode/${num}.jpg`}
                     alt={`CINE MODE Gallery ${num}`}
                     fill={true}
@@ -191,18 +191,18 @@ export default function ExhibitionsPage() {
         </section>
 
         {/* THE ROOM OF [ ] Section */}
-        <section id="the-room" className="py-20 px-10 bg-gray-900/30">
+        <section id="the-room" className="py-20 px-10 bg-gradient-to-r from-gray-50 to-gray-100">
           <div className="max-w-[1600px] mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
               {/* Featured Image */}
               <div className="relative order-2 lg:order-1">
-                <OptimizedImage 
+                <OptimizedImage
                   src={theroom1CMS.currentUrl || '/images/exhibitions/theroom/qslna_dawn_alleyway_low-angle_28_mm_R13_2025_layered_denim-ov_828e4c6e-0b81-4949-8c96-7e241f9a3c03_0.png'}
                   alt="THE ROOM OF [ ] Exhibition"
                   width={600}
                   height={400}
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="w-full h-auto object-cover cursor-pointer transition-all duration-[600ms] hover:scale-[1.02]"
+                  className="w-full h-auto object-cover cursor-pointer transition-all duration-[600ms] hover:scale-[1.02] shadow-lg hover:shadow-xl rounded-lg"
                   onClick={() => openLightbox(theroom1CMS.currentUrl || '/images/exhibitions/theroom/qslna_dawn_alleyway_low-angle_28_mm_R13_2025_layered_denim-ov_828e4c6e-0b81-4949-8c96-7e241f9a3c03_0.png', 'THE ROOM OF [ ] Exhibition')}
                 />
                 
@@ -230,37 +230,37 @@ export default function ExhibitionsPage() {
               
               {/* Text Content */}
               <div className="order-1 lg:order-2">
-                <h2 
-                  className="font-['Playfair_Display'] font-bold text-white mb-8 tracking-[-0.02em] leading-[0.9]"
+                <h2
+                  className="font-['Playfair_Display'] font-bold text-gray-900 mb-8 tracking-[-0.02em] leading-[0.9]"
                   style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}
                 >
-                  THE ROOM<br />OF <span className="text-amber-300">[ ]</span>
+                  THE ROOM<br />OF <span className="text-[#8B7D6B]">[ ]</span>
                 </h2>
-                <div className="space-y-6 text-white/80 text-lg leading-relaxed">
+                <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
                   <p>
                     패션 필름, 텍스타일 아트, 인터랙션 디자인, 공간 인스톨레이션 등 다양한 매체를 통해 각 디자이너의 서로 다른 컨셉으로 전시를 풀어냅니다.
                   </p>
                   <p>
                     빈 공간 [ ] 안에 각자의 이야기를 채워나가는 실험적인 전시입니다.
                   </p>
-                  
+
                   {/* 전시 정보 */}
-                  <div className="mt-8 p-6 bg-white/5 border border-white/10 rounded-lg">
+                  <div className="mt-8 p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
                     <div className="space-y-3">
                       <div>
-                        <span className="text-amber-300 font-medium tracking-[0.1em] uppercase text-sm">장소</span>
-                        <p className="text-white font-light">레온갤러리 성수커넥트</p>
-                        <p className="text-white/70 text-sm">서울 성동구 아차산로1가길 11 지하1층</p>
+                        <span className="text-[#8B7D6B] font-medium tracking-[0.1em] uppercase text-sm">장소</span>
+                        <p className="text-gray-900 font-light">레온갤러리 성수커넥트</p>
+                        <p className="text-gray-500 text-sm">서울 성동구 아차산로1가길 11 지하1층</p>
                       </div>
                       <div>
-                        <span className="text-amber-300 font-medium tracking-[0.1em] uppercase text-sm">일정</span>
-                        <p className="text-white font-light">2025.12.11 (목) - 12.14 (일)</p>
+                        <span className="text-[#8B7D6B] font-medium tracking-[0.1em] uppercase text-sm">일정</span>
+                        <p className="text-gray-900 font-light">2025.12.11 (목) - 12.14 (일)</p>
                       </div>
                     </div>
                   </div>
                 </div>
-                <button 
-                  className="mt-8 px-8 py-4 border border-amber-300 text-amber-300 bg-transparent hover:bg-amber-300 hover:text-black transition-all duration-300 tracking-[0.1em] uppercase"
+                <button
+                  className="mt-8 px-8 py-4 border-2 border-[#8B7D6B] text-[#8B7D6B] bg-transparent hover:bg-[#8B7D6B] hover:text-white transition-all duration-300 tracking-[0.1em] uppercase shadow-md hover:shadow-lg"
                   onClick={() => window.open('https://naver.me/GnK4CyeV', '_blank')}
                 >
                   전시 안내
@@ -276,8 +276,8 @@ export default function ExhibitionsPage() {
                 { num: 3, cms: theroom3CMS, fallback: '/images/exhibitions/theroom/qslna_mirror-box_installation_four_polished_steel_walls_refle_4ffced5d-0e8e-41c6-a7ad-8f08583b1c72_2.png' },
                 { num: 4, cms: theroom4CMS, fallback: '/images/exhibitions/theroom/qslna_split-frame_triptych_left_strip--front_close-crop_of_ma_25f1d65c-d800-4e74-9a72-5919d703eeb2_1.png' }
               ].map(({ num, cms, fallback }) => (
-                <div key={num} className="relative aspect-square overflow-hidden">
-                  <OptimizedImage 
+                <div key={num} className="relative aspect-square overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                  <OptimizedImage
                     src={cms.currentUrl || fallback}
                     alt={`THE ROOM Gallery ${num}`}
                     fill={true}
@@ -313,15 +313,15 @@ export default function ExhibitionsPage() {
         </section>
 
         {/* Future Exhibitions Section */}
-        <section className="py-20 px-10">
+        <section className="py-20 px-10 bg-white">
           <div className="max-w-[1600px] mx-auto text-center">
-            <h2 
-              className="font-['Playfair_Display'] font-bold text-white mb-8 tracking-[-0.02em] leading-[0.9]"
+            <h2
+              className="font-['Playfair_Display'] font-bold text-gray-900 mb-8 tracking-[-0.02em] leading-[0.9]"
               style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}
             >
               FUTURE<br />EXHIBITIONS
             </h2>
-            <div className="max-w-[600px] mx-auto space-y-6 text-white/80 text-lg leading-relaxed mb-8">
+            <div className="max-w-[600px] mx-auto space-y-6 text-gray-600 text-lg leading-relaxed mb-8">
               <p>
                 REDUX는 계속해서 새로운 형태의 전시를 준비하고 있습니다.
               </p>
@@ -329,8 +329,8 @@ export default function ExhibitionsPage() {
                 패션과 예술의 경계를 넘나들며, 관객과 함께 만들어가는 특별한 경험을 선사하겠습니다.
               </p>
             </div>
-            <button 
-              className="px-8 py-4 border border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 tracking-[0.1em] uppercase"
+            <button
+              className="px-8 py-4 border-2 border-gray-900 text-gray-900 bg-transparent hover:bg-gray-900 hover:text-white transition-all duration-300 tracking-[0.1em] uppercase shadow-md hover:shadow-lg"
               onClick={() => alert('Stay tuned for updates!')}
             >
               Stay Updated
@@ -341,26 +341,26 @@ export default function ExhibitionsPage() {
 
       {/* Lightbox */}
       {lightboxOpen && (
-        <div 
-          className="fixed inset-0 bg-black/95 backdrop-blur-[20px] z-[10000] flex items-center justify-center opacity-100 transition-opacity duration-[400ms]"
+        <div
+          className="fixed inset-0 bg-white/95 backdrop-blur-[20px] z-[10000] flex items-center justify-center opacity-100 transition-opacity duration-[400ms]"
           onClick={handleLightboxClick}
         >
           <div className="max-w-[90vw] max-h-[90vh] relative">
-            <button 
-              className="absolute -top-[50px] right-0 bg-transparent border-none text-white text-[30px] cursor-pointer transition-all duration-300 ease-in-out w-10 h-10 flex items-center justify-center hover:text-amber-300 hover:transform hover:scale-120"
+            <button
+              className="absolute -top-[50px] right-0 bg-transparent border-none text-gray-900 text-[30px] cursor-pointer transition-all duration-300 ease-in-out w-10 h-10 flex items-center justify-center hover:text-[#8B7D6B] hover:transform hover:scale-120"
               onClick={closeLightbox}
             >
               ×
             </button>
-            
-            <OptimizedImage 
+
+            <OptimizedImage
               src={currentImage}
               alt={currentAlt}
               width={1200}
               height={800}
               priority={true}
               sizes="90vw"
-              className="max-w-full max-h-[90vh] object-contain shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+              className="max-w-full max-h-[90vh] object-contain shadow-[0_20px_60px_rgba(0,0,0,0.15)]"
             />
           </div>
         </div>

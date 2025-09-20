@@ -111,11 +111,11 @@ export default function Lightbox({
     <>
       {isOpen && (
         <div
-          className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-sm animate-fade-in"
+          className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-sm animate-fade-in"
           onClick={onClose}
         >
           {/* Controls */}
-          <div className="absolute top-0 left-0 right-0 p-4 z-10 bg-gradient-to-b from-black/50 to-transparent">
+          <div className="absolute top-0 left-0 right-0 p-4 z-10 bg-gradient-to-b from-white/90 to-transparent">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <button
@@ -123,18 +123,18 @@ export default function Lightbox({
                     e.stopPropagation();
                     handleZoomOut();
                   }}
-                  className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+                  className="p-2 bg-gray-200 hover:bg-gray-300 rounded-full transition-colors text-gray-700"
                   disabled={scale <= 1}
                 >
                   <ZoomOut size={20} />
                 </button>
-                <span className="text-sm">{Math.round(scale * 100)}%</span>
+                <span className="text-sm text-gray-700">{Math.round(scale * 100)}%</span>
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     handleZoomIn();
                   }}
-                  className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+                  className="p-2 bg-gray-200 hover:bg-gray-300 rounded-full transition-colors text-gray-700"
                   disabled={scale >= 3}
                 >
                   <ZoomIn size={20} />
@@ -143,7 +143,7 @@ export default function Lightbox({
               
               <button
                 onClick={onClose}
-                className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+                className="p-2 bg-gray-200 hover:bg-gray-300 rounded-full transition-colors text-gray-700"
               >
                 <X size={24} />
               </button>
@@ -167,17 +167,17 @@ export default function Lightbox({
               }}
             >
               {imageError ? (
-                <div className="w-full h-full flex items-center justify-center text-white">
-                  <div className="text-center">
+                <div className="w-full h-full flex items-center justify-center text-gray-700">
+                  <div className="text-center bg-white/90 p-8 rounded-lg">
                     <div className="text-6xl mb-4 opacity-50">📷</div>
                     <p className="text-lg mb-2">Failed to load image</p>
                     <p className="text-sm opacity-70">Image may not exist or is not accessible</p>
-                    <button 
+                    <button
                       onClick={() => {
                         setImageError(false);
                         setIsLoading(true);
                       }}
-                      className="mt-4 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-md transition-colors"
+                      className="mt-4 px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-md transition-colors"
                     >
                       Try Again
                     </button>
@@ -186,9 +186,9 @@ export default function Lightbox({
               ) : (
                 <>
                   {isLoading && (
-                    <div className="absolute inset-0 flex items-center justify-center text-white">
-                      <div className="text-center">
-                        <div className="animate-spin w-8 h-8 border-2 border-white/20 border-t-white rounded-full mb-4 mx-auto"></div>
+                    <div className="absolute inset-0 flex items-center justify-center text-gray-700">
+                      <div className="text-center bg-white/90 p-6 rounded-lg">
+                        <div className="animate-spin w-8 h-8 border-2 border-gray-300 border-t-gray-700 rounded-full mb-4 mx-auto"></div>
                         <p className="text-sm opacity-70">Loading image...</p>
                       </div>
                     </div>
@@ -218,7 +218,7 @@ export default function Lightbox({
                 e.stopPropagation();
                 onPrevious();
               }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white/80 hover:bg-white/90 rounded-full transition-colors z-10 text-gray-700 shadow-lg"
               disabled={currentIndex === 0}
             >
               <ChevronLeft size={32} />
@@ -231,7 +231,7 @@ export default function Lightbox({
                 e.stopPropagation();
                 onNext();
               }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white/80 hover:bg-white/90 rounded-full transition-colors z-10 text-gray-700 shadow-lg"
               disabled={currentIndex === images.length - 1}
             >
               <ChevronRight size={32} />
@@ -239,7 +239,7 @@ export default function Lightbox({
           )}
 
           {/* Thumbnails */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent">
+          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-white/90 to-transparent">
             <div className="flex items-center justify-center gap-2 overflow-x-auto py-2">
               {images.map((image, index) => (
                 <button
@@ -250,7 +250,7 @@ export default function Lightbox({
                   }}
                   className={`relative w-16 h-16 rounded overflow-hidden transition-all cursor-pointer hover:scale-105 active:scale-95 ${
                     index === currentIndex
-                      ? 'ring-2 ring-white ring-offset-2 ring-offset-black'
+                      ? 'ring-2 ring-[#8B7D6B] ring-offset-2 ring-offset-white shadow-lg'
                       : 'opacity-50 hover:opacity-100'
                   }`}
                 >

@@ -51,7 +51,7 @@ export default function ImageGallery({
         {galleryImages.map((image, index) => (
           <div
             key={index}
-            className="relative aspect-[3/4] overflow-hidden rounded-lg bg-zinc-900 cursor-pointer group animate-fade-in-stagger"
+            className="relative aspect-[3/4] overflow-hidden rounded-lg bg-gray-200 cursor-pointer group animate-fade-in-stagger"
             style={{ animationDelay: `${index * 0.1}s` }}
             onClick={() => {
               setCurrentIndex(index);
@@ -79,12 +79,12 @@ export default function ImageGallery({
             )}
             
             {/* Hover overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-            
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
             {/* View icon */}
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-              <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center">
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
+                <svg className="w-6 h-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>

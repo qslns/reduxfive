@@ -77,7 +77,7 @@ export default function AboutPage() {
   // HydrationSafe 컴포넌트가 클라이언트 렌더링을 보장
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-white text-gray-900">
       {/* Hero Section - Navigation 제거, 메인 Navigation 사용 */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden pt-[80px]">
         {/* Background texture */}
@@ -90,17 +90,17 @@ export default function AboutPage() {
         
         {/* Decorative elements */}
         <div 
-          className="absolute top-[15%] right-[10%] w-[120px] h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent"
+          className="absolute top-[15%] right-[10%] w-[120px] h-[1px] bg-gradient-to-r from-transparent via-gray-900/30 to-transparent"
           style={{ transform: 'rotate(-20deg)' }}
         />
         <div 
-          className="absolute bottom-[20%] left-[8%] w-[50px] h-[50px] border border-white/20"
+          className="absolute bottom-[20%] left-[8%] w-[50px] h-[50px] border border-gray-200"
           style={{ transform: 'rotate(30deg)', borderRadius: '25%' }}
         />
         
         <div className="text-center z-10 px-6">
           <h1 
-            className="font-['Playfair_Display'] font-bold text-white mb-8 tracking-[-0.02em] leading-[0.85]"
+            className="font-['Playfair_Display'] font-bold text-gray-900 mb-8 tracking-[-0.02em] leading-[0.85]"
             style={{ 
               fontSize: 'clamp(3rem, 8vw, 8rem)',
               textShadow: '0 0 30px rgba(255,255,255,0.1)'
@@ -108,7 +108,7 @@ export default function AboutPage() {
           >
             WHO REDUX?
           </h1>
-          <p className="text-white/80 text-xl tracking-[0.3em] uppercase">
+          <p className="text-gray-700 text-xl tracking-[0.3em] uppercase">
             Fashion Designer Collective
           </p>
         </div>
@@ -120,12 +120,12 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 
-                className="font-['Playfair_Display'] font-bold text-white mb-8 tracking-[-0.02em] leading-[0.9]"
+                className="font-['Playfair_Display'] font-bold text-gray-900 mb-8 tracking-[-0.02em] leading-[0.9]"
                 style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}
               >
                 우리는<br />REDUX<br />입니다
               </h2>
-              <div className="space-y-6 text-white/80 text-lg leading-relaxed">
+              <div className="space-y-6 text-gray-700 text-lg leading-relaxed">
                 <p>
                   REDUX는 5인의 패션 디자이너가 모여 만든 크리에이티브 콜렉티브입니다. 
                   우리는 패션을 넘어 다양한 예술적 매체를 통해 새로운 경험을 창조합니다.
@@ -139,10 +139,10 @@ export default function AboutPage() {
             
             <div className="space-y-8">
               <div>
-                <h3 className="text-2xl font-['Playfair_Display'] font-light text-amber-300 mb-4 tracking-[0.1em]">
+                <h3 className="text-2xl font-['Playfair_Display'] font-light text-[#8B7D6B] mb-4 tracking-[0.1em]">
                   OUR PHILOSOPHY
                 </h3>
-                <div className="space-y-4 text-white/70">
+                <div className="space-y-4 text-gray-500">
                   <p>우리는 경계를 넘어 새로운 가능성을 탐구합니다.</p>
                   <p>각자의 개성이 하나로 모여 더 큰 시너지를 만들어냅니다.</p>
                   <p>순간을 넘어 영원히 기억될 경험을 디자인합니다.</p>
@@ -157,10 +157,10 @@ export default function AboutPage() {
       <section className="py-20 px-10">
         <div className="max-w-[1600px] mx-auto">
           <div className="text-center mb-16">
-            <h2 className="font-['Playfair_Display'] text-4xl font-light text-white mb-4 tracking-[0.05em]">
+            <h2 className="font-['Playfair_Display'] text-4xl font-light text-gray-900 mb-4 tracking-[0.05em]">
               EXPLORE OUR WORLD
             </h2>
-            <div className="w-20 h-[1px] bg-amber-300 mx-auto"></div>
+            <div className="w-20 h-[1px] bg-[#8B7D6B] mx-auto"></div>
           </div>
           
           {/* Responsive Grid */}
@@ -193,21 +193,21 @@ export default function AboutPage() {
                     />
                     
                     {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500">
-                      <div className="absolute bottom-6 left-6 right-6 text-white">
-                        <h3 className="text-2xl font-['Playfair_Display'] font-medium tracking-[0.1em] mb-2 text-amber-300">
+                    <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-lg">
+                      <div className="absolute bottom-6 left-6 right-6 text-gray-800">
+                        <h3 className="text-2xl font-['Playfair_Display'] font-medium tracking-[0.1em] mb-2 text-[#8B7D6B]">
                           {category.name}
                         </h3>
-                        <p className="text-sm opacity-90 leading-relaxed">
+                        <p className="text-sm opacity-90 leading-relaxed text-gray-700">
                           {category.description}
                         </p>
                       </div>
                     </div>
-                    
+
                     {/* Hover indicator */}
                     <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="w-8 h-8 border border-white rounded-full flex items-center justify-center">
-                        <span className="text-sm">→</span>
+                      <div className="w-8 h-8 border border-gray-700 rounded-full flex items-center justify-center bg-white/80 backdrop-blur-sm">
+                        <span className="text-sm text-gray-700">→</span>
                       </div>
                     </div>
                     
@@ -235,7 +235,7 @@ export default function AboutPage() {
                 );
               })
             ) : (
-              <div className="col-span-full text-center py-20 text-white/50">
+              <div className="col-span-full text-center py-20 text-gray-500">
                 <p>카테고리를 불러오는 중...</p>
               </div>
             )}

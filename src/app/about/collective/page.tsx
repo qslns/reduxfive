@@ -78,56 +78,65 @@ export default function CollectivePage() {
   return (
     <>
 
-      {/* Hero Section - HTML 버전과 완전 동일 */}
-      <section className="hero-section h-screen relative flex items-center justify-center bg-black overflow-hidden pt-[80px]">
-        <video 
-          className="hero-video absolute top-0 left-0 w-full h-full object-cover opacity-30"
-          autoPlay 
-          muted 
-          loop 
-          playsInline
-        >
-          <source src="/VIDEO/main.mp4" type="video/mp4" />
-        </video>
-        <div className="hero-content text-center z-[1] text-white">
-          <h1 
+      {/* Hero Section - White theme version */}
+      <section className="hero-section h-screen relative flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-gray-100 overflow-hidden pt-[80px]">
+        {/* Background texture */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'2\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' opacity=\'1\'/%3E%3C/svg%3E")'
+          }}
+        />
+
+        {/* Decorative elements */}
+        <div
+          className="absolute top-[15%] right-[10%] w-[120px] h-[1px] bg-gradient-to-r from-transparent via-gray-900/30 to-transparent"
+          style={{ transform: 'rotate(-20deg)' }}
+        />
+        <div
+          className="absolute bottom-[20%] left-[8%] w-[50px] h-[50px] border border-gray-300"
+          style={{ transform: 'rotate(30deg)', borderRadius: '25%' }}
+        />
+
+        <div className="hero-content text-center z-[1] text-gray-900">
+          <h1
             className="hero-title font-thin uppercase mb-5 opacity-0 transform translate-y-[50px] animate-[heroFade_1.5s_ease_forwards] tracking-[0.4em]"
-            style={{ fontSize: 'clamp(80px, 12vw, 200px)' }}
+            style={{ fontSize: 'clamp(80px, 12vw, 200px)', textShadow: '0 0 30px rgba(0,0,0,0.1)' }}
           >
             REDUX
           </h1>
-          <p className="hero-subtitle text-lg tracking-[4px] opacity-0 animate-[heroFade_1.5s_ease_forwards] [animation-delay:0.3s]">
+          <p className="hero-subtitle text-lg tracking-[4px] opacity-0 animate-[heroFade_1.5s_ease_forwards] [animation-delay:0.3s] text-[#8B7D6B]">
             FIVE MINDS, ONE VISION
           </p>
         </div>
       </section>
 
-      {/* Philosophy Section - HTML 버전과 완전 동일 */}
-      <section className="philosophy-section py-40 px-10 bg-white">
+      {/* Philosophy Section - White theme version */}
+      <section className="philosophy-section py-40 px-10 bg-white shadow-sm">
         <div className="philosophy-container max-w-[1000px] mx-auto text-center">
-          <h2 className="philosophy-title text-5xl font-light tracking-[4px] mb-[60px] text-black">
+          <h2 className="philosophy-title text-5xl font-light tracking-[4px] mb-[60px] text-gray-900">
             WHO WE ARE
           </h2>
-          <p className="philosophy-text text-2xl font-light leading-[2] text-gray-600 mb-10">
-            REDUX는 <span className="text-black font-normal">5인의 패션 디자이너</span>가 모여서 만든 예술 크루입니다.
+          <p className="philosophy-text text-2xl font-light leading-[2] text-gray-700 mb-10">
+            REDUX는 <span className="text-[#8B7D6B] font-semibold">5인의 패션 디자이너</span>가 모여서 만든 예술 크루입니다.
           </p>
-          <p className="philosophy-text text-2xl font-light leading-[2] text-gray-600 mb-10">
+          <p className="philosophy-text text-2xl font-light leading-[2] text-gray-700 mb-10">
             우리는 패션필름, 설치, 비주얼 작업 등 다양한 방식으로<br />
-            관객들에게 <span className="text-black font-normal">'기억에 남을 순간'</span>을 디자인합니다.
+            관객들에게 <span className="text-[#8B7D6B] font-semibold">'기억에 남을 순간'</span>을 디자인합니다.
           </p>
-          <p className="philosophy-text text-2xl font-light leading-[2] text-gray-600 mb-10">
+          <p className="philosophy-text text-2xl font-light leading-[2] text-gray-700 mb-10">
             각자 다른 색을 가진 멤버가 모여서 하나의 흐름을 만들고,<br />
             그 잔상이 오래도록 머물길 바라는 마음으로 활동하고 있습니다.
           </p>
-          <p className="philosophy-quote text-lg italic text-gray-500 mt-[60px]">
+          <p className="philosophy-quote text-lg italic text-gray-600 mt-[60px]">
             "Fashion is not just what we wear, it's how we remember."
           </p>
         </div>
       </section>
 
-      {/* Members Section - HTML 버전과 완전 동일 */}
-      <section className="members-section py-[120px] px-10 bg-gray-100">
-        <h2 className="members-title text-5xl font-light tracking-[4px] text-center mb-20 text-black">
+      {/* Members Section - White theme version */}
+      <section className="members-section py-[120px] px-10 bg-gradient-to-b from-gray-50 to-white">
+        <h2 className="members-title text-5xl font-light tracking-[4px] text-center mb-20 text-gray-900">
           THE COLLECTIVE
         </h2>
         <div className="members-grid grid grid-cols-3 gap-[60px] max-w-[1400px] mx-auto max-[1024px]:grid-cols-2 max-[1024px]:gap-10 max-[768px]:grid-cols-1 max-[768px]:gap-[60px]">
@@ -181,10 +190,10 @@ export default function CollectivePage() {
                 </div>
               )}
             </div>
-            <h3 className="member-name text-xl font-normal tracking-[2px] mb-[10px] text-black">
+            <h3 className="member-name text-xl font-normal tracking-[2px] mb-[10px] text-gray-900">
               KIM BOMIN
             </h3>
-            <p className="member-role text-sm tracking-[1px] text-gray-500 uppercase">
+            <p className="member-role text-sm tracking-[1px] text-gray-600 uppercase">
               Creative Director
             </p>
           </div>
@@ -227,10 +236,10 @@ export default function CollectivePage() {
                 </div>
               )}
             </div>
-            <h3 className="member-name text-xl font-normal tracking-[2px] mb-[10px] text-black">
+            <h3 className="member-name text-xl font-normal tracking-[2px] mb-[10px] text-gray-900">
               PARK PARANG
             </h3>
-            <p className="member-role text-sm tracking-[1px] text-gray-500 uppercase">
+            <p className="member-role text-sm tracking-[1px] text-gray-600 uppercase">
               Visual Artist
             </p>
           </div>
@@ -273,10 +282,10 @@ export default function CollectivePage() {
                 </div>
               )}
             </div>
-            <h3 className="member-name text-xl font-normal tracking-[2px] mb-[10px] text-black">
+            <h3 className="member-name text-xl font-normal tracking-[2px] mb-[10px] text-gray-900">
               LEE TAEHYEON
             </h3>
-            <p className="member-role text-sm tracking-[1px] text-gray-500 uppercase">
+            <p className="member-role text-sm tracking-[1px] text-gray-600 uppercase">
               Fashion Designer
             </p>
           </div>
@@ -319,10 +328,10 @@ export default function CollectivePage() {
                 </div>
               )}
             </div>
-            <h3 className="member-name text-xl font-normal tracking-[2px] mb-[10px] text-black">
+            <h3 className="member-name text-xl font-normal tracking-[2px] mb-[10px] text-gray-900">
               CHOI EUNSOL
             </h3>
-            <p className="member-role text-sm tracking-[1px] text-gray-500 uppercase">
+            <p className="member-role text-sm tracking-[1px] text-gray-600 uppercase">
               Art Director
             </p>
           </div>
@@ -365,71 +374,71 @@ export default function CollectivePage() {
                 </div>
               )}
             </div>
-            <h3 className="member-name text-xl font-normal tracking-[2px] mb-[10px] text-black">
+            <h3 className="member-name text-xl font-normal tracking-[2px] mb-[10px] text-gray-900">
               KIM GYEONGSU
             </h3>
-            <p className="member-role text-sm tracking-[1px] text-gray-500 uppercase">
+            <p className="member-role text-sm tracking-[1px] text-gray-600 uppercase">
               Installation Artist
             </p>
           </div>
         </div>
       </section>
 
-      {/* Values Section - HTML 버전과 완전 동일 */}
-      <section className="values-section py-[120px] px-10 bg-black text-white">
+      {/* Values Section - White theme version */}
+      <section className="values-section py-[120px] px-10 bg-gradient-to-b from-gray-100 to-gray-50 text-gray-900">
         <div className="values-container max-w-[1400px] mx-auto">
-          <h2 className="values-title text-5xl font-light tracking-[4px] text-center mb-20">
+          <h2 className="values-title text-5xl font-light tracking-[4px] text-center mb-20 text-gray-900">
             OUR VALUES
           </h2>
           <div className="values-grid grid grid-cols-4 gap-10 max-[1024px]:grid-cols-2 max-[768px]:grid-cols-1 max-[768px]:gap-[30px]">
-            
-            <div className="value-item text-center py-10 px-5 border border-white/10 transition-all duration-500 ease-in-out hover:bg-white/5 hover:transform hover:-translate-y-[10px]">
-              <div className="value-icon w-[60px] h-[60px] mx-auto mb-[30px] border-2 border-white rounded-full flex items-center justify-center text-2xl">
+
+            <div className="value-item text-center py-10 px-5 border border-gray-200 bg-white rounded-lg shadow-sm transition-all duration-500 ease-in-out hover:bg-gray-50 hover:shadow-md hover:transform hover:-translate-y-[10px]">
+              <div className="value-icon w-[60px] h-[60px] mx-auto mb-[30px] border-2 border-[#8B7D6B] rounded-full flex items-center justify-center text-2xl text-[#8B7D6B]">
                 ∞
               </div>
-              <h3 className="value-name text-lg font-light tracking-[2px] mb-5 uppercase">
+              <h3 className="value-name text-lg font-light tracking-[2px] mb-5 uppercase text-gray-900">
                 Collective
               </h3>
-              <p className="value-description text-sm leading-[1.8] text-gray-400">
+              <p className="value-description text-sm leading-[1.8] text-gray-600">
                 개인의 창의성이 모여
                 더 큰 시너지를 만듭니다
               </p>
             </div>
-            
-            <div className="value-item text-center py-10 px-5 border border-white/10 transition-all duration-500 ease-in-out hover:bg-white/5 hover:transform hover:-translate-y-[10px]">
-              <div className="value-icon w-[60px] h-[60px] mx-auto mb-[30px] border-2 border-white rounded-full flex items-center justify-center text-2xl">
+
+            <div className="value-item text-center py-10 px-5 border border-gray-200 bg-white rounded-lg shadow-sm transition-all duration-500 ease-in-out hover:bg-gray-50 hover:shadow-md hover:transform hover:-translate-y-[10px]">
+              <div className="value-icon w-[60px] h-[60px] mx-auto mb-[30px] border-2 border-[#8B7D6B] rounded-full flex items-center justify-center text-2xl text-[#8B7D6B]">
                 ◐
               </div>
-              <h3 className="value-name text-lg font-light tracking-[2px] mb-5 uppercase">
+              <h3 className="value-name text-lg font-light tracking-[2px] mb-5 uppercase text-gray-900">
                 Memory
               </h3>
-              <p className="value-description text-sm leading-[1.8] text-gray-400">
+              <p className="value-description text-sm leading-[1.8] text-gray-600">
                 순간을 넘어 기억에
                 남는 경험을 디자인합니다
               </p>
             </div>
-            
-            <div className="value-item text-center py-10 px-5 border border-white/10 transition-all duration-500 ease-in-out hover:bg-white/5 hover:transform hover:-translate-y-[10px]">
-              <div className="value-icon w-[60px] h-[60px] mx-auto mb-[30px] border-2 border-white rounded-full flex items-center justify-center text-2xl">
+
+            <div className="value-item text-center py-10 px-5 border border-gray-200 bg-white rounded-lg shadow-sm transition-all duration-500 ease-in-out hover:bg-gray-50 hover:shadow-md hover:transform hover:-translate-y-[10px]">
+              <div className="value-icon w-[60px] h-[60px] mx-auto mb-[30px] border-2 border-[#8B7D6B] rounded-full flex items-center justify-center text-2xl text-[#8B7D6B]">
                 ◈
               </div>
-              <h3 className="value-name text-lg font-light tracking-[2px] mb-5 uppercase">
+              <h3 className="value-name text-lg font-light tracking-[2px] mb-5 uppercase text-gray-900">
                 Boundary
               </h3>
-              <p className="value-description text-sm leading-[1.8] text-gray-400">
+              <p className="value-description text-sm leading-[1.8] text-gray-600">
                 패션과 예술의 경계를
                 허물고 새로운 영역을 탐구합니다
               </p>
             </div>
-            
-            <div className="value-item text-center py-10 px-5 border border-white/10 transition-all duration-500 ease-in-out hover:bg-white/5 hover:transform hover:-translate-y-[10px]">
-              <div className="value-icon w-[60px] h-[60px] mx-auto mb-[30px] border-2 border-white rounded-full flex items-center justify-center text-2xl">
+
+            <div className="value-item text-center py-10 px-5 border border-gray-200 bg-white rounded-lg shadow-sm transition-all duration-500 ease-in-out hover:bg-gray-50 hover:shadow-md hover:transform hover:-translate-y-[10px]">
+              <div className="value-icon w-[60px] h-[60px] mx-auto mb-[30px] border-2 border-[#8B7D6B] rounded-full flex items-center justify-center text-2xl text-[#8B7D6B]">
                 ※
               </div>
-              <h3 className="value-name text-lg font-light tracking-[2px] mb-5 uppercase">
+              <h3 className="value-name text-lg font-light tracking-[2px] mb-5 uppercase text-gray-900">
                 Evolution
               </h3>
-              <p className="value-description text-sm leading-[1.8] text-gray-400">
+              <p className="value-description text-sm leading-[1.8] text-gray-600">
                 끊임없이 변화하고
                 진화하는 창작을 추구합니다
               </p>
@@ -438,17 +447,17 @@ export default function CollectivePage() {
         </div>
       </section>
 
-      {/* Contact CTA Section - HTML 버전과 완전 동일 */}
-      <section className="cta-section py-40 px-10 bg-white text-center">
-        <h2 
-          className="cta-title font-light tracking-[3px] mb-10 text-black"
+      {/* Contact CTA Section - White theme version */}
+      <section className="cta-section py-40 px-10 bg-white text-center shadow-inner">
+        <h2
+          className="cta-title font-light tracking-[3px] mb-10 text-gray-900"
           style={{ fontSize: 'clamp(36px, 5vw, 60px)' }}
         >
           Let's Create Something Memorable Together
         </h2>
-        <a 
-          href="/contact" 
-          className="cta-button inline-block py-5 px-[60px] border-2 border-black text-black no-underline text-base tracking-[2px] uppercase relative overflow-hidden transition-all duration-300 ease-in-out hover:text-white before:content-[''] before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-black before:transition-[left_0.3s_ease] before:-z-[1] hover:before:left-0"
+        <a
+          href="/contact"
+          className="cta-button inline-block py-5 px-[60px] border-2 border-[#8B7D6B] text-[#8B7D6B] no-underline text-base tracking-[2px] uppercase relative overflow-hidden transition-all duration-300 ease-in-out hover:text-white before:content-[''] before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-[#8B7D6B] before:transition-[left_0.3s_ease] before:-z-[1] hover:before:left-0 rounded-sm shadow-sm hover:shadow-md"
         >
           Get in Touch
         </a>

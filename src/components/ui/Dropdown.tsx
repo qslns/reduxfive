@@ -77,7 +77,7 @@ export default function Dropdown({
 
   const dropdownClass = layoutUtils.combineClasses(
     'absolute top-full mt-5 min-w-[180px] py-[15px]',
-    'bg-black/95 backdrop-blur-[10px] border border-white/10',
+    'bg-white backdrop-blur-[10px] border border-gray-200 shadow-lg',
     'transition-all duration-300 ease-in-out',
     getAlignmentClasses(),
     isOpen ? 'opacity-100 visible' : 'opacity-0 invisible',
@@ -133,12 +133,12 @@ export function MobileAccordion({
 }: MobileAccordionProps) {
   const triggerClass = layoutUtils.combineClasses(
     'mobile-menu-item',
-    'text-[clamp(20px,5vw,24px)] text-white tracking-[2px]',
+    'text-[clamp(20px,5vw,24px)] text-gray-900 tracking-[2px]',
     'cursor-pointer transition-all duration-300 ease-in-out',
     'text-center py-[15px] px-5 w-full max-w-[300px]',
     'min-h-[44px] flex items-center justify-center', // Ensure 44px touch target
-    'rounded-md hover:bg-white/10 focus:bg-white/10',
-    'active:scale-95 active:bg-white/20' // Touch feedback
+    'rounded-md hover:bg-gray-100 focus:bg-gray-100',
+    'active:scale-95 active:bg-gray-200' // Touch feedback
   );
 
   const submenuClass = layoutUtils.combineClasses(
@@ -177,13 +177,13 @@ export function MobileAccordion({
             key={itemIndex}
             href={item.href}
             variant="mobile"
-            className="mobile-submenu-item text-base text-white/70 
-                     py-3 px-6 text-center 
+            className="mobile-submenu-item text-base text-gray-600
+                     py-3 px-6 text-center
                      min-h-[44px] flex items-center justify-center
                      rounded-md transition-all duration-300 ease-in-out
-                     hover:text-white hover:bg-white/10 
-                     focus:text-white focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30
-                     active:scale-95 active:bg-white/20"
+                     hover:text-gray-900 hover:bg-gray-100
+                     focus:text-gray-900 focus:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#8B7D6B]/30
+                     active:scale-95 active:bg-gray-200"
           >
             {item.label}
           </NavLink>
@@ -213,13 +213,13 @@ export function MobileMenuToggle({
     'cursor-pointer rounded-md',
     'z-[10000]',
     'max-[768px]:flex',
-    'hover:bg-white/10 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30',
+    'hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#8B7D6B]/30',
     'transition-all duration-300 ease-in-out',
     'active:scale-95', // Touch feedback
     className
   );
 
-  const lineClass = 'w-[24px] h-[2px] bg-white transition-all duration-300 ease-in-out absolute';
+  const lineClass = 'w-[24px] h-[2px] bg-gray-700 transition-all duration-300 ease-in-out absolute';
 
   return (
     <button 

@@ -164,14 +164,22 @@ export default function MemoryPage() {
   return (
     <>
 
-      {/* Professional Gallery - HTML 버전과 완전 동일 */}
-      <div className="gallery-container min-h-screen pt-[80px] pr-5 pb-[60px] pl-5 relative">
-        <div className="gallery-header text-center mb-20 opacity-0 transform translate-y-10 animate-[fadeInUp_1.2s_cubic-bezier(0.25,0.8,0.25,1)_forwards]">
-          <h1 className="gallery-title font-['Playfair_Display'] font-bold text-white mb-5 [text-shadow:0_0_20px_rgba(255,255,255,0.1)]"
-              style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', letterSpacing: '-0.02em', lineHeight: 0.9 }}>
+      {/* Professional Gallery - White theme version */}
+      <div className="gallery-container min-h-screen pt-[80px] pr-5 pb-[60px] pl-5 relative bg-gradient-to-br from-white via-gray-50 to-gray-100">
+        {/* Background texture */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'2\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' opacity=\'1\'/%3E%3C/svg%3E")'
+          }}
+        />
+
+        <div className="gallery-header text-center mb-20 opacity-0 transform translate-y-10 animate-[fadeInUp_1.2s_cubic-bezier(0.25,0.8,0.25,1)_forwards] relative z-10">
+          <h1 className="gallery-title font-['Playfair_Display'] font-bold text-gray-900 mb-5"
+              style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', letterSpacing: '-0.02em', lineHeight: 0.9, textShadow: '0 0 30px rgba(0,0,0,0.1)' }}>
             Memory
           </h1>
-          <p className="gallery-subtitle font-['Inter'] font-extralight text-[--accent-mocha] uppercase"
+          <p className="gallery-subtitle font-['Inter'] font-extralight text-[#8B7D6B] uppercase"
              style={{ fontSize: 'clamp(0.875rem, 2vw, 1.25rem)', letterSpacing: '0.3em' }}>
             Collective Moments
           </p>
@@ -198,8 +206,8 @@ export default function MemoryPage() {
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 className="w-full h-full object-cover transition-all duration-[600ms] [transition-timing-function:cubic-bezier(0.25,0.8,0.25,1)] [filter:brightness(0.9)_contrast(1.1)] hover:[filter:brightness(1)_contrast(1.2)_saturate(1.1)] hover:transform hover:scale-105"
               />
-              <div className="gallery-overlay absolute top-0 left-0 right-0 bottom-0 bg-[linear-gradient(45deg,rgba(0,0,0,0.7)_0%,transparent_30%,transparent_70%,rgba(183,175,163,0.3)_100%)] opacity-0 transition-opacity duration-[400ms] [transition-timing-function:cubic-bezier(0.25,0.8,0.25,1)] flex items-end p-5 hover:opacity-100">
-                <p className="gallery-caption font-['Inter'] text-xs font-light tracking-[0.1em] text-white uppercase [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">
+              <div className="gallery-overlay absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t from-white/95 via-white/30 to-transparent opacity-0 transition-opacity duration-[400ms] [transition-timing-function:cubic-bezier(0.25,0.8,0.25,1)] flex items-end p-5 hover:opacity-100 shadow-lg">
+                <p className="gallery-caption font-['Inter'] text-xs font-light tracking-[0.1em] text-gray-800 uppercase bg-white/80 backdrop-blur-sm px-3 py-2 rounded-md shadow-sm">
                   Moment {String(index + 1).padStart(2, '0')}
                 </p>
               </div>
@@ -235,12 +243,12 @@ export default function MemoryPage() {
           ))}
         </div>
 
-        {/* 새 이미지 추가 슬롯 */}
+        {/* New image addition slot - White theme version */}
         {isAuthenticated && (
           <div className="max-w-[1800px] mx-auto mt-10 px-5">
-            <div 
-              className="relative aspect-[3/4] overflow-hidden bg-gray-800/50 border-2 border-dashed border-gray-600 hover:border-amber-300 transition-all duration-300 flex items-center justify-center rounded-lg"
-              style={{ 
+            <div
+              className="relative aspect-[3/4] overflow-hidden bg-white/70 border-2 border-dashed border-[#8B7D6B] hover:border-[#8B7D6B]/80 hover:bg-white/90 transition-all duration-300 flex items-center justify-center rounded-lg shadow-sm backdrop-blur-sm"
+              style={{
                 animation: `fadeInSequential 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards`,
                 animationDelay: `${galleryImages.length * 50}ms`
               }}
@@ -261,10 +269,10 @@ export default function MemoryPage() {
         )}
       </div>
 
-      {/* Professional Lightbox - 현재 보는 위치 기준으로 수정 */}
+      {/* Professional Lightbox - White theme version */}
       {isLightboxOpen && (
-        <div 
-          className="lightbox fixed inset-0 bg-black/95 backdrop-blur-[20px] z-[10000] opacity-100 transition-opacity duration-[400ms] [transition-timing-function:cubic-bezier(0.25,0.8,0.25,1)]"
+        <div
+          className="lightbox fixed inset-0 bg-white/95 backdrop-blur-[20px] z-[10000] opacity-100 transition-opacity duration-[400ms] [transition-timing-function:cubic-bezier(0.25,0.8,0.25,1)]"
           onClick={handleLightboxClick}
           style={{
             display: 'flex',
@@ -278,15 +286,15 @@ export default function MemoryPage() {
           }}
         >
           <div className="lightbox-content max-w-[90vw] max-h-[90vh] relative">
-            <button 
-              className="lightbox-close absolute -top-[50px] right-0 bg-transparent border-none text-white text-[30px] cursor-pointer transition-all duration-300 ease-in-out w-10 h-10 flex items-center justify-center hover:text-[--accent-mocha] hover:transform hover:scale-120"
+            <button
+              className="lightbox-close absolute -top-[50px] right-0 bg-transparent border-none text-gray-700 text-[30px] cursor-pointer transition-all duration-300 ease-in-out w-10 h-10 flex items-center justify-center hover:text-[#8B7D6B] hover:transform hover:scale-120"
               onClick={closeLightbox}
             >
               ×
             </button>
-            
-            <button 
-              className="lightbox-nav lightbox-prev absolute top-1/2 left-[-80px] transform -translate-y-1/2 bg-white/10 backdrop-blur-[10px] border border-white/20 rounded-full w-[60px] h-[60px] flex items-center justify-center text-white text-xl cursor-pointer transition-all duration-300 ease-in-out hover:bg-[--accent-mocha]/30 hover:transform hover:-translate-y-1/2 hover:scale-110 max-[1024px]:hidden"
+
+            <button
+              className="lightbox-nav lightbox-prev absolute top-1/2 left-[-80px] transform -translate-y-1/2 bg-white/80 backdrop-blur-[10px] border border-gray-200 rounded-full w-[60px] h-[60px] flex items-center justify-center text-gray-700 text-xl cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#8B7D6B] hover:text-white hover:transform hover:-translate-y-1/2 hover:scale-110 max-[1024px]:hidden shadow-md"
               onClick={(e) => { e.stopPropagation(); prevImage(); }}
             >
               ‹
@@ -294,17 +302,17 @@ export default function MemoryPage() {
             
             <div className="relative">
               {lightboxImageError ? (
-                <div className="flex items-center justify-center text-white min-h-[50vh]">
-                  <div className="text-center">
+                <div className="flex items-center justify-center text-gray-700 min-h-[50vh]">
+                  <div className="text-center bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-lg">
                     <div className="text-6xl mb-4 opacity-50">📷</div>
-                    <p className="text-lg mb-2">Failed to load image</p>
-                    <p className="text-sm opacity-70 mb-4">Image may not exist or is not accessible</p>
-                    <button 
+                    <p className="text-lg mb-2 text-gray-900">Failed to load image</p>
+                    <p className="text-sm opacity-70 mb-4 text-gray-600">Image may not exist or is not accessible</p>
+                    <button
                       onClick={() => {
                         setLightboxImageError(false);
                         setLightboxImageLoading(true);
                       }}
-                      className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-md transition-colors border border-white/20"
+                      className="px-4 py-2 bg-[#8B7D6B] hover:bg-[#8B7D6B]/80 text-white rounded-md transition-colors shadow-md"
                     >
                       Try Again
                     </button>
@@ -313,10 +321,10 @@ export default function MemoryPage() {
               ) : (
                 <>
                   {lightboxImageLoading && (
-                    <div className="absolute inset-0 flex items-center justify-center text-white min-h-[50vh]">
-                      <div className="text-center">
-                        <div className="animate-spin w-8 h-8 border-2 border-white/20 border-t-white rounded-full mb-4 mx-auto"></div>
-                        <p className="text-sm opacity-70">Loading image...</p>
+                    <div className="absolute inset-0 flex items-center justify-center text-gray-700 min-h-[50vh]">
+                      <div className="text-center bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-lg">
+                        <div className="animate-spin w-8 h-8 border-2 border-gray-300 border-t-[#8B7D6B] rounded-full mb-4 mx-auto"></div>
+                        <p className="text-sm opacity-70 text-gray-600">Loading image...</p>
                       </div>
                     </div>
                   )}
@@ -338,8 +346,8 @@ export default function MemoryPage() {
               )}
             </div>
             
-            <button 
-              className="lightbox-nav lightbox-next absolute top-1/2 right-[-80px] transform -translate-y-1/2 bg-white/10 backdrop-blur-[10px] border border-white/20 rounded-full w-[60px] h-[60px] flex items-center justify-center text-white text-xl cursor-pointer transition-all duration-300 ease-in-out hover:bg-[--accent-mocha]/30 hover:transform hover:-translate-y-1/2 hover:scale-110 max-[1024px]:hidden"
+            <button
+              className="lightbox-nav lightbox-next absolute top-1/2 right-[-80px] transform -translate-y-1/2 bg-white/80 backdrop-blur-[10px] border border-gray-200 rounded-full w-[60px] h-[60px] flex items-center justify-center text-gray-700 text-xl cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#8B7D6B] hover:text-white hover:transform hover:-translate-y-1/2 hover:scale-110 max-[1024px]:hidden shadow-md"
               onClick={(e) => { e.stopPropagation(); nextImage(); }}
             >
               ›
@@ -370,14 +378,14 @@ export default function MemoryPage() {
           }
         }
         
-        /* CSS 변수 정의 - HTML 버전과 완전 동일 */
+        /* CSS variables - White theme version */
         :root {
-          --primary-black: #000000;
-          --primary-white: #FFFFFF;
-          --accent-mocha: #B7AFA3;
+          --primary-black: #1f2937;
+          --primary-white: #ffffff;
+          --accent-mocha: #8B7D6B;
           --accent-warm: #D4CCC5;
-          --accent-deep: #9A9086;
-          --accent-neutral: #F8F6F4;
+          --accent-deep: #6B5B73;
+          --accent-neutral: #F9FAFB;
         }
 
         /* Gallery Grid - Responsive Grid Layout */

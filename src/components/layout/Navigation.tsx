@@ -420,21 +420,21 @@ export default function Navigation() {
           z-index: var(--nav-z-index);
           transition: var(--nav-transition);
           
-          /* Simplified background - transparent on home page, dark on others */
+          /* Simplified background - transparent on home page, white on others */
           background: ${
-            isHomePage 
-              ? 'transparent' 
-              : 'rgba(0, 0, 0, 0.95)'
+            isHomePage
+              ? 'rgba(255, 255, 255, 0.9)'
+              : 'rgba(255, 255, 255, 0.98)'
           };
-          backdrop-filter: ${isHomePage ? 'none' : 'blur(20px)'};
-          border-bottom: none;
+          backdrop-filter: blur(10px);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .redux-nav--scrolled {
           padding: 15px 40px;
-          background: rgba(0, 0, 0, 0.95);
-          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-          backdrop-filter: blur(20px);
+          background: rgba(255, 255, 255, 0.98);
+          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+          backdrop-filter: blur(10px);
         }
 
         /* Navigation Container */
@@ -453,7 +453,7 @@ export default function Navigation() {
           font-size: clamp(20px, 3vw, 26px);
           font-weight: 800;
           letter-spacing: 0.05em;
-          color: var(--primary-white);
+          color: #1a1a1a;
           text-decoration: none;
           transition: var(--nav-transition);
           cursor: pointer;
@@ -462,7 +462,7 @@ export default function Navigation() {
         }
 
         .redux-nav__logo:hover {
-          opacity: 0.8;
+          color: #8B7D6B;
           transform: scale(1.05);
         }
 
@@ -486,7 +486,7 @@ export default function Navigation() {
           font-size: clamp(13px, 1.2vw, 15px);
           letter-spacing: 0.08em;
           text-transform: uppercase;
-          color: var(--primary-white);
+          color: #505050;
           text-decoration: none;
           padding: 8px 0;
           display: block;
@@ -503,7 +503,7 @@ export default function Navigation() {
           left: 0;
           width: 0;
           height: 2px;
-          background: linear-gradient(90deg, var(--accent-mocha), var(--accent-warm));
+          background: linear-gradient(90deg, #8B7D6B, #A39993);
           transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
@@ -512,7 +512,7 @@ export default function Navigation() {
         }
 
         .redux-nav__item:hover .redux-nav__link {
-          color: var(--accent-mocha);
+          color: #6B625A;
           transform: translateY(-1px);
         }
 
@@ -522,15 +522,15 @@ export default function Navigation() {
           top: calc(100% + 15px);
           left: 50%;
           transform: translateX(-50%);
-          background: rgba(0, 0, 0, 0.95);
-          backdrop-filter: blur(20px);
+          background: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(10px);
           min-width: 200px;
           padding: 20px 0;
           opacity: 0;
           visibility: hidden;
           transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
           border-radius: 8px;
         }
 
@@ -543,7 +543,7 @@ export default function Navigation() {
         .redux-nav__dropdown-item {
           display: block;
           padding: 12px 25px;
-          color: var(--primary-white);
+          color: #505050;
           font-size: 13px;
           letter-spacing: 0.5px;
           text-transform: uppercase;
@@ -559,15 +559,15 @@ export default function Navigation() {
           top: 0;
           height: 100%;
           width: 3px;
-          background: linear-gradient(180deg, var(--accent-mocha), var(--accent-warm));
+          background: linear-gradient(180deg, #8B7D6B, #A39993);
           transform: scaleY(0);
           transition: transform 0.3s ease;
         }
 
         .redux-nav__dropdown-item:hover {
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(0, 0, 0, 0.03);
           padding-left: 35px;
-          color: var(--accent-mocha);
+          color: #8B7D6B;
         }
 
         .redux-nav__dropdown-item:hover::before {
@@ -592,7 +592,7 @@ export default function Navigation() {
         .redux-nav__toggle-line {
           width: 100%;
           height: 2px;
-          background: var(--primary-white);
+          background: #1a1a1a;
           transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
           transform-origin: center;
         }
@@ -648,7 +648,7 @@ export default function Navigation() {
           position: relative;
           width: 100%;
           height: 100%;
-          background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(20, 20, 20, 0.95) 100%);
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 248, 248, 0.95) 100%);
           backdrop-filter: blur(30px);
           display: flex;
           flex-direction: column;
@@ -666,8 +666,8 @@ export default function Navigation() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-          background: rgba(0, 0, 0, 0.3);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+          background: rgba(255, 255, 255, 0.5);
           backdrop-filter: blur(10px);
           position: sticky;
           top: 0;
@@ -678,7 +678,7 @@ export default function Navigation() {
           font-family: 'Playfair Display', serif;
           font-size: 24px;
           font-weight: 700;
-          color: var(--primary-white);
+          color: #1a1a1a;
           text-decoration: none;
           letter-spacing: 0.05em;
         }
@@ -689,16 +689,16 @@ export default function Navigation() {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          background: rgba(0, 0, 0, 0.05);
+          border: 1px solid rgba(0, 0, 0, 0.1);
           border-radius: 12px;
-          color: var(--primary-white);
+          color: #1a1a1a;
           transition: all 0.3s ease;
         }
         
         .redux-nav__mobile-close:hover,
         .redux-nav__mobile-close:focus {
-          background: rgba(255, 255, 255, 0.2);
+          background: rgba(0, 0, 0, 0.08);
           transform: scale(1.05);
           outline: none;
         }
@@ -720,16 +720,16 @@ export default function Navigation() {
           transform: translateY(20px);
           animation: fadeInUp 0.4s ease forwards;
           animation-delay: calc(var(--index, 0) * 0.05s);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
         
         .redux-nav__mobile-item--home {
-          background: linear-gradient(90deg, rgba(183, 175, 163, 0.1) 0%, transparent 100%);
-          border-bottom: 1px solid rgba(183, 175, 163, 0.2);
+          background: linear-gradient(90deg, rgba(139, 125, 107, 0.08) 0%, transparent 100%);
+          border-bottom: 1px solid rgba(139, 125, 107, 0.15);
         }
         
         .redux-nav__mobile-item--home > a {
-          color: var(--accent-mocha);
+          color: #8B7D6B;
           font-weight: 500;
           display: flex;
           align-items: center;
@@ -757,7 +757,7 @@ export default function Navigation() {
           font-family: 'Inter', sans-serif;
           font-size: 16px;
           font-weight: 400;
-          color: var(--primary-white);
+          color: #1a1a1a;
           letter-spacing: 0.05em;
           min-height: 64px;
           display: flex;
@@ -782,7 +782,7 @@ export default function Navigation() {
         .redux-nav__mobile-item > a:hover,
         .redux-nav__mobile-button:focus,
         .redux-nav__mobile-item > a:focus {
-          color: var(--accent-mocha);
+          color: #8B7D6B;
           padding-left: 10px;
           outline: none;
         }
@@ -796,7 +796,7 @@ export default function Navigation() {
           transform: translateY(-50%);
           width: 3px;
           height: 0;
-          background: var(--accent-mocha);
+          background: #8B7D6B;
           transition: height 0.3s ease;
         }
         
@@ -809,34 +809,34 @@ export default function Navigation() {
           max-height: 0;
           overflow: hidden;
           transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          background: rgba(255, 255, 255, 0.02);
+          background: rgba(0, 0, 0, 0.02);
         }
 
         .redux-nav__mobile-submenu--active {
           max-height: 500px;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          border-top: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .redux-nav__mobile-submenu a {
           font-size: 14px;
           font-weight: 300;
-          color: var(--primary-white);
-          opacity: 0.7;
+          color: #505050;
+          opacity: 0.9;
           text-decoration: none;
           padding: 16px 24px 16px 48px;
           display: block;
           transition: all 0.2s ease;
           border-radius: 0;
           margin: 0;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.03);
           position: relative;
         }
 
         .redux-nav__mobile-submenu a:hover,
         .redux-nav__mobile-submenu a:focus {
           opacity: 1;
-          color: var(--accent-mocha);
-          background: rgba(183, 175, 163, 0.05);
+          color: #8B7D6B;
+          background: rgba(139, 125, 107, 0.05);
           padding-left: 56px;
           outline: none;
         }
@@ -845,7 +845,7 @@ export default function Navigation() {
           content: '→';
           position: absolute;
           left: 32px;
-          color: var(--accent-mocha);
+          color: #8B7D6B;
           opacity: 0;
           transition: opacity 0.2s ease;
         }
@@ -858,8 +858,8 @@ export default function Navigation() {
         @media (max-width: 768px) {
           .redux-nav {
             padding: 15px 20px;
-            background: rgba(0, 0, 0, 0.98);
-            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
           }
           
           .redux-nav--scrolled {

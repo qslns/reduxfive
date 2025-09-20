@@ -148,39 +148,39 @@ export default function AISearch() {
           setIsOpen(true);
           setTimeout(() => inputRef.current?.focus(), 100);
         }}
-        className="fixed top-20 right-6 z-[90] flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white hover:bg-white/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/30"
+        className="fixed top-20 right-6 z-[90] flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-gray-700 hover:bg-gray-50 hover:border-gray-300 shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#8B7D6B]/30"
         aria-label="AI Search (Cmd+K)"
         title="AI Search (Cmd+K)"
       >
-        <Sparkles className="w-4 h-4" />
+        <Sparkles className="w-4 h-4 text-[#8B7D6B]" />
         <Search className="w-4 h-4" />
         <span className="hidden md:inline text-sm">AI Search</span>
-        <kbd className="hidden md:inline px-2 py-0.5 text-xs bg-white/10 rounded">⌘K</kbd>
+        <kbd className="hidden md:inline px-2 py-0.5 text-xs bg-gray-100 text-gray-600 rounded">⌘K</kbd>
       </button>
 
       {/* 검색 모달 */}
       {isOpen && (
-        <div className="fixed inset-0 z-[1002] bg-black/80 backdrop-blur-sm">
-          <div 
+        <div className="fixed inset-0 z-[1002] bg-black/60 backdrop-blur-sm">
+          <div
             ref={searchRef}
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-gradient-to-b from-gray-900 to-black border border-white/20 rounded-2xl shadow-2xl overflow-hidden"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-white border border-gray-200 rounded-2xl shadow-2xl overflow-hidden"
           >
             {/* 검색 헤더 */}
-            <div className="p-6 border-b border-white/10">
+            <div className="p-6 border-b border-gray-200">
               <form onSubmit={handleSearch} className="relative">
                 <div className="flex items-center gap-3">
-                  <Sparkles className="w-5 h-5 text-amber-300 animate-pulse" />
+                  <Sparkles className="w-5 h-5 text-[#8B7D6B] animate-pulse" />
                   <input
                     ref={inputRef}
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="AI로 검색하기... (예: Kim Bomin, 전시 정보, Fashion Film)"
-                    className="flex-1 bg-transparent text-white placeholder-white/50 text-lg focus:outline-none"
+                    className="flex-1 bg-transparent text-gray-900 placeholder-gray-500 text-lg focus:outline-none"
                     autoFocus
                   />
                   {isSearching && (
-                    <Loader2 className="w-5 h-5 text-white/50 animate-spin" />
+                    <Loader2 className="w-5 h-5 text-gray-500 animate-spin" />
                   )}
                   <button
                     type="button"
@@ -189,9 +189,9 @@ export default function AISearch() {
                       setQuery('');
                       setResults([]);
                     }}
-                    className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                   >
-                    <X className="w-5 h-5 text-white/50" />
+                    <X className="w-5 h-5 text-gray-500" />
                   </button>
                 </div>
               </form>
@@ -203,7 +203,7 @@ export default function AISearch() {
                     <button
                       key={idx}
                       onClick={() => setQuery(suggestion)}
-                      className="px-3 py-1 bg-white/10 hover:bg-white/20 text-white/70 text-sm rounded-full transition-colors"
+                      className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm rounded-full transition-colors"
                     >
                       {suggestion}
                     </button>
@@ -220,21 +220,21 @@ export default function AISearch() {
                     <button
                       key={idx}
                       onClick={() => navigateToResult(result.url)}
-                      className="w-full flex items-start gap-4 p-4 hover:bg-white/10 rounded-lg transition-colors text-left"
+                      className="w-full flex items-start gap-4 p-4 hover:bg-gray-50 rounded-lg transition-colors text-left"
                     >
                       <div className="mt-1">
-                        {result.type === 'designer' && <span className="text-blue-400">👤</span>}
-                        {result.type === 'exhibition' && <span className="text-green-400">🎨</span>}
-                        {result.type === 'about' && <span className="text-purple-400">📖</span>}
-                        {result.type === 'page' && <span className="text-gray-400">📄</span>}
+                        {result.type === 'designer' && <span className="text-blue-600">👤</span>}
+                        {result.type === 'exhibition' && <span className="text-green-600">🎨</span>}
+                        {result.type === 'about' && <span className="text-purple-600">📖</span>}
+                        {result.type === 'page' && <span className="text-gray-600">📄</span>}
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-white font-medium">{result.title}</h3>
-                        <p className="text-white/60 text-sm mt-1">{result.description}</p>
+                        <h3 className="text-gray-900 font-medium">{result.title}</h3>
+                        <p className="text-gray-600 text-sm mt-1">{result.description}</p>
                         <div className="flex items-center gap-2 mt-2">
-                          <span className="text-xs text-white/40">{result.url}</span>
+                          <span className="text-xs text-gray-500">{result.url}</span>
                           {result.relevance > 0.8 && (
-                            <span className="px-2 py-0.5 bg-amber-300/20 text-amber-300 text-xs rounded-full">
+                            <span className="px-2 py-0.5 bg-[#8B7D6B]/20 text-[#8B7D6B] text-xs rounded-full">
                               Best Match
                             </span>
                           )}
@@ -244,12 +244,12 @@ export default function AISearch() {
                   ))}
                 </div>
               ) : query.length > 2 && !isSearching ? (
-                <div className="p-8 text-center text-white/50">
+                <div className="p-8 text-center text-gray-500">
                   <p>검색 결과가 없습니다</p>
                   <p className="text-sm mt-2">다른 검색어를 시도해보세요</p>
                 </div>
               ) : (
-                <div className="p-8 text-center text-white/50">
+                <div className="p-8 text-center text-gray-500">
                   <p className="text-sm">검색어를 입력하거나 제안된 검색어를 선택하세요</p>
                 </div>
               )}

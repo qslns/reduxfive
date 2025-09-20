@@ -90,8 +90,8 @@ export default function DesignerPage({ params }: Props) {
 
   if (isLoading || !designer) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-white">Loading...</div>
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-gray-500">Loading...</div>
       </div>
     );
   }
@@ -99,24 +99,24 @@ export default function DesignerPage({ params }: Props) {
   const portfolioImages = portfolioCMS.currentImages;
 
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       {/* Navigation Bar */}
-      <nav className="fixed top-0 left-0 right-0 bg-black/95 backdrop-blur-md z-40 border-b border-white/10">
+      <nav className="fixed top-0 left-0 right-0 bg-white/98 backdrop-blur-sm z-40 border-b border-gray-200 shadow-sm">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link href="/" className="text-white font-bold text-xl tracking-wider hover:text-amber-300 transition-all duration-300">
+            <Link href="/" className="text-gray-900 font-bold text-xl tracking-wider hover:text-[#8B7D6B] transition-all duration-300">
               REDUX
             </Link>
 
             <div className="hidden md:flex items-center space-x-8">
-              <Link href="/about" className="text-white/80 hover:text-white transition-colors">ABOUT</Link>
-              <Link href="/designers" className="text-white/80 hover:text-white transition-colors">DESIGNERS</Link>
-              <Link href="/exhibitions" className="text-white/80 hover:text-white transition-colors">EXHIBITIONS</Link>
-              <Link href="/contact" className="text-white/80 hover:text-white transition-colors">CONTACT</Link>
+              <Link href="/about" className="text-gray-700 hover:text-gray-900 transition-colors">ABOUT</Link>
+              <Link href="/designers" className="text-gray-700 hover:text-gray-900 transition-colors">DESIGNERS</Link>
+              <Link href="/exhibitions" className="text-gray-700 hover:text-gray-900 transition-colors">EXHIBITIONS</Link>
+              <Link href="/contact" className="text-gray-700 hover:text-gray-900 transition-colors">CONTACT</Link>
             </div>
 
             {/* Mobile menu button */}
-            <button className="md:hidden text-white p-2">
+            <button className="md:hidden text-gray-900 p-2">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
@@ -132,7 +132,7 @@ export default function DesignerPage({ params }: Props) {
           <div className="container mx-auto max-w-7xl">
             {/* Designer Number Badge */}
             <div className="mb-8 flex justify-center lg:justify-start">
-              <span className="inline-block px-4 py-2 bg-amber-300/10 border border-amber-300/30 rounded-full text-amber-300 text-sm tracking-widest">
+              <span className="inline-block px-4 py-2 bg-[#8B7D6B]/10 border border-[#8B7D6B]/30 rounded-full text-[#8B7D6B] text-sm tracking-widest">
                 DESIGNER {designer.order ? String(designer.order).padStart(2, '0') : '01'}
               </span>
             </div>
@@ -142,21 +142,21 @@ export default function DesignerPage({ params }: Props) {
               {/* Text Content */}
               <div className="order-2 lg:order-1 space-y-8">
                 <div className="space-y-4">
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-wider animate-fade-in">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 tracking-wider animate-fade-in">
                     {designer.name}
                   </h1>
                   <div className="space-y-2">
-                    <p className="text-amber-300 text-sm md:text-base uppercase tracking-[0.2em] animate-slide-up">
+                    <p className="text-[#8B7D6B] text-sm md:text-base uppercase tracking-[0.2em] animate-slide-up">
                       {designer.mainRole}
                     </p>
-                    <p className="text-white/60 text-sm uppercase tracking-wider animate-slide-up animation-delay-100">
+                    <p className="text-gray-500 text-sm uppercase tracking-wider animate-slide-up animation-delay-100">
                       {designer.role}
                     </p>
                   </div>
                 </div>
 
-                <div className="prose prose-invert max-w-none animate-fade-in animation-delay-200">
-                  <p className="text-white/80 text-base md:text-lg leading-[1.8] font-light">
+                <div className="prose prose-gray max-w-none animate-fade-in animation-delay-200">
+                  <p className="text-gray-700 text-base md:text-lg leading-[1.8] font-light">
                     {designer.bio}
                   </p>
                 </div>
@@ -164,14 +164,14 @@ export default function DesignerPage({ params }: Props) {
                 <div className="space-y-4 animate-fade-in animation-delay-300">
                   {designer.instagramHandle && (
                     <div className="flex items-center gap-3 group">
-                      <svg className="w-5 h-5 text-white/60" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
                       </svg>
                       <a
                         href={`https://instagram.com/${designer.instagramHandle.replace('@', '')}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white/80 hover:text-amber-300 transition-all duration-300 group-hover:translate-x-1"
+                        className="text-gray-700 hover:text-[#8B7D6B] transition-all duration-300 group-hover:translate-x-1"
                       >
                         {designer.instagramHandle}
                       </a>
@@ -185,7 +185,7 @@ export default function DesignerPage({ params }: Props) {
                         href={designer.videoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-3 bg-amber-300/10 border border-amber-300/30 text-amber-300 rounded-lg hover:bg-amber-300/20 transition-all duration-300 flex items-center gap-2"
+                        className="px-6 py-3 bg-[#8B7D6B]/10 border border-[#8B7D6B]/30 text-[#8B7D6B] rounded-lg hover:bg-[#8B7D6B]/20 transition-all duration-300 flex items-center gap-2 shadow-sm hover:shadow-md"
                       >
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z"/>
@@ -195,7 +195,7 @@ export default function DesignerPage({ params }: Props) {
                     )}
                     <button
                       onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
-                      className="px-6 py-3 border border-white/20 text-white/80 rounded-lg hover:border-white/40 hover:text-white transition-all duration-300"
+                      className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:border-gray-500 hover:text-gray-900 transition-all duration-300 shadow-sm hover:shadow-md"
                     >
                       View Portfolio ↓
                     </button>
@@ -207,7 +207,7 @@ export default function DesignerPage({ params }: Props) {
               <div className="order-1 lg:order-2 relative">
                 <div className="relative w-full max-w-lg mx-auto lg:max-w-none">
                   {/* Decorative Frame */}
-                  <div className="absolute -inset-4 bg-gradient-to-r from-amber-300/10 to-transparent rounded-2xl blur-2xl animate-pulse-slow" />
+                  <div className="absolute -inset-4 bg-gradient-to-r from-[#8B7D6B]/10 to-transparent rounded-2xl blur-2xl animate-pulse-slow" />
 
                   <div className="aspect-[3/4] relative overflow-hidden rounded-xl shadow-2xl group">
                     <Image
@@ -220,7 +220,7 @@ export default function DesignerPage({ params }: Props) {
                     />
 
                     {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-white/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                     {/* CMS Edit Button */}
                     {isAuthenticated && (
@@ -240,7 +240,7 @@ export default function DesignerPage({ params }: Props) {
 
                   {/* Designer Name Tag */}
                   <div className="mt-4 text-center lg:text-left">
-                    <p className="text-white/40 text-xs uppercase tracking-[0.3em]">
+                    <p className="text-gray-500 text-xs uppercase tracking-[0.3em]">
                       {designer.nameKo || designer.name}
                     </p>
                   </div>
@@ -251,15 +251,15 @@ export default function DesignerPage({ params }: Props) {
         </section>
 
         {/* Portfolio Section */}
-        <section id="portfolio" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-black/95 to-black">
+        <section id="portfolio" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 via-white to-gray-50">
           <div className="container mx-auto max-w-7xl">
             {/* Section Header */}
             <div className="text-center mb-16 space-y-4">
-              <h2 className="text-3xl md:text-4xl font-light text-white tracking-wider animate-fade-in">
+              <h2 className="text-3xl md:text-4xl font-light text-gray-900 tracking-wider animate-fade-in">
                 Portfolio
               </h2>
-              <div className="w-24 h-[1px] bg-amber-300/50 mx-auto animate-expand" />
-              <p className="text-white/60 text-sm uppercase tracking-widest">
+              <div className="w-24 h-[1px] bg-[#8B7D6B]/50 mx-auto animate-expand" />
+              <p className="text-gray-500 text-sm uppercase tracking-widest">
                 Selected Works
               </p>
             </div>
@@ -273,7 +273,7 @@ export default function DesignerPage({ params }: Props) {
                   style={{ animationDelay: `${index * 50}ms` }}
                   onClick={() => openLightbox(index)}
                 >
-                  <div className="relative overflow-hidden bg-white/5">
+                  <div className="relative overflow-hidden bg-gray-50 shadow-sm hover:shadow-lg transition-shadow duration-300">
                     <Image
                       src={image}
                       alt={`Portfolio ${index + 1}`}
@@ -284,11 +284,11 @@ export default function DesignerPage({ params }: Props) {
                     />
 
                     {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
 
                     {/* Work Number */}
                     <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                      <span className="text-white text-xs uppercase tracking-widest">
+                      <span className="text-gray-900 text-xs uppercase tracking-widest font-medium">
                         Work {String(index + 1).padStart(2, '0')}
                       </span>
                     </div>
@@ -323,7 +323,7 @@ export default function DesignerPage({ params }: Props) {
 
               {/* Add New Image Slot */}
               {isAuthenticated && (
-                <div className="relative min-h-[300px] border-2 border-dashed border-white/20 rounded-xl flex items-center justify-center bg-white/5 hover:bg-white/10 transition-colors break-inside-avoid mb-4">
+                <div className="relative min-h-[300px] border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center bg-white hover:bg-gray-50 transition-colors break-inside-avoid mb-4 shadow-sm">
                   <DirectCMS
                     slotId={`designer-${designer.id}-portfolio-new`}
                     type="image"
@@ -338,22 +338,22 @@ export default function DesignerPage({ params }: Props) {
             </div>
 
             {/* Portfolio Stats */}
-            <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/10 pt-8">
+            <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-gray-200 pt-8">
               <div className="text-center">
-                <p className="text-3xl font-light text-amber-300">{portfolioImages.length}</p>
-                <p className="text-xs uppercase tracking-widest text-white/60 mt-2">Total Works</p>
+                <p className="text-3xl font-light text-[#8B7D6B]">{portfolioImages.length}</p>
+                <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">Total Works</p>
               </div>
               <div className="text-center">
-                <p className="text-3xl font-light text-amber-300">{designer.order || 1}</p>
-                <p className="text-xs uppercase tracking-widest text-white/60 mt-2">Designer #</p>
+                <p className="text-3xl font-light text-[#8B7D6B]">{designer.order || 1}</p>
+                <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">Designer #</p>
               </div>
               <div className="text-center">
-                <p className="text-3xl font-light text-amber-300">2025</p>
-                <p className="text-xs uppercase tracking-widest text-white/60 mt-2">Since</p>
+                <p className="text-3xl font-light text-[#8B7D6B]">2025</p>
+                <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">Since</p>
               </div>
               <div className="text-center">
-                <p className="text-3xl font-light text-amber-300">∞</p>
-                <p className="text-xs uppercase tracking-widest text-white/60 mt-2">Creative</p>
+                <p className="text-3xl font-light text-[#8B7D6B]">∞</p>
+                <p className="text-xs uppercase tracking-widest text-gray-500 mt-2">Creative</p>
               </div>
             </div>
           </div>
@@ -362,10 +362,10 @@ export default function DesignerPage({ params }: Props) {
 
       {/* Enhanced Lightbox */}
       {isLightboxOpen && portfolioImages.length > 0 && (
-        <div className="fixed inset-0 z-50 bg-black/98 backdrop-blur-md flex items-center justify-center animate-fade-in" onClick={closeLightbox}>
+        <div className="fixed inset-0 z-50 bg-gray-900/98 backdrop-blur-md flex items-center justify-center animate-fade-in" onClick={closeLightbox}>
           {/* Close Button */}
           <button
-            className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center bg-white/10 rounded-full text-white/80 hover:text-white hover:bg-white/20 transition-all duration-300"
+            className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center bg-gray-900/10 rounded-full text-white/80 hover:text-white hover:bg-gray-900/20 transition-all duration-300"
             onClick={closeLightbox}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -375,7 +375,7 @@ export default function DesignerPage({ params }: Props) {
 
           {/* Previous Button */}
           <button
-            className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/10 rounded-full text-white/80 hover:text-white hover:bg-white/20 transition-all duration-300"
+            className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-gray-900/10 rounded-full text-white/80 hover:text-white hover:bg-gray-900/20 transition-all duration-300"
             onClick={(e) => {
               e.stopPropagation();
               prevImage();
@@ -400,7 +400,7 @@ export default function DesignerPage({ params }: Props) {
 
           {/* Next Button */}
           <button
-            className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/10 rounded-full text-white/80 hover:text-white hover:bg-white/20 transition-all duration-300"
+            className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-gray-900/10 rounded-full text-white/80 hover:text-white hover:bg-gray-900/20 transition-all duration-300"
             onClick={(e) => {
               e.stopPropagation();
               nextImage();
@@ -421,7 +421,7 @@ export default function DesignerPage({ params }: Props) {
                 <button
                   key={idx}
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    idx === currentImageIndex ? 'w-8 bg-amber-300' : 'bg-white/30 hover:bg-white/50'
+                    idx === currentImageIndex ? 'w-8 bg-[#8B7D6B]' : 'bg-white/30 hover:bg-white/50'
                   }`}
                   onClick={(e) => {
                     e.stopPropagation();

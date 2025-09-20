@@ -79,7 +79,7 @@ const ReduxLoadingScreen: React.FC<ReduxLoadingScreenProps> = ({
             left: '-100%',
             width: '100%',
             height: '1px',
-            background: 'var(--primary-black)',
+            background: '#8B7D6B',
             animation: 'loadingLine 2s ease-in-out infinite'
           }}></div>
         </div>

@@ -92,15 +92,15 @@ function HeroSection() {
   // 서버 사이드 렌더링 중에는 기본 콘텐츠 반환
   if (!isClient) {
     return (
-      <section className="hero-section relative h-screen flex items-center justify-center bg-black overflow-hidden">
+      <section className="hero-section relative h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white overflow-hidden">
         <div className="hero-content text-center z-10 px-6">
           <h1 
-            className="hero-title font-['Playfair_Display'] font-bold text-white mb-8 tracking-[-0.02em] leading-[0.85]"
+            className="hero-title font-['Playfair_Display'] font-bold text-gray-900 mb-8 tracking-[-0.02em] leading-[0.85]"
             style={{ fontSize: 'clamp(3rem, 8vw, 8rem)' }}
           >
             REDUX
           </h1>
-          <p className="hero-subtitle text-white/80 text-xl tracking-[0.3em] uppercase mb-12">
+          <p className="hero-subtitle text-gray-700 text-xl tracking-[0.3em] uppercase mb-12">
             THE ROOM OF [ ]
           </p>
         </div>
@@ -109,7 +109,7 @@ function HeroSection() {
   }
 
   return (
-    <section className="hero-section relative h-screen flex items-center justify-center bg-black overflow-hidden">
+    <section className="hero-section relative h-screen flex items-center justify-center bg-white overflow-hidden">
       {/* Background Video */}
       {!videoError && isVideoVisible && (
         <video
@@ -134,8 +134,8 @@ function HeroSection() {
         />
       )}
 
-      {/* Background overlay */}
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]" />
+      {/* Background overlay - lighter for white theme */}
+      <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px]" />
 
       {/* Noise texture */}
       <div 
@@ -147,95 +147,86 @@ function HeroSection() {
 
       {/* Avant-garde scratch-style irregular line elements - 확장된 버전 */}
       <div 
-        className="absolute top-[18%] right-[12%] w-[200px] h-[0.5px] bg-gradient-to-r from-transparent via-white/20 to-transparent"
+        className="absolute top-[18%] right-[12%] w-[200px] h-[0.5px] bg-gradient-to-r from-transparent via-gray-400/30 to-transparent"
         style={{ transform: 'rotate(-23deg) skewX(-15deg)' }}
       />
       <div 
-        className="absolute bottom-[25%] left-[8%] w-[180px] h-[0.5px] bg-gradient-to-l from-transparent via-white/15 to-transparent"
+        className="absolute bottom-[25%] left-[8%] w-[180px] h-[0.5px] bg-gradient-to-l from-transparent via-gray-400/25 to-transparent"
         style={{ transform: 'rotate(17deg) skewY(12deg)' }}
       />
       <div 
-        className="absolute top-[65%] right-[20%] w-[120px] h-[0.5px] bg-gradient-to-r from-transparent via-white/10 to-transparent"
+        className="absolute top-[65%] right-[20%] w-[120px] h-[0.5px] bg-gradient-to-r from-transparent via-gray-400/20 to-transparent"
         style={{ transform: 'rotate(-45deg)' }}
       />
       <div 
-        className="absolute top-[40%] left-[15%] w-[100px] h-[0.5px] bg-gradient-to-l from-transparent via-white/15 to-transparent"
+        className="absolute top-[40%] left-[15%] w-[100px] h-[0.5px] bg-gradient-to-l from-transparent via-gray-400/25 to-transparent"
         style={{ transform: 'rotate(72deg) skewX(20deg)' }}
       />
       
       {/* 추가된 아방가르드 선 요소들 */}
       <div 
-        className="absolute top-[10%] left-[25%] w-[80px] h-[0.3px] bg-gradient-to-r from-white/8 via-white/25 to-transparent"
+        className="absolute top-[10%] left-[25%] w-[80px] h-[0.3px] bg-gradient-to-r from-gray-300/15 via-gray-400/35 to-transparent"
         style={{ transform: 'rotate(-67deg) skewY(-8deg)' }}
       />
       <div 
-        className="absolute top-[55%] right-[35%] w-[140px] h-[0.4px] bg-gradient-to-l from-transparent via-white/12 to-white/8"
+        className="absolute top-[55%] right-[35%] w-[140px] h-[0.4px] bg-gradient-to-l from-transparent via-gray-400/20 to-gray-300/15"
         style={{ transform: 'rotate(38deg) skewX(25deg)' }}
       />
       <div 
-        className="absolute bottom-[40%] right-[8%] w-[60px] h-[0.3px] bg-gradient-to-r from-white/10 to-transparent"
+        className="absolute bottom-[40%] right-[8%] w-[60px] h-[0.3px] bg-gradient-to-r from-gray-400/20 to-transparent"
         style={{ transform: 'rotate(-82deg) skewX(-30deg)' }}
       />
       <div 
-        className="absolute top-[75%] left-[35%] w-[90px] h-[0.4px] bg-gradient-to-l from-transparent via-white/18 to-white/5"
+        className="absolute top-[75%] left-[35%] w-[90px] h-[0.4px] bg-gradient-to-l from-transparent via-gray-400/30 to-gray-300/10"
         style={{ transform: 'rotate(15deg) skewY(18deg)' }}
       />
       <div 
-        className="absolute top-[30%] right-[45%] w-[50px] h-[0.2px] bg-white/12"
+        className="absolute top-[30%] right-[45%] w-[50px] h-[0.2px] bg-gray-400/20"
         style={{ transform: 'rotate(-125deg) skewX(40deg)' }}
       />
       <div 
-        className="absolute bottom-[15%] left-[20%] w-[110px] h-[0.3px] bg-gradient-to-r from-white/6 via-transparent to-white/14"
+        className="absolute bottom-[15%] left-[20%] w-[110px] h-[0.3px] bg-gradient-to-r from-gray-300/10 via-transparent to-gray-400/25"
         style={{ transform: 'rotate(55deg) skewY(-22deg)' }}
       />
       
       {/* 매우 미세한 스크래치 라인들 */}
       <div 
-        className="absolute top-[25%] left-[45%] w-[35px] h-[0.2px] bg-white/8"
+        className="absolute top-[25%] left-[45%] w-[35px] h-[0.2px] bg-gray-400/15"
         style={{ transform: 'rotate(-95deg)' }}
       />
       <div 
-        className="absolute top-[85%] right-[25%] w-[70px] h-[0.2px] bg-gradient-to-r from-transparent to-white/10"
+        className="absolute top-[85%] right-[25%] w-[70px] h-[0.2px] bg-gradient-to-r from-transparent to-gray-400/20"
         style={{ transform: 'rotate(110deg) skewX(-15deg)' }}
       />
       <div 
-        className="absolute top-[45%] left-[60%] w-[40px] h-[0.15px] bg-white/6"
+        className="absolute top-[45%] left-[60%] w-[40px] h-[0.15px] bg-gray-400/10"
         style={{ transform: 'rotate(-155deg) skewY(35deg)' }}
       />
 
       {/* Main content with enhanced transparency effects for video interaction */}
       <div className="hero-content text-center z-10 px-6 max-w-4xl mx-auto">
         <h1 
-          className="hero-title font-['Playfair_Display'] font-bold text-white mb-8 tracking-[-0.02em] leading-[0.85] transition-all duration-1000 ease-out"
-          style={{ 
+          className="hero-title font-['Playfair_Display'] font-bold text-gray-900 mb-8 tracking-[-0.02em] leading-[0.85] transition-all duration-1000 ease-out"
+          style={{
             fontSize: 'clamp(3rem, 8vw, 8rem)',
-            textShadow: '0 0 40px rgba(255,255,255,0.2), 0 0 80px rgba(255,255,255,0.1)',
-            mixBlendMode: 'screen',
-            filter: 'contrast(1.2) brightness(1.1)',
-            background: 'linear-gradient(45deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7), rgba(255,255,255,0.95))',
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            color: 'transparent',
-            animation: 'textGlow 3s ease-in-out infinite alternate'
+            textShadow: '0 2px 10px rgba(0,0,0,0.08), 0 8px 20px rgba(0,0,0,0.04)',
+            color: '#1a1a1a'
           }}
         >
           REDUX
         </h1>
         
         <p 
-          className="hero-subtitle text-white text-xl tracking-[0.3em] uppercase mb-12 transition-all duration-1000"
-          style={{ 
-            textShadow: '0 0 20px rgba(255,255,255,0.3), 0 0 40px rgba(255,255,255,0.15)',
-            mixBlendMode: 'overlay',
-            filter: 'brightness(1.1) contrast(1.1)',
-            animation: 'subtitleGlow 4s ease-in-out infinite alternate'
+          className="hero-subtitle text-gray-700 text-xl tracking-[0.3em] uppercase mb-12 transition-all duration-1000"
+          style={{
+            textShadow: '0 1px 4px rgba(0,0,0,0.05)'
           }}
         >
           THE ROOM OF [ ]
         </p>
 
         <div className="hero-description max-w-2xl mx-auto mb-12">
-          <p className="text-white/70 text-lg leading-relaxed">
+          <p className="text-gray-600 text-lg leading-relaxed">
             5명의 패션 디자이너가 만들어가는 창작의 공간.<br />
             패션을 넘어 예술로, 개인을 넘어 집단으로.
           </p>
@@ -245,15 +236,15 @@ function HeroSection() {
         <div className="hero-actions flex flex-col sm:flex-row gap-6 justify-center items-center">
           <button
             onClick={navigateToAbout}
-            className="group relative px-8 py-4 bg-transparent border-2 border-white text-white uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:bg-white hover:text-black hover:scale-105"
+            className="group relative px-8 py-4 bg-white/80 backdrop-blur-sm border-2 border-gray-900 text-gray-900 uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:bg-gray-900 hover:text-white hover:scale-105 shadow-md hover:shadow-xl"
           >
             <span className="relative z-10">Discover Redux</span>
-            <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            <div className="absolute inset-0 bg-gray-900 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
           </button>
           
           <button
             onClick={navigateToExhibitions}
-            className="group relative px-8 py-4 bg-transparent border-2 border-white/60 text-white uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:bg-white/10 hover:border-white hover:scale-105"
+            className="group relative px-8 py-4 bg-white/60 backdrop-blur-sm border-2 border-gray-400 text-gray-700 uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:bg-gray-50 hover:border-gray-700 hover:text-gray-900 hover:scale-105 shadow-md hover:shadow-xl"
           >
             View Exhibitions
           </button>
@@ -267,7 +258,7 @@ function HeroSection() {
             // X 버튼 - 비디오 끄기 (미니멀 디자인)
             <button
               onClick={hideVideo}
-              className="w-12 h-12 bg-black/70 hover:bg-white/20 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/30 shadow-lg"
+              className="w-12 h-12 bg-white/80 hover:bg-white/90 backdrop-blur-md border border-gray-300 rounded-full flex items-center justify-center text-gray-700 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-400 shadow-lg"
               title="비디오 끄기"
               aria-label="비디오 끄기"
             >
@@ -277,7 +268,7 @@ function HeroSection() {
             // 재생 버튼 - 비디오 켜기 (미니멀 디자인)
             <button
               onClick={showVideo}
-              className="w-12 h-12 bg-black/70 hover:bg-white/20 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/30 shadow-lg"
+              className="w-12 h-12 bg-white/80 hover:bg-white/90 backdrop-blur-md border border-gray-300 rounded-full flex items-center justify-center text-gray-700 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-400 shadow-lg"
               title="비디오 재생"
               aria-label="비디오 재생"
             >

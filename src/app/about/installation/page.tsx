@@ -187,34 +187,34 @@ export default function InstallationPage() {
   return (
     <>
 
-      {/* Hero Section - HTML 버전과 완전 동일한 3D 효과 */}
-      <section className="hero-section h-screen relative overflow-hidden bg-[linear-gradient(45deg,#1a1a1a_0%,#2a2a2a_50%,#1a1a1a_100%)] pt-[80px]">
+      {/* Hero Section - White theme version */}
+      <section className="hero-section h-screen relative overflow-hidden bg-gradient-to-br from-white via-gray-50 to-gray-100 pt-[80px]">
         <div className="hero-3d-container absolute top-0 left-0 w-full h-full [perspective:1000px]">
-          <div className="hero-3d-element absolute w-[150px] h-[150px] bg-white/5 border border-white/10 [transform-style:preserve-3d] animate-[float3d_20s_infinite_ease-in-out] [animation-delay:0s] top-[20%] left-[10%]"></div>
-          <div className="hero-3d-element absolute w-[200px] h-[200px] bg-white/5 border border-white/10 [transform-style:preserve-3d] animate-[float3d_20s_infinite_ease-in-out] [animation-delay:5s] top-[60%] right-[20%]"></div>
-          <div className="hero-3d-element absolute w-[100px] h-[100px] bg-white/5 border border-white/10 [transform-style:preserve-3d] animate-[float3d_20s_infinite_ease-in-out] [animation-delay:10s] bottom-[20%] left-[30%]"></div>
+          <div className="hero-3d-element absolute w-[150px] h-[150px] bg-gray-200/20 border border-gray-300/30 [transform-style:preserve-3d] animate-[float3d_20s_infinite_ease-in-out] [animation-delay:0s] top-[20%] left-[10%] shadow-sm"></div>
+          <div className="hero-3d-element absolute w-[200px] h-[200px] bg-gray-200/20 border border-gray-300/30 [transform-style:preserve-3d] animate-[float3d_20s_infinite_ease-in-out] [animation-delay:5s] top-[60%] right-[20%] shadow-sm"></div>
+          <div className="hero-3d-element absolute w-[100px] h-[100px] bg-gray-200/20 border border-gray-300/30 [transform-style:preserve-3d] animate-[float3d_20s_infinite_ease-in-out] [animation-delay:10s] bottom-[20%] left-[30%] shadow-sm"></div>
         </div>
-        
+
         <div className="hero-content absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-[1]">
-          <h1 
-            className="hero-title font-thin uppercase text-white opacity-0 transform translate-y-[50px] animate-[heroFade_1.5s_ease_forwards] tracking-[0.3em]"
-            style={{ fontSize: 'clamp(60px, 10vw, 180px)' }}
+          <h1
+            className="hero-title font-thin uppercase text-gray-900 opacity-0 transform translate-y-[50px] animate-[heroFade_1.5s_ease_forwards] tracking-[0.3em]"
+            style={{ fontSize: 'clamp(60px, 10vw, 180px)', textShadow: '0 0 30px rgba(0,0,0,0.1)' }}
           >
             Process
           </h1>
-          <p className="hero-subtitle text-base tracking-[3px] text-[--gray-medium] mt-5 opacity-0 animate-[heroFade_1.5s_ease_forwards] [animation-delay:0.3s]">
+          <p className="hero-subtitle text-base tracking-[3px] text-[#8B7D6B] mt-5 opacity-0 animate-[heroFade_1.5s_ease_forwards] [animation-delay:0.3s]">
             Five Roles, One Exhibition
           </p>
         </div>
       </section>
 
-      {/* Installation Showcase Section - HTML 버전과 완전 동일 */}
-      <section className="showcase-section py-[120px] bg-black">
+      {/* Installation Showcase Section - White theme version */}
+      <section className="showcase-section py-[120px] bg-white">
         <div className="showcase-intro max-w-[800px] mx-auto mb-[120px] text-center px-10">
-          <h2 className="text-4xl font-light tracking-[3px] text-white mb-[30px]">
+          <h2 className="text-4xl font-light tracking-[3px] text-gray-900 mb-[30px]">
             전시를 만드는 6가지 방법
           </h2>
-          <p className="text-base leading-[2] text-[--gray-medium]">
+          <p className="text-base leading-[2] text-gray-600">
             REDUX는 5명의 디자이너가 각자의 역할을 맡아 하나의 전시를 만들어갑니다.
             패션 디자이너로서 완벽하지 않지만, 우리만의 방식으로 새로운 경험을 디자인합니다.
           </p>
@@ -224,13 +224,13 @@ export default function InstallationPage() {
           <div 
             key={index}
             className={`installation-item relative mb-[120px] opacity-0 transform translate-y-[100px] revealed:animate-[revealInstallation_1.5s_ease_forwards] ${
-              index % 2 === 1 ? 'bg-white/[0.02]' : ''
+              index % 2 === 1 ? 'bg-gray-50' : 'bg-white'
             }`}
           >
             <div className={`installation-content grid grid-cols-2 min-h-[80vh] ${
               index % 2 === 1 ? '[direction:rtl]' : ''
             }`}>
-              <div className={`installation-visual relative overflow-hidden bg-[--gray-dark] ${
+              <div className={`installation-visual relative overflow-hidden bg-gray-200 ${
                 index % 2 === 1 ? '[direction:ltr]' : ''
               }`}>
                 <OptimizedImage 
@@ -266,20 +266,20 @@ export default function InstallationPage() {
               <div className={`installation-info flex flex-col justify-center py-20 px-20 bg-transparent ${
                 index % 2 === 1 ? '[direction:ltr]' : ''
               }`}>
-                <div className="installation-number text-[120px] font-thin text-white/10 leading-[1] mb-10">
+                <div className="installation-number text-[120px] font-thin text-gray-300/60 leading-[1] mb-10">
                   {installation.number}
                 </div>
-                <h3 className="installation-title text-5xl font-light tracking-[3px] text-white mb-[30px]">
+                <h3 className="installation-title text-5xl font-light tracking-[3px] text-gray-900 mb-[30px]">
                   {installation.title}
                 </h3>
-                <p className="installation-description text-base leading-[2] text-[--gray-medium] mb-10">
+                <p className="installation-description text-base leading-[2] text-gray-600 mb-10">
                   {installation.description}
                 </p>
                 <ul className="installation-details list-none">
                   {installation.details.map((detail, detailIndex) => (
-                    <li 
+                    <li
                       key={detailIndex}
-                      className="text-sm text-[--gray-medium] mb-[10px] pl-5 relative before:content-['—'] before:absolute before:left-0"
+                      className="text-sm text-gray-600 mb-[10px] pl-5 relative before:content-['—'] before:absolute before:left-0 before:text-[#8B7D6B]"
                     >
                       {detail}
                     </li>
@@ -291,8 +291,8 @@ export default function InstallationPage() {
         ))}
       </section>
 
-      {/* Immersive Gallery - HTML 버전과 완전 동일 */}
-      <section className="immersive-gallery relative h-screen overflow-hidden bg-black">
+      {/* Immersive Gallery - White theme version */}
+      <section className="immersive-gallery relative h-screen overflow-hidden bg-gradient-to-br from-gray-100 via-gray-50 to-white">
         <div 
           className="gallery-slider flex h-full transition-transform duration-[800ms] ease-in-out"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -310,11 +310,11 @@ export default function InstallationPage() {
                 sizes="100vw"
                 className="object-cover"
               />
-              <div className="gallery-overlay absolute bottom-[60px] left-[60px] text-white max-[768px]:left-5 max-[768px]:bottom-10">
-                <h3 className="gallery-title text-4xl font-light tracking-[2px] mb-[10px]">
+              <div className="gallery-overlay absolute bottom-[60px] left-[60px] text-gray-900 max-[768px]:left-5 max-[768px]:bottom-10 bg-white/90 backdrop-blur-sm p-6 rounded-lg shadow-lg">
+                <h3 className="gallery-title text-4xl font-light tracking-[2px] mb-[10px] text-gray-900">
                   {slide.title}
                 </h3>
-                <p className="gallery-location text-base text-[--gray-medium]">
+                <p className="gallery-location text-base text-[#8B7D6B]">
                   {slide.location}
                 </p>
               </div>
@@ -344,14 +344,14 @@ export default function InstallationPage() {
         </div>
         
         <div className="gallery-nav absolute bottom-[60px] right-[60px] flex gap-5 max-[768px]:right-5 max-[768px]:bottom-10">
-          <button 
-            className="w-[60px] h-[60px] bg-white/10 border border-white/20 text-white cursor-pointer transition-all duration-300 ease-in-out text-xl hover:bg-white/20"
+          <button
+            className="w-[60px] h-[60px] bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-700 cursor-pointer transition-all duration-300 ease-in-out text-xl hover:bg-[#8B7D6B] hover:text-white shadow-md rounded-md"
             onClick={prevSlide}
           >
             ←
           </button>
-          <button 
-            className="w-[60px] h-[60px] bg-white/10 border border-white/20 text-white cursor-pointer transition-all duration-300 ease-in-out text-xl hover:bg-white/20"
+          <button
+            className="w-[60px] h-[60px] bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-700 cursor-pointer transition-all duration-300 ease-in-out text-xl hover:bg-[#8B7D6B] hover:text-white shadow-md rounded-md"
             onClick={nextSlide}
           >
             →
@@ -359,8 +359,8 @@ export default function InstallationPage() {
         </div>
       </section>
 
-      {/* Footer - HTML 버전과 완전 동일 */}
-      <footer className="py-[60px] px-10 bg-black text-white text-center border-t border-white/10">
+      {/* Footer - White theme version */}
+      <footer className="py-[60px] px-10 bg-gray-50 text-gray-700 text-center border-t border-gray-200">
         <p>&copy; 2025 REDUX. All rights reserved.</p>
       </footer>
 

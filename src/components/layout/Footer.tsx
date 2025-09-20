@@ -34,8 +34,8 @@ export default function Footer() {
 
   if (footerType === 'simple') {
     return (
-      <footer className="py-[60px] px-10 bg-black text-white text-center border-t border-white/10">
-        <p className="text-sm text-white/60">
+      <footer className="py-[60px] px-10 bg-gray-50 text-gray-700 text-center border-t border-black/5">
+        <p className="text-sm text-gray-500">
           &copy; {new Date().getFullYear()} REDUX. All rights reserved.
         </p>
       </footer>
@@ -44,13 +44,13 @@ export default function Footer() {
 
   // Full Footer for homepage
   return (
-    <footer className="py-[60px] px-10 bg-black text-white text-center border-t border-white/10">
+    <footer className="py-[60px] px-10 bg-gray-50 text-gray-700 text-center border-t border-black/5">
       <div className="footer-content max-w-[1200px] mx-auto flex justify-between items-center flex-wrap gap-10 max-[1024px]:flex-col max-[1024px]:text-center">
         <ul className="footer-nav flex gap-[30px] list-none max-[1024px]:flex-col max-[1024px]:gap-[15px]">
           <li>
             <Link 
               href="/about"
-              className="text-white no-underline text-[13px] tracking-[1px] uppercase transition-opacity duration-300 hover:opacity-70 max-[768px]:text-xs"
+              className="text-gray-700 no-underline text-[13px] tracking-[1px] uppercase transition-all duration-300 hover:text-[#8B7D6B] max-[768px]:text-xs"
             >
               About
             </Link>
@@ -58,7 +58,7 @@ export default function Footer() {
           <li>
             <Link 
               href="/designers"
-              className="text-white no-underline text-[13px] tracking-[1px] uppercase transition-opacity duration-300 hover:opacity-70 max-[768px]:text-xs"
+              className="text-gray-700 no-underline text-[13px] tracking-[1px] uppercase transition-all duration-300 hover:text-[#8B7D6B] max-[768px]:text-xs"
             >
               Designers
             </Link>
@@ -66,7 +66,7 @@ export default function Footer() {
           <li>
             <Link 
               href="/exhibitions"
-              className="text-white no-underline text-[13px] tracking-[1px] uppercase transition-opacity duration-300 hover:opacity-70 max-[768px]:text-xs"
+              className="text-gray-700 no-underline text-[13px] tracking-[1px] uppercase transition-all duration-300 hover:text-[#8B7D6B] max-[768px]:text-xs"
             >
               Exhibitions
             </Link>
@@ -74,14 +74,14 @@ export default function Footer() {
           <li>
             <Link 
               href="/contact"
-              className="text-white no-underline text-[13px] tracking-[1px] uppercase transition-opacity duration-300 hover:opacity-70 max-[768px]:text-xs"
+              className="text-gray-700 no-underline text-[13px] tracking-[1px] uppercase transition-all duration-300 hover:text-[#8B7D6B] max-[768px]:text-xs"
             >
               Contact
             </Link>
           </li>
         </ul>
         
-        <div className="footer-info text-xs text-white/60">
+        <div className="footer-info text-xs text-gray-500">
           <p>&copy; {new Date().getFullYear()} REDUX. All rights reserved.</p>
         </div>
       </div>
@@ -109,14 +109,14 @@ export const footerUtils = {
 
 // CSS 클래스명 상수 (유지보수 용이성)
 export const FOOTER_CLASSES = {
-  base: 'py-[60px] px-10 bg-black text-white text-center border-t border-white/10',
+  base: 'py-[60px] px-10 bg-gray-50 text-gray-700 text-center border-t border-black/5',
   fullFooter: {
     content: 'footer-content max-w-[1200px] mx-auto flex justify-between items-center flex-wrap gap-10 max-[1024px]:flex-col max-[1024px]:text-center',
     nav: 'footer-nav flex gap-[30px] list-none max-[1024px]:flex-col max-[1024px]:gap-[15px]',
-    link: 'text-white no-underline text-[13px] tracking-[1px] uppercase transition-opacity duration-300 hover:opacity-70 max-[768px]:text-xs',
-    info: 'footer-info text-xs text-white/60'
+    link: 'text-gray-700 no-underline text-[13px] tracking-[1px] uppercase transition-all duration-300 hover:text-[#8B7D6B] max-[768px]:text-xs',
+    info: 'footer-info text-xs text-gray-500'
   },
   simpleFooter: {
-    text: 'text-sm text-white/60'
+    text: 'text-sm text-gray-500'
   }
 } as const;

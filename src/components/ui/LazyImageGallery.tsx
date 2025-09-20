@@ -32,7 +32,7 @@ export default function LazyImageGallery(props: LazyImageGalleryProps) {
     <div className={`grid grid-cols-1 ${gridCols[columns]} gap-${gap}`}>
       {Array.from({ length: Math.min(props.images.length, 6) }, (_, index) => (
         <div key={index} className="relative aspect-[3/4] overflow-hidden rounded-lg">
-          <Skeleton className="w-full h-full bg-gray-800" />
+          <Skeleton className="w-full h-full bg-gray-200" />
         </div>
       ))}
     </div>

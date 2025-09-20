@@ -19,8 +19,8 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   userScalable: true,
-  themeColor: '#000000',
-  colorScheme: 'dark',
+  themeColor: '#FFFFFF',
+  colorScheme: 'light',
 };
 
 import Navigation from '../components/layout/Navigation';
@@ -56,9 +56,9 @@ export default function RootLayout({
           __html: `
             /* Critical styles to prevent FOUC */
             * { margin: 0; padding: 0; box-sizing: border-box; }
-            html, body { 
-              background: #000000; 
-              color: #ffffff; 
+            html, body {
+              background: #FFFFFF;
+              color: #1a1a1a;
               font-family: system-ui, -apple-system, sans-serif;
               overflow-x: hidden;
               -webkit-font-smoothing: antialiased;
@@ -78,7 +78,7 @@ export default function RootLayout({
               left: 0;
               width: 100%;
               height: 100vh;
-              background: #000000;
+              background: #FFFFFF;
               z-index: 10001;
             }
           `
@@ -138,7 +138,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-sans antialiased bg-black text-white overflow-x-hidden">
+      <body className="font-sans antialiased bg-white text-gray-900 overflow-x-hidden">
         <SkipToContent />
         {/* <InitialLoadingScreen /> */}
         <ClientMobileOptimizer />

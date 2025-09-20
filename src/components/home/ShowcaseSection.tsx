@@ -91,16 +91,16 @@ export default function ShowcaseSection() {
   const actualDesigners = designers.slice(0, 5); // 5명만 표시
 
   return (
-    <section className="showcase-section py-20 px-10 bg-black min-h-screen flex items-center">
+    <section className="showcase-section py-20 px-10 bg-gradient-to-b from-white to-gray-50 min-h-screen flex items-center">
       <div className="max-w-7xl mx-auto w-full">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <h2 
-            className="font-['Playfair_Display'] text-3xl md:text-4xl lg:text-5xl font-light text-white mb-4 md:mb-6 tracking-[0.1em]"
+            className="font-['Playfair_Display'] text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-4 md:mb-6 tracking-[0.1em]"
           >
             DISCOVER
           </h2>
-          <p className="text-white/70 text-base md:text-lg max-w-xl md:max-w-2xl mx-auto leading-relaxed px-4">
+          <p className="text-gray-500 text-base md:text-lg max-w-xl md:max-w-2xl mx-auto leading-relaxed px-4">
             5명의 디자이너와 그들의 창작 세계, 그리고 함께 만들어가는 전시의 공간을 탐험해보세요.
           </p>
         </div>
@@ -109,10 +109,10 @@ export default function ShowcaseSection() {
         <div className="showcase-grid grid grid-cols-2 md:grid-cols-4 gap-6 auto-rows-fr">
           {/* Designers */}
           {designers.map((designer, index) => (
-            <Link 
+            <Link
               key={designer.id}
-              href={designer.link} 
-              className="showcase-item group relative overflow-hidden bg-gray-900 aspect-square transition-all duration-500 hover:scale-105 hover:z-10"
+              href={designer.link}
+              className="showcase-item group relative overflow-hidden bg-white aspect-square transition-all duration-500 hover:scale-105 hover:z-10"
               style={{
                 animation: `fadeInUp 0.8s ease forwards`,
                 animationDelay: `${index * 100}ms`,
@@ -124,16 +124,16 @@ export default function ShowcaseSection() {
                 alt={designer.name}
                 fill={true}
                 sizes="(max-width: 768px) 50vw, 25vw"
-                className="object-cover transition-all duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0"
+                className="object-cover transition-all duration-700 group-hover:scale-110 filter brightness-95 group-hover:brightness-100"
               />
               
               {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="absolute bottom-4 left-4 right-4 text-white">
+              <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="absolute bottom-4 left-4 right-4 text-gray-900">
                   <h3 className="font-medium text-sm tracking-[0.1em] mb-1">
                     {designer.name}
                   </h3>
-                  <p className="text-xs text-white/70">
+                  <p className="text-xs text-gray-700">
                     {designer.role}
                   </p>
                 </div>
@@ -164,10 +164,10 @@ export default function ShowcaseSection() {
 
           {/* Exhibitions */}
           {exhibitions.map((exhibition, index) => (
-            <Link 
+            <Link
               key={exhibition.id}
-              href={exhibition.link} 
-              className="showcase-item group relative overflow-hidden bg-gray-900 aspect-square transition-all duration-500 hover:scale-105 hover:z-10"
+              href={exhibition.link}
+              className="showcase-item group relative overflow-hidden bg-white aspect-square transition-all duration-500 hover:scale-105 hover:z-10"
               style={{
                 animation: `fadeInUp 0.8s ease forwards`,
                 animationDelay: `${(designers.length + index) * 100}ms`,
@@ -179,23 +179,23 @@ export default function ShowcaseSection() {
                 alt={exhibition.name}
                 fill={true}
                 sizes="(max-width: 768px) 50vw, 25vw"
-                className="object-cover transition-all duration-700 group-hover:scale-110"
+                className="object-cover transition-all duration-700 group-hover:scale-110 filter brightness-95 group-hover:brightness-100"
               />
               
               {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <h3 className="font-['Playfair_Display'] font-medium text-sm tracking-[0.1em] mb-1 text-amber-300">
+              <div className="absolute inset-0 bg-gradient-to-t from-white/98 via-white/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="absolute bottom-4 left-4 right-4 text-gray-900">
+                  <h3 className="font-['Playfair_Display'] font-medium text-sm tracking-[0.1em] mb-1 text-[#8B7D6B]">
                     {exhibition.name}
                   </h3>
-                  <p className="text-xs text-white/70">
+                  <p className="text-xs text-gray-700">
                     {exhibition.description}
                   </p>
                 </div>
                 
                 {/* Exhibition indicator */}
                 <div className="absolute top-4 left-4">
-                  <span className="text-xs bg-amber-300 text-black px-2 py-1 rounded uppercase tracking-wider font-medium">
+                  <span className="text-xs bg-[#8B7D6B] text-white px-2 py-1 rounded uppercase tracking-wider font-medium">
                     Exhibition
                   </span>
                 </div>
@@ -229,7 +229,7 @@ export default function ShowcaseSection() {
         <div className="text-center mt-16">
           <Link 
             href="/about"
-            className="inline-block px-8 py-4 border border-white/30 text-white uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:bg-white hover:text-black hover:scale-105"
+            className="inline-block px-8 py-4 border border-gray-300 text-gray-900 uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:bg-gray-900 hover:text-white hover:scale-105 shadow-sm hover:shadow-lg"
           >
             Explore More
           </Link>
@@ -250,11 +250,11 @@ export default function ShowcaseSection() {
         
         .showcase-item {
           border-radius: 4px;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
         }
-        
+
         .showcase-item:hover {
-          box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
         }
         
         /* Enhanced Mobile Responsive adjustments */

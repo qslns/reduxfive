@@ -105,14 +105,14 @@ function NotificationItem({ notification, onRemove }: {
   const getBackgroundColor = () => {
     switch (notification.type) {
       case 'success':
-        return 'bg-green-900/20 border-green-500/30';
+        return 'bg-green-50 border-green-200';
       case 'error':
-        return 'bg-red-900/20 border-red-500/30';
+        return 'bg-red-50 border-red-200';
       case 'warning':
-        return 'bg-yellow-900/20 border-yellow-500/30';
+        return 'bg-yellow-50 border-yellow-200';
       case 'info':
       default:
-        return 'bg-blue-900/20 border-blue-500/30';
+        return 'bg-blue-50 border-blue-200';
     }
   };
 
@@ -129,18 +129,18 @@ function NotificationItem({ notification, onRemove }: {
         
         <div className="flex-1 min-w-0">
           {notification.title && (
-            <p className="text-sm font-medium text-white mb-1">
+            <p className="text-sm font-medium text-gray-900 mb-1">
               {notification.title}
             </p>
           )}
-          <p className="text-sm text-gray-300 break-words">
+          <p className="text-sm text-gray-700 break-words">
             {notification.message}
           </p>
         </div>
 
         <button
           onClick={() => onRemove(notification.id)}
-          className="flex-shrink-0 ml-4 text-gray-400 hover:text-white transition-colors"
+          className="flex-shrink-0 ml-4 text-gray-500 hover:text-gray-700 transition-colors"
           aria-label="알림 닫기"
         >
           <X className="w-4 h-4" />
