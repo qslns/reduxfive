@@ -5,7 +5,7 @@ export default function ContactInfo() {
     <div>
       <h2 className="heading-3 mb-8">Contact</h2>
       <p className="body-large text-gray-400 mb-12">
-        Collaboration inquiries. Press requests. General questions.
+        REDUX와의 협업이나 문의사항이 있으시면 언제든지 연락해 주세요.
       </p>
       
       <div className="space-y-6">
@@ -40,7 +40,7 @@ export default function ContactInfo() {
           <div>
             <p className="font-medium mb-1">Address</p>
             <p className="text-gray-400">
-              Seoul, Seongdong-gu<br />
+              서울특별시 성동구<br />
               REDUX Studio, 4F
             </p>
           </div>
@@ -63,11 +63,11 @@ export default function ContactInfo() {
       </div>
       
       <div className="mt-12 p-6 bg-zinc-900 rounded-lg">
-        <h3 className="text-lg font-semibold mb-3">Hours</h3>
+        <h3 className="text-lg font-semibold mb-3">업무 시간</h3>
         <div className="space-y-2 text-gray-400">
-          <p>Mon-Fri: 10:00 - 19:00</p>
-          <p>Sat: 12:00 - 17:00</p>
-          <p>Sun & Holidays: Closed</p>
+          <p>월-금: 10:00 - 19:00</p>
+          <p>토: 12:00 - 17:00</p>
+          <p>일, 공휴일: 휴무</p>
         </div>
       </div>
     </div>

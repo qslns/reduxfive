@@ -5,7 +5,7 @@ export const aboutCategories: Category[] = [
     id: 'collective',
     title: 'Collective',
     titleKo: '콜렉티브',
-    description: 'Five minds. One vision. Where individual expression becomes collective force.',
+    description: '5인의 개성이 하나의 비전으로. 개인의 표현이 집단의 힘이 되는 곳.',
     coverImage: '/images/about/process/홍보  브랜딩.png',
     images: []
   },
@@ -13,7 +13,7 @@ export const aboutCategories: Category[] = [
     id: 'fashion-film',
     title: 'Fashion Film',
     titleKo: '패션 필름',
-    description: 'Motion captured. Form in flux. Fashion transcending static frames.',
+    description: '움직임을 담은 패션. 정지된 프레임을 넘어 생명력 있는 이야기로.',
     coverImage: '/images/about/process/영상 & 편집.png',
     videoUrl: '/VIDEO/main.mp4.mp4',
     images: []
@@ -22,7 +22,7 @@ export const aboutCategories: Category[] = [
     id: 'memory',
     title: 'Memory',
     titleKo: '메모리',
-    description: 'Fragments of time. Preserved moments. Our collective consciousness made visible.',
+    description: '시간의 조각들. 보존된 순간들. 우리의 집단 의식을 가시화하다.',
     coverImage: '/images/about/memory/IMG_1728.jpeg',
     images: [
       '/images/about/memory/0C22A68E-AADF-4A8D-B5E7-44DDBA2EE64F.jpeg',
@@ -67,7 +67,7 @@ export const aboutCategories: Category[] = [
     id: 'visual-art',
     title: 'Visual Art',
     titleKo: '비주얼 아트',
-    description: 'Beyond garment. Pure form. Where textile becomes canvas.',
+    description: '의류를 넘어 순수한 형태로. 섬유가 캔버스가 되는 곳.',
     coverImage: '/images/about/visual-art/Analog Memories.png',
     images: [
       '/images/about/visual-art/Analog Memories.png',
@@ -84,7 +84,7 @@ export const aboutCategories: Category[] = [
     id: 'installation',
     title: 'Installation',
     titleKo: '인스톨레이션',
-    description: 'Spatial narratives. Immersive environments. Fashion occupying three dimensions.',
+    description: '공간의 내러티브. 몰입형 환경. 세 가지 차원을 채우는 패션.',
     coverImage: '/images/about/process/공간  연출.png',
     processImages: [
       '/images/about/process/공간  연출.png',

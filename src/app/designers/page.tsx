@@ -137,7 +137,7 @@ export default function DesignersPage() {
   
   // Dynamic content loading
   const { text: heroTitle } = useTextContent('designers', 'hero-title', 'FIVE DESIGNERS');
-  const { text: heroSubtitle } = useTextContent('designers', 'hero-subtitle', 'One Collective Vision');
+  const { text: heroSubtitle } = useTextContent('designers', 'hero-subtitle', '5인의 디자이너, 하나의 비전');
   
   // CMS 인증
   const { isAuthenticated } = useSimpleAuth();

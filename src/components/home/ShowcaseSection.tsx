@@ -32,35 +32,35 @@ export default function ShowcaseSection() {
       name: 'KIM BOMIN',
       cms: kimBominCMS,
       link: '/designers/kimbomin',
-      role: 'Textile Architect'
+      role: 'Fashion Designer'
     },
     { 
       id: 'parkparang',
       name: 'PARK PARANG',
       cms: parkParangCMS,
       link: '/designers/parkparang',
-      role: 'Material Explorer'
+      role: 'Fashion Designer'
     },
     { 
       id: 'leetaehyeon',
       name: 'LEE TAEHYEON',
       cms: leeTaehyeonCMS,
       link: '/designers/leetaehyeon',
-      role: 'Visual Narrative'
+      role: 'Fashion Designer'
     },
     { 
       id: 'choieunsol',
       name: 'CHOI EUNSOL',
       cms: choiEunsolCMS,
       link: '/designers/choieunsol',
-      role: 'Form Sculptor'
+      role: 'Fashion Designer'
     },
     { 
       id: 'kimgyeongsu',
       name: 'KIM GYEONGSU',
       cms: kimGyeongsuCMS,
       link: '/designers/kimgyeongsu',
-      role: 'Structure Designer'
+      role: 'Fashion Designer'
     }
   ];
 
@@ -69,14 +69,14 @@ export default function ShowcaseSection() {
     {
       id: 'cinemode',
       name: 'CINE MODE',
-      description: 'Moving Images',
+      description: '패션 필름',
       cms: cinemodeCMS,
       link: '/exhibitions#cine-mode'
     },
     {
       id: 'theroom',
       name: 'THE ROOM OF [ ]',
-      description: 'Spatial Installation',
+      description: '설치 미술',
       cms: theroomCMS,
       link: '/exhibitions#the-room'
     }
@@ -98,10 +98,10 @@ export default function ShowcaseSection() {
           <h2 
             className="font-['Playfair_Display'] text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-4 md:mb-6 tracking-[0.1em]"
           >
-            COLLECTIVE
+            CREATORS
           </h2>
           <p className="text-gray-500 text-base md:text-lg max-w-xl md:max-w-2xl mx-auto leading-relaxed px-4">
-            Five distinct voices. One unified vision.
+            5인의 패션 디자이너, 그들의 창작 세계를 탐험하다.
           </p>
         </div>
 
@@ -196,7 +196,7 @@ export default function ShowcaseSection() {
                 {/* Exhibition indicator */}
                 <div className="absolute top-4 left-4">
                   <span className="text-xs bg-[#8B7D6B] text-white px-2 py-1 rounded uppercase tracking-wider font-medium">
-                    Current
+                    Exhibition
                   </span>
                 </div>
               </div>
@@ -231,7 +231,7 @@ export default function ShowcaseSection() {
             href="/about"
             className="inline-block px-8 py-4 border border-gray-300 text-gray-900 uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:bg-gray-900 hover:text-white hover:scale-105 shadow-sm hover:shadow-lg"
           >
-            Full Archive
+            더 알아보기
           </Link>
         </div>
       </div>

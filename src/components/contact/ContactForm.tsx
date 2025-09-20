@@ -39,13 +39,13 @@ export default function ContactForm() {
 
   return (
     <div className="w-full max-w-2xl mx-auto">
-      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 md:mb-8 text-center md:text-left">Connect</h2>
+      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 md:mb-8 text-center md:text-left">문의하기</h2>
       
       <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <div>
             <label htmlFor="name" className="block text-sm font-medium mb-2">
-              Name *
+              이름 *
             </label>
             <input
               type="text"
@@ -60,7 +60,7 @@ export default function ContactForm() {
           
           <div>
             <label htmlFor="email" className="block text-sm font-medium mb-2">
-              Email *
+              이메일 *
             </label>
             <input
               type="email"
@@ -76,7 +76,7 @@ export default function ContactForm() {
         
         <div>
           <label htmlFor="subject" className="block text-sm font-medium mb-2">
-            Inquiry Type *
+            문의 유형 *
           </label>
           <select
             id="subject"
@@ -86,17 +86,17 @@ export default function ContactForm() {
             required
             className="w-full px-3 md:px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg focus:outline-none focus:border-white transition-colors text-sm md:text-base"
           >
-            <option value="">Select</option>
-            <option value="collaboration">Collaboration</option>
-            <option value="exhibition">Exhibition</option>
-            <option value="press">Press</option>
-            <option value="general">General</option>
+            <option value="">선택해주세요</option>
+            <option value="collaboration">협업 문의</option>
+            <option value="exhibition">전시 문의</option>
+            <option value="press">언론 문의</option>
+            <option value="general">일반 문의</option>
           </select>
         </div>
         
         <div>
           <label htmlFor="message" className="block text-sm font-medium mb-2">
-            Message *
+            메시지 *
           </label>
           <textarea
             id="message"
@@ -115,24 +115,24 @@ export default function ContactForm() {
           className="w-full px-4 md:px-6 py-3 md:py-4 bg-white text-black font-medium rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm md:text-base"
         >
           {isSubmitting ? (
-            'Sending...'
+            '전송 중...'
           ) : (
             <>
               <Send className="w-4 h-4 md:w-5 md:h-5" />
-              Send
+              메시지 보내기
             </>
           )}
         </button>
         
         {submitStatus === 'success' && (
           <div className="p-3 md:p-4 bg-green-900/20 border border-green-900 rounded-lg text-green-400 text-sm md:text-base">
-            Message sent. We'll be in touch soon.
+            메시지가 전송되었습니다. 빠른 시일 내에 연락드리겠습니다.
           </div>
         )}
         
         {submitStatus === 'error' && (
           <div className="p-3 md:p-4 bg-red-900/20 border border-red-900 rounded-lg text-red-400 text-sm md:text-base">
-            Failed to send. Please try again.
+            전송에 실패했습니다. 다시 시도해주세요.
           </div>
         )}
       </form>
