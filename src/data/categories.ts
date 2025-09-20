@@ -5,7 +5,7 @@ export const aboutCategories: Category[] = [
     id: 'collective',
     title: 'Collective',
     titleKo: '콜렉티브',
-    description: 'Five creative minds united by a shared vision of pushing the boundaries of fashion and art.',
+    description: 'Five minds. One vision. Where individual expression becomes collective force.',
     coverImage: '/images/about/process/홍보  브랜딩.png',
     images: []
   },
@@ -13,7 +13,7 @@ export const aboutCategories: Category[] = [
     id: 'fashion-film',
     title: 'Fashion Film',
     titleKo: '패션 필름',
-    description: 'Exploring the intersection of fashion and cinema through experimental filmmaking.',
+    description: 'Motion captured. Form in flux. Fashion transcending static frames.',
     coverImage: '/images/about/process/영상 & 편집.png',
     videoUrl: '/VIDEO/main.mp4.mp4',
     images: []
@@ -22,7 +22,7 @@ export const aboutCategories: Category[] = [
     id: 'memory',
     title: 'Memory',
     titleKo: '메모리',
-    description: 'A visual archive of collective memories and shared experiences that shape our creative journey.',
+    description: 'Fragments of time. Preserved moments. Our collective consciousness made visible.',
     coverImage: '/images/about/memory/IMG_1728.jpeg',
     images: [
       '/images/about/memory/0C22A68E-AADF-4A8D-B5E7-44DDBA2EE64F.jpeg',
@@ -67,7 +67,7 @@ export const aboutCategories: Category[] = [
     id: 'visual-art',
     title: 'Visual Art',
     titleKo: '비주얼 아트',
-    description: 'Fashion as a medium for visual storytelling and artistic expression.',
+    description: 'Beyond garment. Pure form. Where textile becomes canvas.',
     coverImage: '/images/about/visual-art/Analog Memories.png',
     images: [
       '/images/about/visual-art/Analog Memories.png',
@@ -84,7 +84,7 @@ export const aboutCategories: Category[] = [
     id: 'installation',
     title: 'Installation',
     titleKo: '인스톨레이션',
-    description: 'Transforming spaces through immersive fashion installations and experiential design.',
+    description: 'Spatial narratives. Immersive environments. Fashion occupying three dimensions.',
     coverImage: '/images/about/process/공간  연출.png',
     processImages: [
       '/images/about/process/공간  연출.png',

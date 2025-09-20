@@ -109,7 +109,7 @@ export default function AboutPage() {
             WHO REDUX?
           </h1>
           <p className="text-gray-700 text-xl tracking-[0.3em] uppercase">
-            Fashion Designer Collective
+            Creative Collective
           </p>
         </div>
       </section>
@@ -123,16 +123,16 @@ export default function AboutPage() {
                 className="font-['Playfair_Display'] font-bold text-gray-900 mb-8 tracking-[-0.02em] leading-[0.9]"
                 style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}
               >
-                우리는<br />REDUX<br />입니다
+                The Room<br />of<br />REDUX
               </h2>
               <div className="space-y-6 text-gray-700 text-lg leading-relaxed">
                 <p>
-                  REDUX는 5인의 패션 디자이너가 모여 만든 크리에이티브 콜렉티브입니다. 
-                  우리는 패션을 넘어 다양한 예술적 매체를 통해 새로운 경험을 창조합니다.
+                  Five distinct creative minds converge as REDUX.
+                  A collective exploring the boundaries between fashion, art, and human expression.
                 </p>
                 <p>
-                  패션 필름, 설치 미술, 비주얼 아트, 공간 디자인 등 다양한 형태로 
-                  관객들에게 '기억에 남을 순간'을 선사하고자 합니다.
+                  Through moving images, spatial installations, and material explorations,
+                  we craft moments that transcend the temporal.
                 </p>
               </div>
             </div>
@@ -140,12 +140,12 @@ export default function AboutPage() {
             <div className="space-y-8">
               <div>
                 <h3 className="text-2xl font-['Playfair_Display'] font-light text-[#8B7D6B] mb-4 tracking-[0.1em]">
-                  OUR PHILOSOPHY
+                  MANIFESTO
                 </h3>
                 <div className="space-y-4 text-gray-500">
-                  <p>우리는 경계를 넘어 새로운 가능성을 탐구합니다.</p>
-                  <p>각자의 개성이 하나로 모여 더 큰 시너지를 만들어냅니다.</p>
-                  <p>순간을 넘어 영원히 기억될 경험을 디자인합니다.</p>
+                  <p>Boundaries exist to be questioned.</p>
+                  <p>Individual voices unite in collective resonance.</p>
+                  <p>Ephemeral moments become eternal memories.</p>
                 </div>
               </div>
             </div>
@@ -158,7 +158,7 @@ export default function AboutPage() {
         <div className="max-w-[1600px] mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-['Playfair_Display'] text-4xl font-light text-gray-900 mb-4 tracking-[0.05em]">
-              EXPLORE OUR WORLD
+              DIMENSIONS
             </h2>
             <div className="w-20 h-[1px] bg-[#8B7D6B] mx-auto"></div>
           </div>
@@ -236,7 +236,7 @@ export default function AboutPage() {
               })
             ) : (
               <div className="col-span-full text-center py-20 text-gray-500">
-                <p>카테고리를 불러오는 중...</p>
+                <p>Loading dimensions...</p>
               </div>
             )}
           </div>

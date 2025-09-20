@@ -246,8 +246,8 @@ function HeroSection() {
               opacity: 0.95,
             }}
           >
-            5명의 패션 디자이너가 만들어가는 창작의 공간.<br />
-            패션을 넘어 예술로, 개인을 넘어 집단으로.
+            Exceptional craftsmanship. Intentional beauty.<br />
+            Where five creative minds converge into singular expression.
           </p>
         </div>
 
@@ -262,7 +262,7 @@ function HeroSection() {
               boxShadow: '0 4px 15px rgba(0, 0, 0, 0.15)',
             }}
           >
-            <span className="relative z-10 text-white font-medium">Discover Redux</span>
+            <span className="relative z-10 text-white font-medium">Enter</span>
             <div className="absolute inset-0 bg-gradient-to-r from-[#8B7D6B] to-[#6B5D4B] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </button>
           
@@ -274,7 +274,7 @@ function HeroSection() {
               border: '1px solid rgba(90, 90, 90, 0.3)',
             }}
           >
-            <span className="font-medium text-gray-700 group-hover:text-gray-900 transition-colors duration-300">View Exhibitions</span>
+            <span className="font-medium text-gray-700 group-hover:text-gray-900 transition-colors duration-300">Archive</span>
           </button>
         </div>
       </div>

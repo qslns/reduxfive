@@ -28,39 +28,39 @@ export default function ShowcaseSection() {
   // 디자이너 데이터
   const designers = [
     { 
-      id: 'kimbomin', 
-      name: 'KIM BOMIN', 
-      cms: kimBominCMS, 
+      id: 'kimbomin',
+      name: 'KIM BOMIN',
+      cms: kimBominCMS,
       link: '/designers/kimbomin',
-      role: 'Fashion Designer'
+      role: 'Textile Architect'
     },
     { 
-      id: 'parkparang', 
-      name: 'PARK PARANG', 
-      cms: parkParangCMS, 
+      id: 'parkparang',
+      name: 'PARK PARANG',
+      cms: parkParangCMS,
       link: '/designers/parkparang',
-      role: 'Fashion Designer'
+      role: 'Material Explorer'
     },
     { 
-      id: 'leetaehyeon', 
-      name: 'LEE TAEHYEON', 
-      cms: leeTaehyeonCMS, 
+      id: 'leetaehyeon',
+      name: 'LEE TAEHYEON',
+      cms: leeTaehyeonCMS,
       link: '/designers/leetaehyeon',
-      role: 'Creative Director'
+      role: 'Visual Narrative'
     },
     { 
-      id: 'choieunsol', 
-      name: 'CHOI EUNSOL', 
-      cms: choiEunsolCMS, 
+      id: 'choieunsol',
+      name: 'CHOI EUNSOL',
+      cms: choiEunsolCMS,
       link: '/designers/choieunsol',
-      role: 'Fashion Designer'
+      role: 'Form Sculptor'
     },
     { 
-      id: 'kimgyeongsu', 
-      name: 'KIM GYEONGSU', 
-      cms: kimGyeongsuCMS, 
+      id: 'kimgyeongsu',
+      name: 'KIM GYEONGSU',
+      cms: kimGyeongsuCMS,
       link: '/designers/kimgyeongsu',
-      role: 'Fashion Designer'
+      role: 'Structure Designer'
     }
   ];
 
@@ -69,14 +69,14 @@ export default function ShowcaseSection() {
     {
       id: 'cinemode',
       name: 'CINE MODE',
-      description: 'Fashion Film Exhibition',
+      description: 'Moving Images',
       cms: cinemodeCMS,
       link: '/exhibitions#cine-mode'
     },
     {
       id: 'theroom',
       name: 'THE ROOM OF [ ]',
-      description: 'Multi-media Exhibition',
+      description: 'Spatial Installation',
       cms: theroomCMS,
       link: '/exhibitions#the-room'
     }
@@ -98,10 +98,10 @@ export default function ShowcaseSection() {
           <h2 
             className="font-['Playfair_Display'] text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-4 md:mb-6 tracking-[0.1em]"
           >
-            DISCOVER
+            COLLECTIVE
           </h2>
           <p className="text-gray-500 text-base md:text-lg max-w-xl md:max-w-2xl mx-auto leading-relaxed px-4">
-            5명의 디자이너와 그들의 창작 세계, 그리고 함께 만들어가는 전시의 공간을 탐험해보세요.
+            Five distinct voices. One unified vision.
           </p>
         </div>
 
@@ -196,7 +196,7 @@ export default function ShowcaseSection() {
                 {/* Exhibition indicator */}
                 <div className="absolute top-4 left-4">
                   <span className="text-xs bg-[#8B7D6B] text-white px-2 py-1 rounded uppercase tracking-wider font-medium">
-                    Exhibition
+                    Current
                   </span>
                 </div>
               </div>
@@ -231,7 +231,7 @@ export default function ShowcaseSection() {
             href="/about"
             className="inline-block px-8 py-4 border border-gray-300 text-gray-900 uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:bg-gray-900 hover:text-white hover:scale-105 shadow-sm hover:shadow-lg"
           >
-            Explore More
+            Full Archive
           </Link>
         </div>
       </div>
