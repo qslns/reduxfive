@@ -118,7 +118,7 @@ function HeroSection() {
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
         >
           <source src={heroVideoUrl || '/VIDEO/main.mp4'} type="video/mp4" />
         </video>
@@ -205,28 +205,47 @@ function HeroSection() {
 
       {/* Main content with enhanced transparency effects for video interaction */}
       <div className="hero-content text-center z-10 px-6 max-w-4xl mx-auto">
-        <h1 
-          className="hero-title font-['Playfair_Display'] font-bold text-gray-900 mb-8 tracking-[-0.02em] leading-[0.85] transition-all duration-1000 ease-out"
+        <h1
+          className="hero-title font-['Playfair_Display'] font-bold mb-8 tracking-[-0.02em] leading-[0.85] transition-all duration-1000 ease-out animate-gradient"
           style={{
             fontSize: 'clamp(3rem, 8vw, 8rem)',
-            textShadow: '0 2px 10px rgba(0,0,0,0.08), 0 8px 20px rgba(0,0,0,0.04)',
-            color: '#1a1a1a'
+            background: 'linear-gradient(135deg, #2a2a2a 0%, #5a5a5a 25%, #8B7D6B 50%, #5a5a5a 75%, #2a2a2a 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            backgroundSize: '200% auto',
+            filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.08))',
           }}
         >
           REDUX
         </h1>
         
-        <p 
-          className="hero-subtitle text-gray-700 text-xl tracking-[0.3em] uppercase mb-12 transition-all duration-1000"
+        <p
+          className="hero-subtitle text-xl tracking-[0.3em] uppercase mb-12 transition-all duration-1000"
           style={{
-            textShadow: '0 1px 4px rgba(0,0,0,0.05)'
+            background: 'linear-gradient(90deg, #4a4a4a 0%, #7a7a7a 50%, #4a4a4a 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            opacity: 0.9,
+            filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.05))',
           }}
         >
           THE ROOM OF [ ]
         </p>
 
         <div className="hero-description max-w-2xl mx-auto mb-12">
-          <p className="text-gray-600 text-lg leading-relaxed">
+          <p
+            className="text-lg leading-relaxed"
+            style={{
+              background: 'linear-gradient(135deg, #5a5a5a 0%, #7a7a7a 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              lineHeight: '1.8',
+              opacity: 0.95,
+            }}
+          >
             5명의 패션 디자이너가 만들어가는 창작의 공간.<br />
             패션을 넘어 예술로, 개인을 넘어 집단으로.
           </p>
@@ -236,17 +255,26 @@ function HeroSection() {
         <div className="hero-actions flex flex-col sm:flex-row gap-6 justify-center items-center">
           <button
             onClick={navigateToAbout}
-            className="group relative px-8 py-4 bg-white/80 backdrop-blur-sm border-2 border-gray-900 text-gray-900 uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:bg-gray-900 hover:text-white hover:scale-105 shadow-md hover:shadow-xl"
+            className="group relative px-8 py-4 backdrop-blur-md uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(43, 43, 43, 0.85) 0%, rgba(139, 125, 107, 0.85) 100%)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.15)',
+            }}
           >
-            <span className="relative z-10">Discover Redux</span>
-            <div className="absolute inset-0 bg-gray-900 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            <span className="relative z-10 text-white font-medium">Discover Redux</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#8B7D6B] to-[#6B5D4B] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </button>
           
           <button
             onClick={navigateToExhibitions}
-            className="group relative px-8 py-4 bg-white/60 backdrop-blur-sm border-2 border-gray-400 text-gray-700 uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:bg-gray-50 hover:border-gray-700 hover:text-gray-900 hover:scale-105 shadow-md hover:shadow-xl"
+            className="group relative px-8 py-4 backdrop-blur-md uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.25) 100%)',
+              border: '1px solid rgba(90, 90, 90, 0.3)',
+            }}
           >
-            View Exhibitions
+            <span className="font-medium text-gray-700 group-hover:text-gray-900 transition-colors duration-300">View Exhibitions</span>
           </button>
         </div>
       </div>
@@ -301,6 +329,51 @@ const HeroSectionWithStyles = () => (
   <>
     <HeroSection />
     <style jsx global>{`
+        /* 그라데이션 애니메이션 */
+        @keyframes gradient-shift {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+
+        .animate-gradient {
+          animation: gradient-shift 4s ease infinite;
+        }
+
+        /* 홈페이지에서 Navigation 투명하게 만들기 */
+        body:has(.hero-section) .redux-nav:not(.redux-nav--scrolled) {
+          background: transparent !important;
+          backdrop-filter: none !important;
+          border-bottom: none !important;
+        }
+
+        body:has(.hero-section) .redux-nav:not(.redux-nav--scrolled) .redux-nav__logo {
+          background: linear-gradient(135deg, #3a3a3a 0%, #6a6a6a 50%, #8B7D6B 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        body:has(.hero-section) .redux-nav:not(.redux-nav--scrolled) .redux-nav__link {
+          color: #5a5a5a;
+          opacity: 0.9;
+        }
+
+        body:has(.hero-section) .redux-nav:not(.redux-nav--scrolled) .redux-nav__link:hover {
+          color: #8B7D6B;
+          opacity: 1;
+        }
+
+        body:has(.hero-section) .redux-nav:not(.redux-nav--scrolled) .redux-nav__toggle-line {
+          background: #5a5a5a;
+        }
+
         /* 완전히 새로운 모바일 최적화 - 깨짐 방지 */
         @media (max-width: 768px) {
           .hero-section {

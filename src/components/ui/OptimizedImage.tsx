@@ -12,6 +12,7 @@ interface OptimizedImageProps {
   fill?: boolean;
   sizes?: string;
   quality?: number;
+  loading?: 'lazy' | 'eager';
   placeholder?: 'blur' | 'empty';
   blurDataURL?: string;
   style?: React.CSSProperties;
@@ -38,7 +39,8 @@ function OptimizedImage({
   priority = false,
   fill = false,
   sizes,
-  quality = 85,
+  quality = 75,
+  loading,
   placeholder = 'empty',
   blurDataURL,
   style,
@@ -72,10 +74,13 @@ function OptimizedImage({
     className
   );
 
-  // Generate default sizes if not provided
-  const defaultSizes = fill 
-    ? '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+  // Generate optimized sizes if not provided
+  const defaultSizes = fill
+    ? '(max-width: 640px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 60vw, (max-width: 1280px) 50vw, 40vw'
     : undefined;
+
+  // Auto determine loading strategy
+  const loadingStrategy = loading || (priority ? 'eager' : 'lazy');
 
   const imageProps = {
     src,
@@ -83,8 +88,9 @@ function OptimizedImage({
     className: imageClass,
     quality,
     priority,
-    placeholder,
-    blurDataURL,
+    loading: loadingStrategy,
+    placeholder: placeholder === 'blur' && blurDataURL ? 'blur' as const : undefined,
+    blurDataURL: placeholder === 'blur' ? blurDataURL : undefined,
     style,
     onClick,
     onLoad: handleLoad,
@@ -117,9 +123,9 @@ function OptimizedImage({
       {isLoading && !hasError && (
         <div className={layoutUtils.combineClasses(
           'absolute inset-0 flex items-center justify-center',
-          'bg-gray-900/10 animate-pulse'
+          'bg-gradient-to-r from-gray-100 to-gray-200 animate-pulse'
         )}>
-          <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+          <div className="w-8 h-8 border-2 border-gray-300/50 border-t-gray-500 rounded-full animate-spin" />
         </div>
       )}
     </div>
@@ -156,7 +162,7 @@ export function GalleryImage({
       <OptimizedImage
         {...props}
         fill={true}
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
         className="object-cover w-full h-full"
       />
     </div>
@@ -189,6 +195,7 @@ export function HeroImage({
         fill={true}
         priority={true}
         sizes="100vw"
+        quality={90}
         className="object-cover w-full h-full"
       />
       
@@ -235,7 +242,7 @@ export function ProfileImage({
       <OptimizedImage
         {...props}
         fill={true}
-        sizes="(max-width: 768px) 100px, 200px"
+        sizes="(max-width: 640px) 64px, (max-width: 768px) 96px, 128px"
         className="object-cover w-full h-full"
       />
     </div>
@@ -272,6 +279,7 @@ export function BackgroundImage({
         alt=""
         fill={true}
         sizes="100vw"
+        quality={90}
         className="object-cover w-full h-full -z-10"
       />
       
