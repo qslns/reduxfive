@@ -66,6 +66,15 @@ export default function MemoryPage() {
   // Ensure client-side rendering
   useEffect(() => {
     setIsClient(true);
+
+    // Cleanup on unmount
+    return () => {
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+      }
+    };
   }, []);
 
   // Gallery images are now managed by CMS - fallback to empty array if not loaded
@@ -122,18 +131,22 @@ export default function MemoryPage() {
   // 라이트박스 함수들 - 클라이언트 체크 포함
   const openLightbox = (index: number) => {
     if (!isClient || !galleryImages || galleryImages.length === 0) return;
-    
+
     setCurrentImageIndex(index);
     setIsLightboxOpen(true);
     setLightboxImageError(false);
     setLightboxImageLoading(true);
-    document.body.style.overflow = 'hidden';
+    // body 스크롤 비활성화 제거 - 네비게이션 문제 방지
+    // document.body.style.overflow = 'hidden';
   };
 
   const closeLightbox = () => {
     setIsLightboxOpen(false);
-    if (isClient) {
+    // body 스크롤 복원
+    if (isClient && typeof document !== 'undefined') {
       document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
     }
   };
 
@@ -165,7 +178,7 @@ export default function MemoryPage() {
     <>
 
       {/* Professional Gallery - White theme version */}
-      <div className="gallery-container min-h-screen pt-[80px] pr-5 pb-[60px] pl-5 relative bg-gradient-to-br from-white via-gray-50 to-gray-100">
+      <div className="gallery-container min-h-screen pt-[100px] pr-5 pb-[60px] pl-5 relative bg-gradient-to-br from-white via-gray-50 to-gray-100">
         {/* Background texture */}
         <div
           className="absolute inset-0 opacity-[0.02]"
@@ -174,7 +187,7 @@ export default function MemoryPage() {
           }}
         />
 
-        <div className="gallery-header text-center mb-20 opacity-0 transform translate-y-10 animate-[fadeInUp_1.2s_cubic-bezier(0.25,0.8,0.25,1)_forwards] relative z-10">
+        <div className="gallery-header text-center mb-20 opacity-0 transform translate-y-10 animate-[fadeInUp_1.2s_cubic-bezier(0.25,0.8,0.25,1)_forwards] relative z-[5]">
           <h1 className="gallery-title font-['Playfair_Display'] font-bold text-gray-900 mb-5"
               style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', letterSpacing: '-0.02em', lineHeight: 0.9, textShadow: '0 0 30px rgba(0,0,0,0.1)' }}>
             Memory
@@ -214,8 +227,8 @@ export default function MemoryPage() {
               
               {/* CMS 버튼 for admin */}
               {isAuthenticated && (
-                <div 
-                  className="absolute top-2 right-2 z-20"
+                <div
+                  className="absolute top-2 right-2 z-[15]"
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -272,29 +285,24 @@ export default function MemoryPage() {
       {/* Professional Lightbox - White theme version */}
       {isLightboxOpen && (
         <div
-          className="lightbox fixed inset-0 bg-white/95 backdrop-blur-[20px] z-[10000] opacity-100 transition-opacity duration-[400ms] [transition-timing-function:cubic-bezier(0.25,0.8,0.25,1)]"
+          className="lightbox fixed inset-0 bg-black/90 backdrop-blur-[20px] z-[9998] opacity-100 transition-opacity duration-[400ms] [transition-timing-function:cubic-bezier(0.25,0.8,0.25,1)]"
           onClick={handleLightboxClick}
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh'
+            justifyContent: 'center'
           }}
         >
           <div className="lightbox-content max-w-[90vw] max-h-[90vh] relative">
             <button
-              className="lightbox-close absolute -top-[50px] right-0 bg-transparent border-none text-gray-700 text-[30px] cursor-pointer transition-all duration-300 ease-in-out w-10 h-10 flex items-center justify-center hover:text-[#8B7D6B] hover:transform hover:scale-120"
+              className="lightbox-close absolute -top-[50px] right-0 bg-transparent border-none text-white text-[30px] cursor-pointer transition-all duration-300 ease-in-out w-10 h-10 flex items-center justify-center hover:text-[#8B7D6B] hover:transform hover:scale-120 z-[9999]"
               onClick={closeLightbox}
             >
               ×
             </button>
 
             <button
-              className="lightbox-nav lightbox-prev absolute top-1/2 left-[-80px] transform -translate-y-1/2 bg-white/80 backdrop-blur-[10px] border border-gray-200 rounded-full w-[60px] h-[60px] flex items-center justify-center text-gray-700 text-xl cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#8B7D6B] hover:text-white hover:transform hover:-translate-y-1/2 hover:scale-110 max-[1024px]:hidden shadow-md"
+              className="lightbox-nav lightbox-prev absolute top-1/2 left-[-80px] transform -translate-y-1/2 bg-white/80 backdrop-blur-[10px] border border-gray-200 rounded-full w-[60px] h-[60px] flex items-center justify-center text-gray-700 text-xl cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#8B7D6B] hover:text-white hover:transform hover:-translate-y-1/2 hover:scale-110 max-[1024px]:hidden shadow-md z-[9999]"
               onClick={(e) => { e.stopPropagation(); prevImage(); }}
             >
               ‹
@@ -347,7 +355,7 @@ export default function MemoryPage() {
             </div>
             
             <button
-              className="lightbox-nav lightbox-next absolute top-1/2 right-[-80px] transform -translate-y-1/2 bg-white/80 backdrop-blur-[10px] border border-gray-200 rounded-full w-[60px] h-[60px] flex items-center justify-center text-gray-700 text-xl cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#8B7D6B] hover:text-white hover:transform hover:-translate-y-1/2 hover:scale-110 max-[1024px]:hidden shadow-md"
+              className="lightbox-nav lightbox-next absolute top-1/2 right-[-80px] transform -translate-y-1/2 bg-white/80 backdrop-blur-[10px] border border-gray-200 rounded-full w-[60px] h-[60px] flex items-center justify-center text-gray-700 text-xl cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#8B7D6B] hover:text-white hover:transform hover:-translate-y-1/2 hover:scale-110 max-[1024px]:hidden shadow-md z-[9999]"
               onClick={(e) => { e.stopPropagation(); nextImage(); }}
             >
               ›

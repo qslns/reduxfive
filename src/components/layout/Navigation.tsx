@@ -407,7 +407,7 @@ export default function Navigation() {
           --nav-transition-fast: all 0.2s ease;
           --nav-blur: blur(20px);
           --nav-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-          --nav-z-index: 1000;
+          --nav-z-index: 10001;
         }
 
         /* Navigation Base - Simplified */
@@ -586,7 +586,7 @@ export default function Navigation() {
           cursor: pointer;
           padding: 0;
           position: relative;
-          z-index: 1001;
+          z-index: 10002;
         }
 
         .redux-nav__toggle-line {
@@ -618,7 +618,7 @@ export default function Navigation() {
           width: 100% !important;
           height: 100vh !important;
           height: 100dvh !important;
-          z-index: 9999 !important;
+          z-index: 10000 !important;
           transform: translateX(100%) !important;
           transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
           display: none !important;
