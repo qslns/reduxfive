@@ -299,6 +299,7 @@ export default function MemoryPage() {
             position: 'fixed',
             zIndex: 9998,
             pointerEvents: 'auto'
+          }}
         >
           <div className="lightbox-content max-w-[90vw] max-h-[90vh] relative">
             <button
