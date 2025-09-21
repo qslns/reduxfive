@@ -1,46 +1,10 @@
 'use client';
 
-import { useGalleryCMS } from '../../../hooks/useSimpleCMS';
-import { useSimpleAuth } from '../../../hooks/useSimpleAuth';
-import DirectCMS from '../../../components/cms/DirectCMS';
+import { useState, useEffect } from 'react';
 import OptimizedImage from '../../../components/ui/OptimizedImage';
-import { useEffect } from 'react';
 
 export default function MemoryPage() {
-  const { isAuthenticated } = useSimpleAuth();
-
-  // 디버깅: 클릭 이벤트 모니터링
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    // 모든 링크 클릭 이벤트 확인
-    const handleLinkClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const link = target.closest('a');
-      if (link) {
-        console.log('🔗 Memory 페이지 - 링크 클릭됨:', link.href);
-        console.log('   이벤트 취소됨?:', e.defaultPrevented);
-        console.log('   stopPropagation 호출됨?:', e.cancelBubble);
-      }
-    };
-
-    // 전역 클릭 이벤트 확인
-    const handleGlobalClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      console.log('🌐 Memory 페이지 - 전역 클릭:', target.tagName, target.className);
-    };
-
-    // Capture phase에서 이벤트 감지
-    document.addEventListener('click', handleLinkClick, true);
-    window.addEventListener('click', handleGlobalClick, true);
-
-    return () => {
-      document.removeEventListener('click', handleLinkClick, true);
-      window.removeEventListener('click', handleGlobalClick, true);
-    };
-  }, []);
-
-  const memoryCMS = useGalleryCMS('about-memory-gallery', [
+  const [images] = useState([
     '/images/about/memory/IMG_3452.JPG',
     '/images/about/memory/IMG_3454.JPG',
     '/images/about/memory/IMG_3455.JPG',
@@ -59,34 +23,30 @@ export default function MemoryPage() {
     '/images/about/memory/0C22A68E-AADF-4A8D-B5E7-44DDBA2EE64F.jpeg',
   ]);
 
-  const images = memoryCMS.currentImages;
+  // 클라이언트 사이드 확인
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null; // SSR 시 렌더링 안 함
+  }
 
   return (
-    <>
-      {/* Hero Section - Simple white theme without COLLECTIVE MOMENTS */}
-      <section
-        className="hero-section min-h-[50vh] relative flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-gray-100 overflow-hidden pt-[120px]"
-        style={{ position: 'relative', zIndex: 1 }}
-      >
-        <div className="hero-content text-center z-10">
-          <h1
-            className="hero-title font-thin uppercase text-gray-900 opacity-0 transform translate-y-[50px] animate-[heroFade_1.5s_ease_forwards] tracking-[0.2em]"
-            style={{
-              fontSize: 'clamp(60px, 10vw, 160px)',
-              textShadow: '0 0 30px rgba(0,0,0,0.1)',
-              pointerEvents: 'none'
-            }}
-          >
+    <div className="memory-page-wrapper"> {/* Fragment 대신 div 사용 */}
+      {/* Hero Section */}
+      <section className="hero-section min-h-[50vh] relative flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-gray-100 overflow-hidden pt-[120px]">
+        <div className="hero-content text-center relative z-10">
+          <h1 className="hero-title font-thin uppercase text-gray-900 opacity-0 transform translate-y-[50px] animate-[heroFade_1.5s_ease_forwards] tracking-[0.2em]"
+              style={{ fontSize: 'clamp(60px, 10vw, 160px)', textShadow: '0 0 30px rgba(0,0,0,0.1)' }}>
             Memory
           </h1>
         </div>
       </section>
 
       {/* Memory Grid Section */}
-      <section
-        className="memory-grid-section py-[120px] px-10 bg-white"
-        style={{ position: 'relative', zIndex: 2 }}
-      >
+      <section className="memory-grid-section py-[120px] px-10 bg-white relative">
         <div className="section-intro max-w-[800px] mx-auto mb-[120px] text-center">
           <h2 className="text-4xl font-light tracking-[3px] text-gray-900 mb-[30px]">
             순간은 기억이 되고
@@ -96,17 +56,10 @@ export default function MemoryPage() {
           </p>
         </div>
 
-        {/* Gallery Grid */}
-        <div
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-[1600px] mx-auto"
-          style={{ position: 'relative', zIndex: 1 }}
-        >
+        {/* Gallery Grid - CMS 제거 버전 */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-[1600px] mx-auto">
           {images.map((image, index) => (
-            <div
-              key={index}
-              className="relative aspect-[3/4] overflow-hidden bg-gray-100 group"
-              style={{ pointerEvents: 'auto' }}
-            >
+            <div key={index} className="relative aspect-[3/4] overflow-hidden bg-gray-100 group">
               <OptimizedImage
                 src={image}
                 alt={`Memory ${index + 1}`}
@@ -114,60 +67,20 @@ export default function MemoryPage() {
                 priority={index < 4}
                 sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 className="object-cover transition-transform duration-500 hover:scale-105"
-                style={{ pointerEvents: 'none' }}
               />
-
-              {/* CMS Button for Admin */}
-              {isAuthenticated && (
-                <div
-                  className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                  style={{ zIndex: 50, pointerEvents: 'auto' }}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                  }}
-                >
-                  <DirectCMS
-                    slotId={`memory-${index}`}
-                    currentUrl={image}
-                    type="image"
-                    onUpload={(url) => {
-                      const newImages = [...images];
-                      newImages[index] = url;
-                      memoryCMS.updateGallery(newImages);
-                    }}
-                    onDelete={() => {
-                      const newImages = images.filter((_, i) => i !== index);
-                      memoryCMS.updateGallery(newImages);
-                    }}
-                    isAdminMode={true}
-                    placeholder={`메모리 ${index + 1}`}
-                  />
-                </div>
-              )}
             </div>
           ))}
         </div>
-
-        {/* Add New Image Button for Admin */}
-        {isAuthenticated && (
-          <div className="mt-12 flex justify-center" style={{ position: 'relative', zIndex: 1 }}>
-            <div className="w-64 h-80 border-2 border-dashed border-gray-300 rounded flex items-center justify-center">
-              <DirectCMS
-                slotId="memory-new"
-                type="image"
-                onUpload={(url) => {
-                  const newImages = [...images, url];
-                  memoryCMS.updateGallery(newImages);
-                }}
-                isAdminMode={true}
-                placeholder="새 이미지 추가"
-              />
-            </div>
-          </div>
-        )}
       </section>
 
-      {/* Styles moved to globals.css to avoid style jsx issues */}
-    </>
+      <style jsx>{`
+        @keyframes heroFade {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
+    </div>
   );
 }
