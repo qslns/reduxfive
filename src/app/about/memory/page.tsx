@@ -32,11 +32,18 @@ export default function MemoryPage() {
   return (
     <>
       {/* Hero Section - Simple white theme without COLLECTIVE MOMENTS */}
-      <section className="hero-section min-h-[50vh] relative flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-gray-100 overflow-hidden pt-[120px]">
-        <div className="hero-content text-center z-[1]">
+      <section
+        className="hero-section min-h-[50vh] relative flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-gray-100 overflow-hidden pt-[120px]"
+        style={{ position: 'relative', zIndex: 1 }}
+      >
+        <div className="hero-content text-center z-10">
           <h1
             className="hero-title font-thin uppercase text-gray-900 opacity-0 transform translate-y-[50px] animate-[heroFade_1.5s_ease_forwards] tracking-[0.2em]"
-            style={{ fontSize: 'clamp(60px, 10vw, 160px)', textShadow: '0 0 30px rgba(0,0,0,0.1)' }}
+            style={{
+              fontSize: 'clamp(60px, 10vw, 160px)',
+              textShadow: '0 0 30px rgba(0,0,0,0.1)',
+              pointerEvents: 'none'
+            }}
           >
             Memory
           </h1>
@@ -44,7 +51,10 @@ export default function MemoryPage() {
       </section>
 
       {/* Memory Grid Section */}
-      <section className="memory-grid-section py-[120px] px-10 bg-white">
+      <section
+        className="memory-grid-section py-[120px] px-10 bg-white"
+        style={{ position: 'relative', zIndex: 2 }}
+      >
         <div className="section-intro max-w-[800px] mx-auto mb-[120px] text-center">
           <h2 className="text-4xl font-light tracking-[3px] text-gray-900 mb-[30px]">
             순간은 기억이 되고
@@ -55,11 +65,15 @@ export default function MemoryPage() {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-[1600px] mx-auto">
+        <div
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-[1600px] mx-auto"
+          style={{ position: 'relative', zIndex: 1 }}
+        >
           {images.map((image, index) => (
             <div
               key={index}
               className="relative aspect-[3/4] overflow-hidden bg-gray-100 group"
+              style={{ pointerEvents: 'auto' }}
             >
               <OptimizedImage
                 src={image}
@@ -68,11 +82,18 @@ export default function MemoryPage() {
                 priority={index < 4}
                 sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 className="object-cover transition-transform duration-500 hover:scale-105"
+                style={{ pointerEvents: 'none' }}
               />
 
               {/* CMS Button for Admin */}
               {isAuthenticated && (
-                <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div
+                  className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                  style={{ zIndex: 50, pointerEvents: 'auto' }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
                   <DirectCMS
                     slotId={`memory-${index}`}
                     currentUrl={image}
@@ -97,7 +118,7 @@ export default function MemoryPage() {
 
         {/* Add New Image Button for Admin */}
         {isAuthenticated && (
-          <div className="mt-12 flex justify-center">
+          <div className="mt-12 flex justify-center" style={{ position: 'relative', zIndex: 1 }}>
             <div className="w-64 h-80 border-2 border-dashed border-gray-300 rounded flex items-center justify-center">
               <DirectCMS
                 slotId="memory-new"

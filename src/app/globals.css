@@ -1928,8 +1928,46 @@ html {
     transform: none !important;
     transition: none !important;
   }
-  
+
   html {
     scroll-behavior: auto;
   }
+}
+
+/* === Memory 페이지 전용 수정 === */
+.memory-grid-section * {
+  pointer-events: auto !important;
+  position: relative;
+}
+
+.memory-grid-section img {
+  pointer-events: none !important;
+}
+
+/* Memory 페이지에서 네비게이션 보장 */
+.memory-grid-section {
+  position: relative;
+  z-index: 1 !important;
+  isolation: isolate;
+}
+
+/* Memory 페이지 hero 영역 */
+.hero-section {
+  position: relative;
+  z-index: 1 !important;
+}
+
+/* DirectCMS 버튼 z-index 조정 */
+.memory-grid-section .absolute.top-2.right-2 {
+  z-index: 50 !important;
+}
+
+/* 네비게이션 항상 최상위 보장 */
+nav.redux-nav {
+  z-index: 10001 !important;
+  pointer-events: auto !important;
+}
+
+.redux-nav__mobile {
+  z-index: 10000 !important;
 }

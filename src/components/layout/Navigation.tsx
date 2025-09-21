@@ -180,8 +180,7 @@ export default function Navigation() {
         aria-label="Main navigation"
         style={{
           zIndex: 10001,
-          pointerEvents: 'auto',
-          isolation: 'isolate'
+          pointerEvents: 'auto'
         }}
       >
         <div className="redux-nav__container" style={{ pointerEvents: 'auto' }}>
@@ -427,7 +426,6 @@ export default function Navigation() {
         /* Ensure navigation is always on top and clickable */
         nav.redux-nav {
           pointer-events: auto !important;
-          isolation: isolate !important;
           z-index: 10001 !important;
         }
 
