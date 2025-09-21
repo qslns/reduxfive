@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useCMSSlot } from '../../../hooks/useCMSSlot';
 import { useSimpleAuth } from '../../../hooks/useSimpleAuth';
-import MediaSlot from '../../../components/cms/MediaSlot';
+import { useSimpleCMS } from '../../../hooks/useSimpleCMS';
+import DirectCMS from '../../../components/cms/DirectCMS';
 import OptimizedImage from '../../../components/ui/OptimizedImage';
 
 // 최적화된 Fashion Film 페이지
@@ -69,11 +69,11 @@ function FashionFilmContent() {
   ];
 
   // CMS 슬롯들 - 클라이언트에서만 초기화
-  const kimbomin_thumb = useCMSSlot('about-fashionfilm-kimbomin-thumbnail');
-  const parkparang_thumb = useCMSSlot('about-fashionfilm-parkparang-thumbnail');
-  const leetaehyeon_thumb = useCMSSlot('about-fashionfilm-leetaehyeon-thumbnail');
-  const choieunsol_thumb = useCMSSlot('about-fashionfilm-choieunsol-thumbnail');
-  const kimgyeongsu_thumb = useCMSSlot('about-fashionfilm-kimgyeongsu-thumbnail');
+  const kimbomin_thumb = useSimpleCMS('about-fashionfilm-kimbomin-thumbnail', '/images/designers/kimbomin/cinemode/NOR_7419-11.jpg');
+  const parkparang_thumb = useSimpleCMS('about-fashionfilm-parkparang-thumbnail', '/images/profile/Park Parang.jpg');
+  const leetaehyeon_thumb = useSimpleCMS('about-fashionfilm-leetaehyeon-thumbnail', '/images/designers/leetaehyeon/cinemode/KakaoTalk_20250628_134001383_01.jpg');
+  const choieunsol_thumb = useSimpleCMS('about-fashionfilm-choieunsol-thumbnail', '/images/designers/choieunsol/cinemode/IMG_8617.jpeg');
+  const kimgyeongsu_thumb = useSimpleCMS('about-fashionfilm-kimgyeongsu-thumbnail', '/images/designers/kimgyeongsu/Showcase/IMG_2544.jpg');
 
   useEffect(() => {
     if (!isClient) return;
@@ -229,31 +229,31 @@ function FashionFilmContent() {
         
         <div className="films-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1400px] mx-auto">
           {baseFilmData.map((film, index) => {
-            // CMS 슬롯에서 이미지 가져오기 (안전하게)
+            // CMS 슬롯에서 이미지 가져오기
             let thumbnailUrl = film.defaultThumbnail;
             let cmsSlot = null;
-            
-            if (isClient && isAuthenticated) {
-              switch(film.id) {
-                case 'kimbomin':
-                  cmsSlot = kimbomin_thumb;
-                  break;
-                case 'parkparang':
-                  cmsSlot = parkparang_thumb;
-                  break;
-                case 'leetaehyeon':
-                  cmsSlot = leetaehyeon_thumb;
-                  break;
-                case 'choieunsol':
-                  cmsSlot = choieunsol_thumb;
-                  break;
-                case 'kimgyeongsu':
-                  cmsSlot = kimgyeongsu_thumb;
-                  break;
-              }
-              if (cmsSlot?.currentFiles?.[0]) {
-                thumbnailUrl = cmsSlot.currentFiles[0];
-              }
+
+            switch(film.id) {
+              case 'kimbomin':
+                cmsSlot = kimbomin_thumb;
+                thumbnailUrl = kimbomin_thumb.currentUrl || film.defaultThumbnail;
+                break;
+              case 'parkparang':
+                cmsSlot = parkparang_thumb;
+                thumbnailUrl = parkparang_thumb.currentUrl || film.defaultThumbnail;
+                break;
+              case 'leetaehyeon':
+                cmsSlot = leetaehyeon_thumb;
+                thumbnailUrl = leetaehyeon_thumb.currentUrl || film.defaultThumbnail;
+                break;
+              case 'choieunsol':
+                cmsSlot = choieunsol_thumb;
+                thumbnailUrl = choieunsol_thumb.currentUrl || film.defaultThumbnail;
+                break;
+              case 'kimgyeongsu':
+                cmsSlot = kimgyeongsu_thumb;
+                thumbnailUrl = kimgyeongsu_thumb.currentUrl || film.defaultThumbnail;
+                break;
             }
             
             return (
@@ -298,20 +298,23 @@ function FashionFilmContent() {
                   </div>
                 </div>
                 
-                {/* CMS overlay for admin - 안전한 렌더링 */}
-                {isAuthenticated && isClient && cmsSlot?.slot && (
-                  <div 
-                    className="absolute top-2 right-2 z-20 w-8 h-8"
+                {/* CMS 버튼 for admin */}
+                {isAuthenticated && cmsSlot && (
+                  <div
+                    className="absolute top-2 right-2 z-20"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
                     }}
                   >
-                    <MediaSlot
-                      slot={cmsSlot.slot}
-                      currentFiles={cmsSlot.currentFiles}
-                      onFilesUpdate={cmsSlot.updateFiles}
+                    <DirectCMS
+                      slotId={`about-fashionfilm-${film.id}-thumbnail`}
+                      currentUrl={cmsSlot.currentUrl}
+                      type="image"
+                      onUpload={cmsSlot.handleUpload}
+                      onDelete={cmsSlot.handleDelete}
                       isAdminMode={true}
+                      placeholder={film.name}
                     />
                   </div>
                 )}

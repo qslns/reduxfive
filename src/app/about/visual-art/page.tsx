@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useCMSSlot } from '../../../hooks/useCMSSlot';
 import { useSimpleAuth } from '../../../hooks/useSimpleAuth';
-import MediaSlot from '../../../components/cms/MediaSlot';
+import { useSimpleCMS } from '../../../hooks/useSimpleCMS';
+import DirectCMS from '../../../components/cms/DirectCMS';
 import OptimizedImage from '../../../components/ui/OptimizedImage';
 
 // HTML redux5 about-visual-art.html과 완전 동일한 Visual Art 페이지 구현
@@ -28,22 +28,28 @@ export default function VisualArtPage() {
 
   // Client-side state management
   const { isAuthenticated } = useSimpleAuth();
-  const { slot: visualArtSlot, currentFiles: galleryImages, updateFiles: updateGalleryImages } = useCMSSlot('about-visualart-gallery');
-  
-  // 기본 이미지들 - CMS가 비어있을 때 사용
-  const defaultImages = [
-    '/images/about/visual-art/Metamorphosis.png',
-    '/images/about/visual-art/Shadow Play.png',
-    '/images/about/visual-art/Texture Study.png',
-    '/images/about/visual-art/Color Theory.png',
-    '/images/about/visual-art/Form & Void.png',
-    '/images/about/visual-art/Digital Dreams.png',
-    '/images/about/visual-art/Analog Memories.png',
-    '/images/about/visual-art/Collective Vision.png'
+
+  // CMS 슬롯들 - 8개 Visual Art 이미지
+  const visualArtCMS1 = useSimpleCMS('about-visualart-metamorphosis', '/images/about/visual-art/Metamorphosis.png');
+  const visualArtCMS2 = useSimpleCMS('about-visualart-shadowplay', '/images/about/visual-art/Shadow Play.png');
+  const visualArtCMS3 = useSimpleCMS('about-visualart-texturestudy', '/images/about/visual-art/Texture Study.png');
+  const visualArtCMS4 = useSimpleCMS('about-visualart-colortheory', '/images/about/visual-art/Color Theory.png');
+  const visualArtCMS5 = useSimpleCMS('about-visualart-formvoid', '/images/about/visual-art/Form & Void.png');
+  const visualArtCMS6 = useSimpleCMS('about-visualart-digitaldreams', '/images/about/visual-art/Digital Dreams.png');
+  const visualArtCMS7 = useSimpleCMS('about-visualart-analogmemories', '/images/about/visual-art/Analog Memories.png');
+  const visualArtCMS8 = useSimpleCMS('about-visualart-collectivevision', '/images/about/visual-art/Collective Vision.png');
+
+  // Visual Art 이미지 데이터 배열로 정리
+  const visualArtImages = [
+    { cms: visualArtCMS1 },
+    { cms: visualArtCMS2 },
+    { cms: visualArtCMS3 },
+    { cms: visualArtCMS4 },
+    { cms: visualArtCMS5 },
+    { cms: visualArtCMS6 },
+    { cms: visualArtCMS7 },
+    { cms: visualArtCMS8 },
   ];
-  
-  // CMS 이미지가 없으면 기본 이미지 사용
-  const displayImages = galleryImages.length > 0 ? galleryImages : defaultImages;
 
   // Ensure client-side rendering
   useEffect(() => {
@@ -141,21 +147,21 @@ export default function VisualArtPage() {
         </div>
         
         <div className="visual-grid grid grid-cols-12 gap-10 max-w-[1600px] mx-auto max-[1024px]:grid-cols-6 max-[1024px]:gap-5 max-[768px]:grid-cols-1 max-[768px]:gap-5">
-          {/* Dynamic Visual Art Items from CMS */}
-          {displayImages.map((image, index) => {
-            const meta = visualArtMeta[index] || { 
-              title: `VISUAL ART ${index + 1}`, 
-              description: '시각적 표현의 새로운 가능성', 
-              gridClass: 'col-span-6' 
+          {/* Dynamic Visual Art Items with Individual CMS */}
+          {visualArtImages.map((imageData, index) => {
+            const meta = visualArtMeta[index] || {
+              title: `VISUAL ART ${index + 1}`,
+              description: '시각적 표현의 새로운 가능성',
+              gridClass: 'col-span-6'
             };
-            
+
             return (
-              <div 
+              <div
                 key={index}
-                className={`visual-item ${meta.gridClass} [aspect-ratio:16/9] relative overflow-hidden bg-[--gray-light] cursor-pointer opacity-0 transform translate-y-[50px] revealed:animate-[revealItem_0.8s_ease_forwards] max-[1024px]:col-span-6 max-[768px]:col-span-1 max-[768px]:[aspect-ratio:4/3]`}
+                className={`visual-item ${meta.gridClass} [aspect-ratio:16/9] relative overflow-hidden bg-[--gray-light] cursor-pointer opacity-0 transform translate-y-[50px] revealed:animate-[revealItem_0.8s_ease_forwards] max-[1024px]:col-span-6 max-[768px]:col-span-1 max-[768px]:[aspect-ratio:4/3] group`}
               >
-                <OptimizedImage 
-                  src={image}
+                <OptimizedImage
+                  src={imageData.cms.currentUrl || `/images/about/visual-art/${meta.title.replace(/ /g, ' ')}.png`}
                   alt={`Visual Art ${index + 1}`}
                   fill={true}
                   priority={index < 4}
@@ -170,6 +176,21 @@ export default function VisualArtPage() {
                     {meta.description}
                   </p>
                 </div>
+
+                {/* CMS 버튼 for admin */}
+                {isAuthenticated && (
+                  <div className="absolute top-2 right-2 z-20">
+                    <DirectCMS
+                      slotId={`about-visualart-${meta.title.toLowerCase().replace(/[^a-z]/g, '')}`}
+                      currentUrl={imageData.cms.currentUrl}
+                      type="image"
+                      onUpload={imageData.cms.handleUpload}
+                      onDelete={imageData.cms.handleDelete}
+                      isAdminMode={true}
+                      placeholder={meta.title}
+                    />
+                  </div>
+                )}
               </div>
             );
           })}
@@ -227,41 +248,6 @@ export default function VisualArtPage() {
         </div>
       </section>
 
-      {/* CMS Admin Interface - White theme version */}
-      {isAuthenticated && isClient && visualArtSlot && (
-        <section className="cms-admin-section py-[80px] px-10 bg-white">
-          <div className="max-w-[1600px] mx-auto">
-            <div style={{
-              background: 'rgba(255, 255, 255, 0.98)',
-              backdropFilter: 'blur(10px)',
-              borderRadius: '16px',
-              border: '1px solid rgba(139, 125, 107, 0.2)',
-              padding: '32px',
-              boxShadow: '0 8px 32px rgba(139, 125, 107, 0.1)'
-            }}>
-              <div style={{
-                color: '#8B7D6B',
-                fontSize: '20px',
-                fontWeight: 600,
-                marginBottom: '24px',
-                letterSpacing: '1px',
-                textTransform: 'uppercase',
-                textAlign: 'center'
-              }}>
-                🎨 Visual Art Gallery Management
-              </div>
-
-              <MediaSlot
-                slot={visualArtSlot}
-                currentFiles={galleryImages}
-                onFilesUpdate={updateGalleryImages}
-                isAdminMode={true}
-                className="visual-art-cms-slot"
-              />
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* CSS for animations matching HTML version */}
       <style jsx>{`
