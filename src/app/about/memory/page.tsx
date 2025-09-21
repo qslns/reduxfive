@@ -1,17 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import OptimizedImage from '../../../components/ui/OptimizedImage';
 import { useGalleryCMS } from '../../../hooks/useSimpleCMS';
 import { useSimpleAuth } from '../../../hooks/useSimpleAuth';
 import DirectCMS from '../../../components/cms/DirectCMS';
 
 export default function MemoryPage() {
-  const router = useRouter();
-  const [isClient, setIsClient] = useState(false);
-
   const { isAuthenticated } = useSimpleAuth();
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   const memoryCMS = useGalleryCMS('about-memory-gallery', [
     '/images/about/memory/IMG_3452.JPG',
     '/images/about/memory/IMG_3454.JPG',
@@ -57,95 +55,53 @@ export default function MemoryPage() {
 
   const images = memoryCMS.currentImages;
 
-  // Ensure client-side rendering
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  // Intersection Observer animation - client only
-  useEffect(() => {
-    if (!isClient) return;
-
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
-    };
-
-    const memoryObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('revealed');
-          }, index * 50);
-        }
-      });
-    }, observerOptions);
-
-    const memoryItems = document.querySelectorAll('.memory-item');
-    memoryItems.forEach(item => memoryObserver.observe(item));
-
-    return () => {
-      memoryObserver.disconnect();
-    };
-  }, [isClient]);
-
   return (
-    <>
-      {/* Hero Section - Matching Visual Art style */}
-      <section className="hero-section h-screen relative flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-gray-100 overflow-hidden pt-[80px]">
-        {/* Background texture */}
-        <div
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'2\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' opacity=\'1\'/%3E%3C/svg%3E")'
-          }}
-        />
+    <div className="min-h-screen bg-white pt-24 pb-20">
+      <div className="max-w-7xl mx-auto px-4">
 
-        <div className="hero-content text-center z-[1]">
-          <h1
-            className="hero-title font-thin uppercase text-gray-900 opacity-0 transform translate-y-[50px] animate-[heroFade_1.5s_ease_forwards] tracking-[0.2em]"
-            style={{ fontSize: 'clamp(60px, 10vw, 160px)', textShadow: '0 0 30px rgba(0,0,0,0.1)' }}
-          >
+        {/* 헤더 */}
+        <div className="text-center mb-16">
+          <h1 className="text-6xl md:text-8xl font-thin tracking-wider text-gray-900 mb-6 uppercase">
             Memory
           </h1>
-          <p className="hero-subtitle text-base tracking-[3px] text-[#8B7D6B] mt-5 opacity-0 animate-[heroFade_1.5s_ease_forwards] [animation-delay:0.3s]">
-            Collective Moments
-          </p>
-        </div>
-      </section>
-
-      {/* Gallery Section - Matching Visual Art structure */}
-      <section className="memory-grid-section py-[120px] px-10 bg-white">
-        <div className="section-intro max-w-[800px] mx-auto mb-[120px] text-center">
-          <h2 className="text-4xl font-light tracking-[3px] text-gray-900 mb-[30px]">
-            우리의 순간들
-          </h2>
-          <p className="text-base leading-[2] text-gray-600">
-            REDUX의 여정 속에서 만들어진 소중한 순간들을 기록합니다.
-            각각의 사진은 우리의 이야기를 담고 있습니다.
+          <p className="text-lg text-gray-600 tracking-widest">
+            COLLECTIVE MOMENTS
           </p>
         </div>
 
-        {/* Gallery Grid */}
-        <div className="memory-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-[1600px] mx-auto">
+        {/* 설명 텍스트 */}
+        <div className="max-w-3xl mx-auto text-center mb-20">
+          <p className="text-xl text-gray-700 leading-relaxed mb-4">
+            순간은 <span className="text-[#8B7D6B] font-medium">기억</span>이 되고,
+          </p>
+          <p className="text-xl text-gray-700 leading-relaxed mb-8">
+            기억은 우리의 <span className="text-[#8B7D6B] font-medium">이야기</span>가 됩니다.
+          </p>
+          <p className="text-gray-500 italic text-sm">
+            "Every moment we share becomes a thread in our collective story."
+          </p>
+        </div>
+
+        {/* 갤러리 */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {images.map((image, index) => (
-            <div
-              key={index}
-              className="memory-item relative group opacity-0 transform translate-y-[50px] revealed:animate-[revealItem_0.8s_ease_forwards]"
-            >
-              <div className="aspect-[3/4] bg-gray-100 overflow-hidden">
+            <div key={index} className="relative group">
+              <div
+                className="aspect-[3/4] bg-gray-100 overflow-hidden cursor-pointer"
+                onClick={() => setSelectedImage(image)}
+              >
                 <OptimizedImage
                   src={image}
                   alt={`Memory ${index + 1}`}
-                  fill={true}
-                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  width={400}
+                  height={533}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
 
-              {/* CMS Controls for Admin */}
-              {isAuthenticated && isClient && (
-                <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              {/* CMS 버튼 */}
+              {isAuthenticated && (
+                <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <DirectCMS
                     slotId={`memory-${index}`}
                     currentUrl={image}
@@ -168,10 +124,10 @@ export default function MemoryPage() {
           ))}
         </div>
 
-        {/* Add New Image - Admin Only */}
-        {isAuthenticated && isClient && (
-          <div className="mt-16 flex justify-center">
-            <div className="w-64 h-80 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center bg-gray-50 hover:bg-gray-100 transition-colors">
+        {/* 새 이미지 추가 */}
+        {isAuthenticated && (
+          <div className="mt-12 flex justify-center">
+            <div className="w-64 h-80 border-2 border-dashed border-gray-300 rounded flex items-center justify-center">
               <DirectCMS
                 slotId="memory-new"
                 type="image"
@@ -185,39 +141,30 @@ export default function MemoryPage() {
             </div>
           </div>
         )}
-      </section>
+      </div>
 
-      {/* CSS Animations - Matching Visual Art */}
-      <style jsx>{`
-        @keyframes heroFade {
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes revealItem {
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .memory-item.revealed {
-          animation: revealItem 0.8s ease forwards;
-        }
-
-        @media (max-width: 768px) {
-          .hero-title {
-            font-size: clamp(40px, 8vw, 80px) !important;
-            letter-spacing: 0.1em !important;
-          }
-
-          .memory-grid-section {
-            padding: 80px 20px;
-          }
-        }
-      `}</style>
-    </>
+      {/* 라이트박스 모달 - 매우 심플하게 */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 bg-black/90 flex items-center justify-center p-4"
+          style={{ zIndex: 50 }}
+          onClick={() => setSelectedImage(null)}
+        >
+          <OptimizedImage
+            src={selectedImage}
+            alt="Selected memory"
+            width={1200}
+            height={900}
+            className="max-w-full max-h-full object-contain"
+          />
+          <button
+            onClick={() => setSelectedImage(null)}
+            className="absolute top-4 right-4 text-white text-4xl"
+          >
+            ×
+          </button>
+        </div>
+      )}
+    </div>
   );
 }

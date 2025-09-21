@@ -160,10 +160,11 @@ export default function AISearch() {
 
       {/* 검색 모달 */}
       {isOpen && (
-        <div className="fixed inset-0 z-[1002] bg-black/60 backdrop-blur-sm">
+        <div className="fixed inset-0 z-[1002] bg-black/60 backdrop-blur-sm pointer-events-auto">
           <div
             ref={searchRef}
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-white border border-gray-200 rounded-2xl shadow-2xl overflow-hidden"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-white border border-gray-200 rounded-2xl shadow-2xl overflow-hidden pointer-events-auto"
+            onClick={(e) => e.stopPropagation()}
           >
             {/* 검색 헤더 */}
             <div className="p-6 border-b border-gray-200">
