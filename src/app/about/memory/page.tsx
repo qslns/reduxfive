@@ -1,13 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useGalleryCMS } from '../../../hooks/useSimpleCMS';
 import { useSimpleAuth } from '../../../hooks/useSimpleAuth';
 import DirectCMS from '../../../components/cms/DirectCMS';
 import OptimizedImage from '../../../components/ui/OptimizedImage';
 
 export default function MemoryPage() {
-  const [isClient, setIsClient] = useState(false);
   const { isAuthenticated } = useSimpleAuth();
 
   const memoryCMS = useGalleryCMS('about-memory-gallery', [
@@ -31,24 +29,17 @@ export default function MemoryPage() {
 
   const images = memoryCMS.currentImages;
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
   return (
     <>
-      {/* Hero Section */}
-      <section className="hero-section h-screen relative flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-gray-100 overflow-hidden pt-[80px]">
+      {/* Hero Section - Simple white theme without COLLECTIVE MOMENTS */}
+      <section className="hero-section min-h-[50vh] relative flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-gray-100 overflow-hidden pt-[120px]">
         <div className="hero-content text-center z-[1]">
           <h1
             className="hero-title font-thin uppercase text-gray-900 opacity-0 transform translate-y-[50px] animate-[heroFade_1.5s_ease_forwards] tracking-[0.2em]"
-            style={{ fontSize: 'clamp(60px, 10vw, 160px)' }}
+            style={{ fontSize: 'clamp(60px, 10vw, 160px)', textShadow: '0 0 30px rgba(0,0,0,0.1)' }}
           >
             Memory
           </h1>
-          <p className="hero-subtitle text-base tracking-[3px] text-[#8B7D6B] mt-5 opacity-0 animate-[heroFade_1.5s_ease_forwards] [animation-delay:0.3s]">
-            COLLECTIVE MOMENTS
-          </p>
         </div>
       </section>
 
@@ -123,27 +114,7 @@ export default function MemoryPage() {
         )}
       </section>
 
-      {/* CSS Animations */}
-      <style jsx>{`
-        @keyframes heroFade {
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-          .hero-title {
-            font-size: clamp(40px, 8vw, 80px) !important;
-            letter-spacing: 0.1em !important;
-          }
-
-          .memory-grid-section {
-            padding: 80px 20px;
-          }
-        }
-      `}</style>
+      {/* Styles moved to globals.css to avoid style jsx issues */}
     </>
   );
 }
