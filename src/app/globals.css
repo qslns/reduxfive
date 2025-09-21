@@ -1971,3 +1971,16 @@ nav.redux-nav {
 .redux-nav__mobile {
   z-index: 10000 !important;
 }
+
+/* 네비게이션 클릭 이벤트 보장 */
+.redux-nav__link,
+.redux-nav__dropdown-item,
+.redux-nav__logo {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* Memory 페이지 특별 처리 */
+body:has(.memory-grid-section) nav * {
+  pointer-events: auto !important;
+}
