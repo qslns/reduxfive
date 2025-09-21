@@ -32,6 +32,7 @@ import MobileAdminPanel from '../components/admin/MobileAdminPanel';
 import SkipToContent from '../components/ui/SkipToContent';
 import ClientMobileOptimizer from '../components/ui/ClientMobileOptimizer';
 import AISearch from '../components/ui/AISearch';
+import DebugPanel from '../components/debug/DebugPanel';
 
 export default function RootLayout({
   children,
@@ -153,6 +154,8 @@ export default function RootLayout({
           <MobileAdminPanel />
           {/* AI 검색 기능만 유지 */}
           <AISearch />
+          {/* 디버그 패널 - 개발 환경에서만 표시 */}
+          <DebugPanel />
         {/* </GlobalErrorBoundary> */}
         
         {/* 전역 에러 처리 시스템 */}

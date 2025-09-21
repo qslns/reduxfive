@@ -109,27 +109,29 @@ export default function Navigation() {
     }
   }, [mobileMenuActive, closeMobileMenu]);
 
-  // Close mobile menu on pathname change - 강화된 버전
+  // Close mobile menu on pathname change - 모바일에서만
   useEffect(() => {
-    if (mobileMenuActive) {
+    // 모바일에서만 작동
+    if (typeof window !== 'undefined' && window.innerWidth <= 768 && mobileMenuActive) {
       console.log('🔄 경로 변경으로 인한 메뉴 닫기:', pathname);
       closeMobileMenu();
     }
-  }, [pathname, closeMobileMenu]); // Remove mobileMenuActive from dependencies to prevent infinite loops
+  }, [pathname]); // closeMobileMenu는 dependency에서 제거
 
-  // 전역 클릭 이벤트로 메뉴 닫기 - 추가 안전장치
+  // 전역 클릭 이벤트로 메뉴 닫기 - 모바일에서만
   useEffect(() => {
-    if (!mobileMenuActive) return;
+    // 모바일에서만 작동
+    if (!mobileMenuActive || (typeof window !== 'undefined' && window.innerWidth > 768)) return;
 
     const handleGlobalClick = (event: Event) => {
       const target = event.target as HTMLElement;
       if (!target) return;
-      
+
       // 메뉴 내부 클릭이 아닌 경우에만 닫기
       const mobileMenu = document.getElementById('mobile-menu');
       const isMenuClick = mobileMenu?.contains(target);
       const isToggleClick = target.closest('.redux-nav__toggle');
-      
+
       if (!isMenuClick && !isToggleClick) {
         console.log('🔄 전역 클릭으로 인한 메뉴 닫기');
         closeMobileMenu();
@@ -187,12 +189,35 @@ export default function Navigation() {
                 role="menuitem"
                 aria-haspopup="true"
                 aria-expanded="false"
+                onClick={(e) => {
+                  console.log('🅰️ Navigation - About 링크 클릭');
+                  console.log('   preventDefault 호출 여부:', e.defaultPrevented);
+                  // 명시적으로 preventDefault를 호출하지 않음
+                }}
               >
                 About
               </Link>
               <div className="redux-nav__dropdown" role="menu" aria-label="About submenu">
-                <Link href="/about/fashion-film" className="redux-nav__dropdown-item" role="menuitem">Fashion Film</Link>
-                <Link href="/about/memory" className="redux-nav__dropdown-item" role="menuitem">Memory</Link>
+                <Link
+                  href="/about/fashion-film"
+                  className="redux-nav__dropdown-item"
+                  role="menuitem"
+                  onClick={(e) => {
+                    console.log('🎬 Fashion Film 링크 클릭');
+                    // preventDefault를 호출하지 않음
+                  }}
+                >Fashion Film</Link>
+                <Link
+                  href="/about/memory"
+                  className="redux-nav__dropdown-item"
+                  role="menuitem"
+                  onClick={(e) => {
+                    console.log('🧠 Memory 링크 클릭');
+                    console.log('   현재 경로:', pathname);
+                    console.log('   대상 경로:', e.currentTarget.href);
+                    // preventDefault를 호출하지 않음 - Next.js Link가 처리하도록 함
+                  }}
+                >Memory</Link>
                 <Link href="/about/visual-art" className="redux-nav__dropdown-item" role="menuitem">Visual Art</Link>
                 <Link href="/about/installation" className="redux-nav__dropdown-item" role="menuitem">Process</Link>
                 <Link href="/about/collective" className="redux-nav__dropdown-item" role="menuitem">Collective</Link>

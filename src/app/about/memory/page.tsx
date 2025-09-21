@@ -4,9 +4,41 @@ import { useGalleryCMS } from '../../../hooks/useSimpleCMS';
 import { useSimpleAuth } from '../../../hooks/useSimpleAuth';
 import DirectCMS from '../../../components/cms/DirectCMS';
 import OptimizedImage from '../../../components/ui/OptimizedImage';
+import { useEffect } from 'react';
 
 export default function MemoryPage() {
   const { isAuthenticated } = useSimpleAuth();
+
+  // 디버깅: 클릭 이벤트 모니터링
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    // 모든 링크 클릭 이벤트 확인
+    const handleLinkClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a');
+      if (link) {
+        console.log('🔗 Memory 페이지 - 링크 클릭됨:', link.href);
+        console.log('   이벤트 취소됨?:', e.defaultPrevented);
+        console.log('   stopPropagation 호출됨?:', e.cancelBubble);
+      }
+    };
+
+    // 전역 클릭 이벤트 확인
+    const handleGlobalClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      console.log('🌐 Memory 페이지 - 전역 클릭:', target.tagName, target.className);
+    };
+
+    // Capture phase에서 이벤트 감지
+    document.addEventListener('click', handleLinkClick, true);
+    window.addEventListener('click', handleGlobalClick, true);
+
+    return () => {
+      document.removeEventListener('click', handleLinkClick, true);
+      window.removeEventListener('click', handleGlobalClick, true);
+    };
+  }, []);
 
   const memoryCMS = useGalleryCMS('about-memory-gallery', [
     '/images/about/memory/IMG_3452.JPG',
