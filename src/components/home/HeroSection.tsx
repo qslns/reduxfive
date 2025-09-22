@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useSimpleCMS } from '../../hooks/useSimpleCMS';
 import { useSimpleAuth } from '../../hooks/useSimpleAuth';
 import DirectCMS from '../cms/DirectCMS';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useScroll, useTransform } from 'framer-motion';
 
 /**
  * 최적화된 Hero Section - 로딩 문제 해결
@@ -15,6 +17,12 @@ function HeroSection() {
   const [videoError, setVideoError] = useState(false);
   const [isVideoVisible, setIsVideoVisible] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Parallax scroll effects
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
   
   // CMS integration
   const { isAuthenticated } = useSimpleAuth();
@@ -108,8 +116,30 @@ function HeroSection() {
     );
   }
 
+  // 타이포그래피 애니메이션 변수
+  const titleLetterVariants = {
+    hidden: { y: 100, opacity: 0 },
+    visible: (i: number) => ({
+      y: 0,
+      opacity: 1,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.8,
+        ease: [0.25, 0.8, 0.25, 1] as const
+      }
+    })
+  };
+
+  const titleText = "REDUX";
+
   return (
-    <section className="hero-section relative h-screen flex items-center justify-center bg-white overflow-hidden">
+    <motion.section
+      ref={sectionRef}
+      className="hero-section relative h-screen flex items-center justify-center bg-white overflow-hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
       {/* Background Video */}
       {!videoError && isVideoVisible && (
         <video
@@ -204,80 +234,135 @@ function HeroSection() {
       />
 
       {/* Main content with enhanced transparency effects for video interaction */}
-      <div className="hero-content text-center z-10 px-6 max-w-4xl mx-auto">
-        <h1
-          className="hero-title font-['Playfair_Display'] font-bold mb-8 tracking-[-0.02em] leading-[0.85] transition-all duration-1000 ease-out animate-gradient"
+      <motion.div
+        className="hero-content text-center z-10 px-6 max-w-4xl mx-auto"
+        style={{ y, opacity }}
+      >
+        <motion.h1
+          className="hero-title font-['Playfair_Display'] font-black mb-12 tracking-[-0.02em] leading-[0.85] transition-all duration-1000 ease-out"
           style={{
-            fontSize: 'clamp(3rem, 8vw, 8rem)',
-            background: 'linear-gradient(135deg, #2a2a2a 0%, #5a5a5a 25%, #8B7D6B 50%, #5a5a5a 75%, #2a2a2a 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            backgroundSize: '200% auto',
-            filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.08))',
+            fontSize: 'clamp(5rem, 12vw, 10rem)',
+            textShadow: '0 4px 20px rgba(0,0,0,0.1)'
           }}
+          initial="hidden"
+          animate="visible"
         >
-          REDUX
-        </h1>
-        
-        <p
-          className="hero-subtitle text-xl tracking-[0.3em] uppercase mb-12 transition-all duration-1000"
+          {titleText.split('').map((letter, i) => (
+            <motion.span
+              key={i}
+              custom={i}
+              variants={titleLetterVariants}
+              className="inline-block"
+              style={{
+                background: 'linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 25%, #8B7D6B 50%, #4a4a4a 75%, #1a1a1a 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                backgroundSize: '200% auto',
+              }}
+              whileHover={{
+                scale: 1.1,
+                transition: { duration: 0.2 }
+              }}
+            >
+              {letter}
+            </motion.span>
+          ))}
+        </motion.h1>
+
+        <motion.p
+          className="hero-subtitle text-2xl tracking-[0.4em] uppercase mb-16 font-light"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
           style={{
-            background: 'linear-gradient(90deg, #4a4a4a 0%, #7a7a7a 50%, #4a4a4a 100%)',
+            background: 'linear-gradient(90deg, #3a3a3a 0%, #6a6a6a 50%, #3a3a3a 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
-            opacity: 0.9,
-            filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.05))',
+            filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.05))',
           }}
         >
           THE ROOM OF [ ]
-        </p>
+        </motion.p>
 
-        <div className="hero-description max-w-2xl mx-auto mb-12">
-          <p
-            className="text-lg leading-relaxed"
+        <motion.div
+          className="hero-description max-w-3xl mx-auto mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
+        >
+          <motion.p
+            className="text-xl md:text-2xl leading-relaxed font-light"
             style={{
-              background: 'linear-gradient(135deg, #5a5a5a 0%, #7a7a7a 100%)',
+              background: 'linear-gradient(135deg, #4a4a4a 0%, #7a7a7a 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              lineHeight: '1.8',
-              opacity: 0.95,
+              lineHeight: '2',
             }}
           >
             5인의 패션 디자이너가 만들어가는 창작 집단.<br />
             개인의 경계를 넘어 하나의 비전을 그리다.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Action buttons */}
-        <div className="hero-actions flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <button
+        <motion.div
+          className="hero-actions flex flex-col sm:flex-row gap-8 justify-center items-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.6, duration: 0.8 }}
+        >
+          <motion.button
             onClick={navigateToAbout}
-            className="group relative px-8 py-4 backdrop-blur-md uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden"
+            className="group relative px-12 py-5 backdrop-blur-md uppercase tracking-[0.3em] text-sm font-semibold overflow-hidden"
             style={{
-              background: 'linear-gradient(135deg, rgba(43, 43, 43, 0.85) 0%, rgba(139, 125, 107, 0.85) 100%)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              boxShadow: '0 4px 15px rgba(0, 0, 0, 0.15)',
+              background: 'linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(139, 125, 107, 0.9) 100%)',
+              border: '2px solid rgba(255, 255, 255, 0.1)',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
             }}
+            whileHover={{ scale: 1.05, boxShadow: '0 12px 40px rgba(0, 0, 0, 0.3)' }}
+            whileTap={{ scale: 0.98 }}
           >
-            <span className="relative z-10 text-white font-medium">Discover REDUX</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-[#8B7D6B] to-[#6B5D4B] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </button>
-          
-          <button
+            <motion.span className="relative z-10 text-white font-medium">Discover REDUX</motion.span>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-[#8B7D6B] to-[#6B5D4B]"
+              initial={{ x: '-100%' }}
+              whileHover={{ x: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+          </motion.button>
+
+          <motion.button
             onClick={navigateToExhibitions}
-            className="group relative px-8 py-4 backdrop-blur-md uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden"
+            className="group relative px-12 py-5 backdrop-blur-md uppercase tracking-[0.3em] text-sm font-semibold overflow-hidden"
             style={{
-              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.25) 100%)',
-              border: '1px solid rgba(90, 90, 90, 0.3)',
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 245, 245, 0.9) 100%)',
+              border: '2px solid rgba(26, 26, 26, 0.2)',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
             }}
+            whileHover={{ scale: 1.05, boxShadow: '0 12px 40px rgba(0, 0, 0, 0.2)' }}
+            whileTap={{ scale: 0.98 }}
           >
-            <span className="font-medium text-gray-700 group-hover:text-gray-900 transition-colors duration-300">Exhibitions</span>
-          </button>
-        </div>
-      </div>
+            <motion.span className="relative z-10 text-gray-800">Exhibitions</motion.span>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-gray-900 to-gray-700"
+              initial={{ x: '-100%' }}
+              whileHover={{ x: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+            <motion.span
+              className="absolute inset-0 flex items-center justify-center text-white font-medium"
+              initial={{ opacity: 0 }}
+              whileHover={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Exhibitions
+            </motion.span>
+          </motion.button>
+        </motion.div>
+      </motion.div>
 
       {/* 비디오 컨트롤 - 간소화된 버전 */}
       {!videoError && (
@@ -321,7 +406,7 @@ function HeroSection() {
           />
         </div>
       )}
-    </section>
+    </motion.section>
   );
 }
 

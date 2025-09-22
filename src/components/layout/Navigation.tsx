@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 /**
  * REDUX Navigation Component
@@ -13,6 +14,19 @@ export default function Navigation() {
   const [mobileMenuActive, setMobileMenuActive] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const pathname = usePathname();
+
+  // Scroll animation
+  const { scrollY } = useScroll();
+  const backgroundColor = useTransform(
+    scrollY,
+    [0, 100],
+    ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.98)']
+  );
+  const backdropFilter = useTransform(
+    scrollY,
+    [0, 100],
+    ['blur(0px)', 'blur(10px)']
+  );
   
   // 페이지 타입 확인
   const isHomePage = pathname === '/';
@@ -159,14 +173,19 @@ export default function Navigation() {
       <div className="noise-overlay" />
 
       {/* Navigation */}
-      <nav
+      <motion.nav
         className={`redux-nav ${scrolled ? 'redux-nav--scrolled' : ''}`}
         role="navigation"
         aria-label="Main navigation"
         style={{
+          backgroundColor: isHomePage && !scrolled ? backgroundColor : 'rgba(255, 255, 255, 0.98)',
+          backdropFilter: isHomePage && !scrolled ? backdropFilter : 'blur(10px)',
           zIndex: 10001,
           pointerEvents: 'auto'
         }}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5, ease: [0.25, 0.8, 0.25, 1] }}
       >
         <div className="redux-nav__container" style={{ pointerEvents: 'auto' }}>
           {/* Logo */}
@@ -285,7 +304,7 @@ export default function Navigation() {
             <span className="redux-nav__toggle-line" />
           </button>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Mobile Menu */}
       <div 

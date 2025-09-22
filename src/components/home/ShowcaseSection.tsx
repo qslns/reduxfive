@@ -6,10 +6,15 @@ import OptimizedImage from '../ui/OptimizedImage';
 import { useSimpleAuth } from '../../hooks/useSimpleAuth';
 import { useSimpleCMS } from '../../hooks/useSimpleCMS';
 import DirectCMS from '../cms/DirectCMS';
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 // 최적화된 ShowcaseSection - 로딩 문제 해결
 export default function ShowcaseSection() {
   const [isClient, setIsClient] = useState(false);
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   
   // CMS 인증
   const { isAuthenticated } = useSimpleAuth();
@@ -90,54 +95,150 @@ export default function ShowcaseSection() {
   // 서버 사이드 렌더링에서도 실제 콘텐츠 표시
   const actualDesigners = designers.slice(0, 5); // 5명만 표시
 
+  // 애니메이션 변수
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: {
+      y: 50,
+      opacity: 0,
+      scale: 0.9
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        type: "spring" as const,
+        damping: 20,
+        stiffness: 100
+      }
+    }
+  };
+
+  const titleVariants = {
+    hidden: {
+      y: 30,
+      opacity: 0
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: [0.25, 0.8, 0.25, 1] as const
+      }
+    }
+  };
+
   return (
-    <section className="showcase-section py-20 px-10 bg-gradient-to-b from-white to-gray-50 min-h-screen flex items-center">
+    <motion.section
+      ref={sectionRef}
+      className="showcase-section py-32 px-10 bg-gradient-to-b from-white via-gray-50/50 to-white min-h-screen flex items-center"
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={containerVariants}
+    >
       <div className="max-w-7xl mx-auto w-full">
         {/* Section Header */}
-        <div className="text-center mb-12 md:mb-16">
-          <h2 
-            className="font-['Playfair_Display'] text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-4 md:mb-6 tracking-[0.1em]"
+        <motion.div
+          className="text-center mb-24 md:mb-32"
+          variants={titleVariants}
+        >
+          <motion.h2
+            className="font-['Playfair_Display'] text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 mb-8 md:mb-12 tracking-[-0.02em]"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+            transition={{ duration: 1, ease: [0.25, 0.8, 0.25, 1] }}
           >
             CREATORS
-          </h2>
-          <p className="text-gray-500 text-base md:text-lg max-w-xl md:max-w-2xl mx-auto leading-relaxed px-4">
+          </motion.h2>
+          <motion.p
+            className="text-gray-600 text-lg md:text-xl max-w-xl md:max-w-2xl mx-auto leading-relaxed px-4 tracking-wider"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
             5인의 패션 디자이너, 그들의 창작 세계를 탐험하다.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Showcase Grid */}
-        <div className="showcase-grid grid grid-cols-2 md:grid-cols-4 gap-6 auto-rows-fr">
+        <motion.div
+          className="showcase-grid grid grid-cols-2 md:grid-cols-4 gap-8 auto-rows-fr"
+          variants={containerVariants}
+        >
           {/* Designers */}
           {designers.map((designer, index) => (
-            <Link
+            <motion.div
               key={designer.id}
-              href={designer.link}
-              className="showcase-item group relative overflow-hidden bg-white aspect-square transition-all duration-500 hover:scale-105 hover:z-10"
-              style={{
-                animation: `fadeInUp 0.8s ease forwards`,
-                animationDelay: `${index * 100}ms`,
-                opacity: 0
+              variants={itemVariants}
+              whileHover={{
+                scale: 1.05,
+                y: -10,
+                transition: { duration: 0.3 }
               }}
+              whileTap={{ scale: 0.98 }}
             >
-              <OptimizedImage
-                src={designer.cms.currentUrl || `/images/profile/${designer.name.replace(' ', ' ')}.${designer.id === 'kimbomin' || designer.id === 'kimgyeongsu' ? 'webp' : designer.id === 'choieunsol' ? 'jpeg' : 'jpg'}`}
-                alt={designer.name}
-                fill={true}
-                sizes="(max-width: 768px) 50vw, 25vw"
-                className="object-cover transition-all duration-700 group-hover:scale-110 filter brightness-95 group-hover:brightness-100"
-              />
+            <Link
+              href={designer.link}
+              className="showcase-item group relative overflow-hidden bg-white aspect-square block shadow-lg hover:shadow-2xl transition-shadow duration-300"
+            >
+              <motion.div
+                className="absolute inset-0"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.6 }}
+              >
+                <OptimizedImage
+                  src={designer.cms.currentUrl || `/images/profile/${designer.name.replace(' ', ' ')}.${designer.id === 'kimbomin' || designer.id === 'kimgyeongsu' ? 'webp' : designer.id === 'choieunsol' ? 'jpeg' : 'jpg'}`}
+                  alt={designer.name}
+                  fill={true}
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  className="object-cover filter brightness-95 group-hover:brightness-100 transition-all duration-700"
+                />
+              </motion.div>
               
               {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="absolute bottom-4 left-4 right-4 text-gray-900">
-                  <h3 className="font-medium text-sm tracking-[0.1em] mb-1">
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-center justify-center"
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="text-center text-white">
+                  <motion.h3
+                    className="font-['Playfair_Display'] text-2xl font-bold tracking-wider mb-2"
+                    initial={{ y: 20, opacity: 0 }}
+                    whileHover={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.1, duration: 0.3 }}
+                  >
                     {designer.name}
-                  </h3>
-                  <p className="text-xs text-gray-700">
+                  </motion.h3>
+                  <motion.div
+                    className="h-[2px] w-16 bg-white mx-auto mb-2"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ delay: 0.2, duration: 0.3 }}
+                  />
+                  <motion.p
+                    className="text-sm tracking-[0.2em] uppercase"
+                    initial={{ y: 10, opacity: 0 }}
+                    whileHover={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.3, duration: 0.3 }}
+                  >
                     {designer.role}
-                  </p>
+                  </motion.p>
                 </div>
-              </div>
+              </motion.div>
 
               {/* CMS 버튼 for admin */}
               {isAuthenticated && (
@@ -160,46 +261,79 @@ export default function ShowcaseSection() {
                 </div>
               )}
             </Link>
+            </motion.div>
           ))}
 
           {/* Exhibitions */}
           {exhibitions.map((exhibition, index) => (
-            <Link
+            <motion.div
               key={exhibition.id}
-              href={exhibition.link}
-              className="showcase-item group relative overflow-hidden bg-white aspect-square transition-all duration-500 hover:scale-105 hover:z-10"
-              style={{
-                animation: `fadeInUp 0.8s ease forwards`,
-                animationDelay: `${(designers.length + index) * 100}ms`,
-                opacity: 0
+              variants={itemVariants}
+              whileHover={{
+                scale: 1.05,
+                y: -10,
+                transition: { duration: 0.3 }
               }}
+              whileTap={{ scale: 0.98 }}
             >
-              <OptimizedImage
-                src={exhibition.cms.currentUrl || `/images/exhibitions/${exhibition.id}/1.jpg`}
-                alt={exhibition.name}
-                fill={true}
-                sizes="(max-width: 768px) 50vw, 25vw"
-                className="object-cover transition-all duration-700 group-hover:scale-110 filter brightness-95 group-hover:brightness-100"
-              />
+            <Link
+              href={exhibition.link}
+              className="showcase-item group relative overflow-hidden bg-white aspect-square block shadow-lg hover:shadow-2xl transition-shadow duration-300"
+            >
+              <motion.div
+                className="absolute inset-0"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.6 }}
+              >
+                <OptimizedImage
+                  src={exhibition.cms.currentUrl || `/images/exhibitions/${exhibition.id}/1.jpg`}
+                  alt={exhibition.name}
+                  fill={true}
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  className="object-cover filter brightness-95 group-hover:brightness-100 transition-all duration-700"
+                />
+              </motion.div>
               
               {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-white/98 via-white/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="absolute bottom-4 left-4 right-4 text-gray-900">
-                  <h3 className="font-['Playfair_Display'] font-medium text-sm tracking-[0.1em] mb-1 text-[#8B7D6B]">
-                    {exhibition.name}
-                  </h3>
-                  <p className="text-xs text-gray-700">
-                    {exhibition.description}
-                  </p>
-                </div>
-                
-                {/* Exhibition indicator */}
-                <div className="absolute top-4 left-4">
-                  <span className="text-xs bg-[#8B7D6B] text-white px-2 py-1 rounded uppercase tracking-wider font-medium">
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-center justify-center"
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="text-center text-white">
+                  <motion.span
+                    className="text-xs bg-[#8B7D6B] text-white px-3 py-1 rounded-full uppercase tracking-wider font-medium mb-4 inline-block"
+                    initial={{ y: -10, opacity: 0 }}
+                    whileHover={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     Exhibition
-                  </span>
+                  </motion.span>
+                  <motion.h3
+                    className="font-['Playfair_Display'] text-2xl font-bold tracking-wider mb-2"
+                    initial={{ y: 20, opacity: 0 }}
+                    whileHover={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.1, duration: 0.3 }}
+                  >
+                    {exhibition.name}
+                  </motion.h3>
+                  <motion.div
+                    className="h-[2px] w-16 bg-white mx-auto mb-2"
+                    initial={{ scaleX: 0 }}
+                    whileHover={{ scaleX: 1 }}
+                    transition={{ delay: 0.2, duration: 0.3 }}
+                  />
+                  <motion.p
+                    className="text-sm tracking-[0.1em]"
+                    initial={{ y: 10, opacity: 0 }}
+                    whileHover={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.3, duration: 0.3 }}
+                  >
+                    {exhibition.description}
+                  </motion.p>
                 </div>
-              </div>
+              </motion.div>
 
               {/* CMS 버튼 for admin */}
               {isAuthenticated && (
@@ -222,18 +356,35 @@ export default function ShowcaseSection() {
                 </div>
               )}
             </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-16">
-          <Link 
-            href="/about"
-            className="inline-block px-8 py-4 border border-gray-300 text-gray-900 uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:bg-gray-900 hover:text-white hover:scale-105 shadow-sm hover:shadow-lg"
+        <motion.div
+          className="text-center mt-24"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            더 알아보기
-          </Link>
-        </div>
+            <Link
+              href="/about"
+              className="inline-block px-12 py-5 bg-gradient-to-r from-gray-900 to-gray-700 text-white uppercase tracking-[0.3em] text-sm font-medium shadow-xl hover:shadow-2xl transition-all duration-300 relative overflow-hidden group"
+            >
+              <span className="relative z-10">더 알아보기</span>
+              <motion.div
+                className="absolute inset-0 bg-[#8B7D6B]"
+                initial={{ x: "-100%" }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.3 }}
+              />
+            </Link>
+          </motion.div>
+        </motion.div>
       </div>
 
       <style jsx>{`
@@ -339,6 +490,6 @@ export default function ShowcaseSection() {
           }
         }
       `}</style>
-    </section>
+    </motion.section>
   );
 }

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { layoutUtils } from '../../lib/design-system';
+import { motion } from 'framer-motion';
 
 interface OptimizedImageProps {
   src: string;
@@ -30,6 +31,26 @@ interface OptimizedImageProps {
  * OptimizedImage component - Next.js Image 컴포넌트 래퍼
  * 이미지 최적화, 레이지 로딩, 그리고 일관된 스타일링 제공
  */
+// Blur data URL for placeholder
+const shimmer = (w: number, h: number) => `
+<svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="g">
+      <stop stop-color="#333" offset="20%" />
+      <stop stop-color="#222" offset="50%" />
+      <stop stop-color="#333" offset="70%" />
+    </linearGradient>
+  </defs>
+  <rect width="${w}" height="${h}" fill="#333" />
+  <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
+  <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+</svg>`;
+
+const toBase64 = (str: string) =>
+  typeof window === 'undefined'
+    ? Buffer.from(str).toString('base64')
+    : window.btoa(str);
+
 function OptimizedImage({
   src,
   alt,
@@ -68,8 +89,8 @@ function OptimizedImage({
   };
 
   const imageClass = layoutUtils.combineClasses(
-    'transition-opacity duration-300 ease-in-out',
-    isLoading ? 'opacity-0' : 'opacity-100',
+    'transition-all duration-700 ease-out',
+    isLoading ? 'opacity-0 filter blur-lg scale-105' : 'opacity-100 filter blur-0 scale-100',
     hasError ? 'opacity-50' : '',
     className
   );
@@ -82,6 +103,11 @@ function OptimizedImage({
   // Auto determine loading strategy
   const loadingStrategy = loading || (priority ? 'eager' : 'lazy');
 
+  // Generate blur placeholder if not provided
+  const defaultBlurDataURL = `data:image/svg+xml;base64,${toBase64(
+    shimmer(700, 475)
+  )}`;
+
   const imageProps = {
     src,
     alt,
@@ -89,8 +115,8 @@ function OptimizedImage({
     quality,
     priority,
     loading: loadingStrategy,
-    placeholder: placeholder === 'blur' && blurDataURL ? 'blur' as const : undefined,
-    blurDataURL: placeholder === 'blur' ? blurDataURL : undefined,
+    placeholder: 'blur' as const,
+    blurDataURL: blurDataURL || defaultBlurDataURL,
     style,
     onClick,
     onLoad: handleLoad,
@@ -105,10 +131,15 @@ function OptimizedImage({
   };
 
   return (
-    <div className={layoutUtils.combineClasses(
-      'relative overflow-hidden',
-      fill ? 'w-full h-full' : ''
-    )}>
+    <motion.div
+      className={layoutUtils.combineClasses(
+        'relative overflow-hidden',
+        fill ? 'w-full h-full' : ''
+      )}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       {hasError ? (
         <div className={layoutUtils.combineClasses(
           'flex items-center justify-center bg-gray-100 text-gray-400',
@@ -119,16 +150,25 @@ function OptimizedImage({
       ) : (
         <Image {...imageProps} />
       )}
-      
+
       {isLoading && !hasError && (
-        <div className={layoutUtils.combineClasses(
-          'absolute inset-0 flex items-center justify-center',
-          'bg-gradient-to-r from-gray-100 to-gray-200 animate-pulse'
-        )}>
-          <div className="w-8 h-8 border-2 border-gray-300/50 border-t-gray-500 rounded-full animate-spin" />
-        </div>
+        <motion.div
+          className={layoutUtils.combineClasses(
+            'absolute inset-0 flex items-center justify-center',
+            'bg-gradient-to-r from-gray-100/80 to-gray-200/80 backdrop-blur-sm'
+          )}
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <motion.div
+            className="w-8 h-8 border-2 border-gray-300/50 border-t-gray-500 rounded-full"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          />
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }
 

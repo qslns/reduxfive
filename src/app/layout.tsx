@@ -25,7 +25,7 @@ export const viewport: Viewport = {
 
 import Navigation from '../components/layout/Navigation';
 import Footer from '../components/layout/Footer';
-// import PageTransition from '@/components/ui/PageTransition';
+import PageTransition from '../components/ui/PageTransition';
 // import InitialLoadingScreen from '@/components/ui/InitialLoadingScreen';
 // import GlobalErrorBoundary from '@/components/ui/GlobalErrorBoundary';
 import MobileAdminPanel from '../components/admin/MobileAdminPanel';
@@ -146,9 +146,9 @@ export default function RootLayout({
         {/* <GlobalErrorBoundary> */}
           <Navigation />
           <main id="main-content" tabIndex={-1}>
-            {/* <PageTransition> */}
+            <PageTransition>
               {children}
-            {/* </PageTransition> */}
+            </PageTransition>
           </main>
           <Footer />
           <MobileAdminPanel />
