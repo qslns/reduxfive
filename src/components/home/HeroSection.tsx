@@ -235,11 +235,11 @@ function HeroSection() {
 
       {/* Main content with enhanced transparency effects for video interaction */}
       <motion.div
-        className="hero-content text-center z-10 px-6 max-w-4xl mx-auto"
+        className="hero-content text-center z-10 px-6 w-full flex flex-col items-center justify-center"
         style={{ y, opacity }}
       >
         <motion.h1
-          className="hero-title font-['Playfair_Display'] font-black mb-12 tracking-[-0.02em] leading-[0.85] transition-all duration-1000 ease-out flex justify-center"
+          className="hero-title font-['Playfair_Display'] font-black mb-12 tracking-[-0.02em] leading-[0.85] transition-all duration-1000 ease-out"
           style={{
             fontSize: 'clamp(4rem, 10vw, 10rem)',
             textShadow: '0 4px 20px rgba(0,0,0,0.1)'
