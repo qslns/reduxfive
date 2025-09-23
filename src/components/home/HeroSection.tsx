@@ -69,7 +69,6 @@ export default function HeroSection({
 
   // Toggle video visibility
   const toggleVideo = () => setIsVideoVisible(!isVideoVisible);
-  const showVideo = () => setIsVideoVisible(true);
 
   // Re-play video when it becomes visible
   useEffect(() => {
@@ -134,7 +133,7 @@ export default function HeroSection({
       {!videoError && isVideoVisible && (
         <video
           ref={videoRef}
-          className="absolute top-0 left-0 w-full h-full object-cover opacity-60"
+          className="absolute top-0 left-0 w-full h-full object-cover opacity-80"
           muted
           loop
           playsInline
@@ -150,7 +149,22 @@ export default function HeroSection({
       )}
 
       {/* Overlay gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white/30" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/20" />
+
+      {/* Video Toggle Button */}
+      <motion.button
+        onClick={toggleVideo}
+        className="absolute top-8 right-8 z-20 px-4 py-2 bg-black/50 hover:bg-black/70 text-white rounded-full backdrop-blur-sm transition-all duration-300"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <span className="text-sm font-light tracking-wider">
+          {isVideoVisible ? '영상 끄기' : '영상 켜기'}
+        </span>
+      </motion.button>
 
       {/* Decorative elements */}
       <div className="absolute top-[35%] left-[10%] w-[250px] h-[250px] border border-gray-300/30 rounded-full" />

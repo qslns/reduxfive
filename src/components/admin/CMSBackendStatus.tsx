@@ -89,11 +89,11 @@ export default function CMSBackendStatus() {
   if (isLoading && !healthData) {
     return (
       <div
-        className="bg-white rounded-lg p-6 shadow-lg animate-fade-in"
+        className="bg-gray-900 rounded-lg p-6 border border-gray-700"
       >
         <div className="flex items-center space-x-2 mb-4">
           <RefreshCw className="w-5 h-5 text-[#8B7D6B] animate-spin" />
-          <h3 className="text-lg font-semibold text-gray-800">백엔드 상태 확인 중...</h3>
+          <h3 className="text-lg font-semibold text-white">백엔드 상태 확인 중...</h3>
         </div>
       </div>
     );
@@ -101,23 +101,23 @@ export default function CMSBackendStatus() {
 
   return (
     <div
-      className="bg-white rounded-lg p-6 space-y-4 shadow-lg animate-fade-in"
+      className="bg-gray-900 rounded-lg p-6 space-y-4 border border-gray-700"
     >
       {/* 헤더 */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <Server className="w-5 h-5 text-[#8B7D6B]" />
-          <h3 className="text-lg font-semibold text-gray-800">CMS 백엔드 상태</h3>
+          <h3 className="text-lg font-semibold text-white">CMS 백엔드 상태</h3>
         </div>
         
         <div className="flex items-center space-x-2">
           <button
             onClick={checkBackendHealth}
             disabled={isLoading}
-            className="p-2 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors disabled:opacity-50 shadow-sm"
+            className="p-2 bg-gray-800 hover:bg-gray-700 rounded-md transition-colors disabled:opacity-50 border border-gray-600"
             title="상태 새로고침"
           >
-            <RefreshCw className={`w-4 h-4 text-gray-700 ${isLoading ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`w-4 h-4 text-gray-300 ${isLoading ? 'animate-spin' : ''}`} />
           </button>
           
           <button
@@ -139,7 +139,7 @@ export default function CMSBackendStatus() {
           <AlertCircle className="w-5 h-5 text-red-600" />
         )}
         
-        <span className="text-gray-800">
+        <span className="text-gray-300">
           백엔드: <span className={`font-medium ${isBackendOnline ? 'text-green-600' : 'text-red-600'}`}>
             {isBackendOnline ? 'Online' : 'Offline'}
           </span>
@@ -154,20 +154,20 @@ export default function CMSBackendStatus() {
 
       {/* 에러 메시지 */}
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-md p-3">
+        <div className="bg-red-900/20 border border-red-500/30 rounded-md p-3">
           <div className="flex items-center space-x-2">
             <AlertCircle className="w-4 h-4 text-red-600" />
-            <span className="text-red-700 text-sm">{error}</span>
+            <span className="text-red-400 text-sm">{error}</span>
           </div>
         </div>
       )}
 
       {/* 백엔드가 오프라인일 때 */}
       {!isBackendOnline && (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-md p-3">
+        <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-md p-3">
           <div className="flex items-center space-x-2">
             <AlertCircle className="w-4 h-4 text-yellow-600" />
-            <span className="text-yellow-700 text-sm">
+            <span className="text-yellow-300 text-sm">
               백엔드가 오프라인입니다. localStorage fallback을 사용 중입니다.
             </span>
           </div>
@@ -178,51 +178,51 @@ export default function CMSBackendStatus() {
       {healthData && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* 서버 상태 */}
-          <div className="bg-gray-50 rounded-lg p-4 shadow-sm">
+          <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
             <div className="flex items-center space-x-2 mb-3">
               <Server className="w-4 h-4 text-[#8B7D6B]" />
-              <h4 className="text-sm font-medium text-gray-800">서버</h4>
+              <h4 className="text-sm font-medium text-white">서버</h4>
             </div>
 
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <span className="text-gray-600">상태:</span>
-                <span className="text-gray-800">{healthData.server.status}</span>
+                <span className="text-gray-400">상태:</span>
+                <span className="text-gray-200">{healthData.server.status}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">가동시간:</span>
-                <span className="text-gray-800">{healthData.server.uptimeReadable}</span>
+                <span className="text-gray-400">가동시간:</span>
+                <span className="text-gray-200">{healthData.server.uptimeReadable}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">메모리 사용:</span>
-                <span className="text-gray-800">{healthData.server.memory.used}</span>
+                <span className="text-gray-400">메모리 사용:</span>
+                <span className="text-gray-200">{healthData.server.memory.used}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">전체 메모리:</span>
-                <span className="text-gray-800">{healthData.server.memory.total}</span>
+                <span className="text-gray-400">전체 메모리:</span>
+                <span className="text-gray-200">{healthData.server.memory.total}</span>
               </div>
             </div>
           </div>
 
           {/* CMS 정보 */}
-          <div className="bg-gray-50 rounded-lg p-4 shadow-sm">
+          <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
             <div className="flex items-center space-x-2 mb-3">
               <Database className="w-4 h-4 text-green-600" />
-              <h4 className="text-sm font-medium text-gray-800">CMS</h4>
+              <h4 className="text-sm font-medium text-white">CMS</h4>
             </div>
 
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <span className="text-gray-600">총 슬롯:</span>
-                <span className="text-gray-800">{healthData.cms.totalSlots}</span>
+                <span className="text-gray-400">총 슬롯:</span>
+                <span className="text-gray-200">{healthData.cms.totalSlots}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">저장소 타입:</span>
-                <span className="text-gray-800 capitalize">{healthData.cms.storageType}</span>
+                <span className="text-gray-400">저장소 타입:</span>
+                <span className="text-gray-200 capitalize">{healthData.cms.storageType}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">마지막 확인:</span>
-                <span className="text-gray-800 text-xs">
+                <span className="text-gray-400">마지막 확인:</span>
+                <span className="text-gray-200 text-xs">
                   {new Date(healthData.cms.lastCheck).toLocaleTimeString()}
                 </span>
               </div>
@@ -232,9 +232,9 @@ export default function CMSBackendStatus() {
       )}
 
       {/* 권장사항 */}
-      <div className="bg-blue-50 border border-blue-200 rounded-md p-3">
+      <div className="bg-blue-900/20 border border-blue-500/30 rounded-md p-3">
         <h4 className="text-sm font-medium text-[#8B7D6B] mb-2">💡 권장사항</h4>
-        <ul className="text-xs text-gray-700 space-y-1">
+        <ul className="text-xs text-gray-300 space-y-1">
           <li>• 프로덕션 환경에서는 Vercel KV 또는 데이터베이스 사용 권장</li>
           <li>• 정기적으로 데이터 동기화를 수행하세요</li>
           <li>• 백엔드 오프라인 시 데이터 손실 위험이 있습니다</li>
