@@ -62,7 +62,7 @@ export default function HeroSection({
 
   // Navigation functions
   const navigateToAbout = () => router.push('/about');
-  const navigateToDesigners = () => router.push('/designers');
+  const navigateToExhibitions = () => router.push('/exhibitions');
   const scrollToExplore = () => {
     window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
   };
@@ -265,7 +265,7 @@ export default function HeroSection({
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span className="relative z-10">Discover Story</span>
+              <span className="relative z-10">DISCOVER REDUX</span>
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a] to-[#2a2a2a]"
                 initial={{ x: '-100%' }}
@@ -275,12 +275,12 @@ export default function HeroSection({
             </motion.button>
 
             <motion.button
-              onClick={navigateToDesigners}
+              onClick={navigateToExhibitions}
               className="group px-10 py-4 border-2 border-gray-700 text-gray-700 uppercase tracking-[0.2em] text-sm font-medium relative overflow-hidden transition-all duration-500"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span className="relative z-10 group-hover:text-white transition-colors duration-300">Meet Creators</span>
+              <span className="relative z-10 group-hover:text-white transition-colors duration-300">EXHIBITIONS</span>
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-gray-700 to-gray-900"
                 initial={{ scaleX: 0 }}
