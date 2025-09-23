@@ -221,21 +221,16 @@ export default function DesignersPage() {
           }}
         ></div>
         <div className="text-center z-10">
-          <h1 
-            className="hero-title font-['Playfair_Display'] font-light tracking-[0.2em] mb-5 opacity-0 transform translate-y-[30px]"
+          <h1
+            className="hero-title font-['Playfair_Display'] font-light tracking-[0.2em] mb-5"
             style={{
-              fontSize: 'clamp(48px, 8vw, 80px)',
-              animation: 'fadeInUp 1s ease forwards'
+              fontSize: 'clamp(48px, 8vw, 80px)'
             }}
           >
             {heroTitle}
           </h1>
-          <p 
-            className="hero-subtitle text-[18px] text-gray-600 tracking-[2px] opacity-0"
-            style={{
-              animation: 'fadeInUp 1s ease forwards',
-              animationDelay: '0.2s'
-            }}
+          <p
+            className="hero-subtitle text-[18px] text-gray-600 tracking-[2px]"
           >
             {heroSubtitle}
           </p>
