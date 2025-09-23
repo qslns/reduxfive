@@ -1,108 +1,98 @@
+/**
+ * Hero Section Component
+ * 메인 페이지 히어로 섹션 - 비디오 백그라운드와 타이틀
+ */
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSimpleCMS } from '../../hooks/useSimpleCMS';
-import { useSimpleAuth } from '../../hooks/useSimpleAuth';
-import DirectCMS from '../cms/DirectCMS';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 
-/**
- * 최적화된 Hero Section - 로딩 문제 해결
- */
-function HeroSection() {
+interface HeroSectionProps {
+  videoUrl?: string;
+  className?: string;
+}
+
+export default function HeroSection({
+  videoUrl: heroVideoUrl,
+  className = ''
+}: HeroSectionProps) {
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const [isVideoVisible, setIsVideoVisible] = useState(true);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const [showOverlay, setShowOverlay] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   // Parallax scroll effects
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
-  
-  // CMS integration
-  const { isAuthenticated } = useSimpleAuth();
-  const { currentUrl: heroVideoUrl, handleUpload: cmsUpload, handleDelete: cmsDelete } = useSimpleCMS('main-hero-video', '/VIDEO/main.mp4');
-  
 
-  // 클라이언트 마운트 처리
   useEffect(() => {
     setIsClient(true);
-  }, []);
 
-  // 비디오 로드 처리
-  useEffect(() => {
-    if (!isClient || !videoRef.current) return;
+    const videoElement = videoRef.current;
+    if (videoElement && isClient) {
+      videoElement.src = heroVideoUrl || '/VIDEO/main.mp4';
+      videoElement.load();
 
-    const video = videoRef.current;
-    
-    const handleLoadedData = () => {
-      setVideoError(false);
-      // 자동 재생 시도
-      video.play().catch(() => {
-        // 자동 재생 실패시 무시 (사용자가 수동으로 재생 가능)
+      videoElement.addEventListener('canplay', () => {
+        const playPromise = videoElement.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => setVideoError(true));
+        }
       });
-    };
 
-    const handleError = () => {
-      setVideoError(true);
-    };
+      videoElement.addEventListener('error', () => setVideoError(true));
+    }
 
-    video.addEventListener('loadeddata', handleLoadedData);
-    video.addEventListener('error', handleError);
+    const timer = setTimeout(() => setShowOverlay(true), 1500);
 
     return () => {
-      video.removeEventListener('loadeddata', handleLoadedData);
-      video.removeEventListener('error', handleError);
+      clearTimeout(timer);
+      if (videoElement) {
+        videoElement.removeEventListener('canplay', () => {});
+        videoElement.removeEventListener('error', () => {});
+      }
     };
-  }, [isClient, heroVideoUrl]);
+  }, [heroVideoUrl, isClient]);
 
-  const navigateToAbout = () => {
-    router.push('/about');
+  // Navigation functions
+  const navigateToAbout = () => router.push('/about');
+  const navigateToDesigners = () => router.push('/designers');
+  const scrollToExplore = () => {
+    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
   };
 
-  const navigateToExhibitions = () => {
-    router.push('/exhibitions');
-  };
+  // Toggle video visibility
+  const toggleVideo = () => setIsVideoVisible(!isVideoVisible);
+  const showVideo = () => setIsVideoVisible(true);
 
-  // 비디오 컨트롤 함수들 - 간소화
-  const hideVideo = () => {
-    setIsVideoVisible(false);
-    if (videoRef.current) {
-      videoRef.current.pause();
-    }
-  };
-
-  const showVideo = () => {
-    setIsVideoVisible(true);
-  };
-
-  // 비디오가 다시 보이게 될 때 자동 재생
+  // Re-play video when it becomes visible
   useEffect(() => {
     if (isVideoVisible && videoRef.current && isClient) {
       const timer = setTimeout(() => {
         if (videoRef.current) {
-          videoRef.current.currentTime = 0; // 처음부터 재생
+          videoRef.current.currentTime = 0;
           videoRef.current.play().catch((error) => {
             console.warn('Video play failed:', error);
           });
         }
       }, 200);
-      
+
       return () => clearTimeout(timer);
     }
   }, [isVideoVisible, isClient]);
 
-  // 서버 사이드 렌더링 중에는 기본 콘텐츠 반환
+  // Server-side rendering fallback
   if (!isClient) {
     return (
       <section className="hero-section relative h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white overflow-hidden">
-        <div className="hero-content text-center z-10 px-6">
-          <h1 
+        <div className="text-center z-10 px-6">
+          <h1
             className="hero-title font-['Playfair_Display'] font-bold text-gray-900 mb-8 tracking-[-0.02em] leading-[0.85]"
             style={{ fontSize: 'clamp(3rem, 8vw, 8rem)' }}
           >
@@ -116,7 +106,7 @@ function HeroSection() {
     );
   }
 
-  // 타이포그래피 애니메이션 변수
+  // Typography animation variants
   const titleLetterVariants = {
     hidden: { y: 100, opacity: 0 },
     visible: (i: number) => ({
@@ -135,7 +125,7 @@ function HeroSection() {
   return (
     <motion.section
       ref={sectionRef}
-      className="hero-section relative h-screen flex items-center justify-center bg-white overflow-hidden"
+      className="hero-section relative h-screen bg-white overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
@@ -154,605 +144,168 @@ function HeroSection() {
         </video>
       )}
 
-      {/* Background Image (when video is hidden or error) */}
+      {/* Background Image (fallback) */}
       {(videoError || !isVideoVisible) && (
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-80"
-          style={{
-            backgroundImage: 'url(/images/hero-background/background.png)'
-          }}
-        />
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-50 via-white to-gray-100 opacity-70" />
       )}
 
-      {/* Background overlay - lighter for white theme */}
-      <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px]" />
+      {/* Overlay gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white/30" />
 
-      {/* Noise texture */}
-      <div 
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'2\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' opacity=\'1\'/%3E%3C/svg%3E")'
-        }}
-      />
+      {/* Decorative elements */}
+      <div className="absolute top-[35%] left-[10%] w-[250px] h-[250px] border border-gray-300/30 rounded-full" />
+      <div className="absolute bottom-[20%] right-[15%] w-[180px] h-[180px] border-2 border-gray-300/20" />
+      <div className="absolute top-[18%] right-[12%] w-[200px] h-[0.5px] bg-gradient-to-r from-transparent via-gray-400/30 to-transparent transform rotate-[-23deg]" />
+      <div className="absolute bottom-[25%] left-[8%] w-[180px] h-[0.5px] bg-gradient-to-l from-transparent via-gray-400/25 to-transparent transform rotate-[17deg]" />
 
-      {/* Avant-garde scratch-style irregular line elements - 확장된 버전 */}
-      <div 
-        className="absolute top-[18%] right-[12%] w-[200px] h-[0.5px] bg-gradient-to-r from-transparent via-gray-400/30 to-transparent"
-        style={{ transform: 'rotate(-23deg) skewX(-15deg)' }}
-      />
-      <div 
-        className="absolute bottom-[25%] left-[8%] w-[180px] h-[0.5px] bg-gradient-to-l from-transparent via-gray-400/25 to-transparent"
-        style={{ transform: 'rotate(17deg) skewY(12deg)' }}
-      />
-      <div 
-        className="absolute top-[65%] right-[20%] w-[120px] h-[0.5px] bg-gradient-to-r from-transparent via-gray-400/20 to-transparent"
-        style={{ transform: 'rotate(-45deg)' }}
-      />
-      <div 
-        className="absolute top-[40%] left-[15%] w-[100px] h-[0.5px] bg-gradient-to-l from-transparent via-gray-400/25 to-transparent"
-        style={{ transform: 'rotate(72deg) skewX(20deg)' }}
-      />
-      
-      {/* 추가된 아방가르드 선 요소들 */}
-      <div 
-        className="absolute top-[10%] left-[25%] w-[80px] h-[0.3px] bg-gradient-to-r from-gray-300/15 via-gray-400/35 to-transparent"
-        style={{ transform: 'rotate(-67deg) skewY(-8deg)' }}
-      />
-      <div 
-        className="absolute top-[55%] right-[35%] w-[140px] h-[0.4px] bg-gradient-to-l from-transparent via-gray-400/20 to-gray-300/15"
-        style={{ transform: 'rotate(38deg) skewX(25deg)' }}
-      />
-      <div 
-        className="absolute bottom-[40%] right-[8%] w-[60px] h-[0.3px] bg-gradient-to-r from-gray-400/20 to-transparent"
-        style={{ transform: 'rotate(-82deg) skewX(-30deg)' }}
-      />
-      <div 
-        className="absolute top-[75%] left-[35%] w-[90px] h-[0.4px] bg-gradient-to-l from-transparent via-gray-400/30 to-gray-300/10"
-        style={{ transform: 'rotate(15deg) skewY(18deg)' }}
-      />
-      <div 
-        className="absolute top-[30%] right-[45%] w-[50px] h-[0.2px] bg-gray-400/20"
-        style={{ transform: 'rotate(-125deg) skewX(40deg)' }}
-      />
-      <div 
-        className="absolute bottom-[15%] left-[20%] w-[110px] h-[0.3px] bg-gradient-to-r from-gray-300/10 via-transparent to-gray-400/25"
-        style={{ transform: 'rotate(55deg) skewY(-22deg)' }}
-      />
-      
-      {/* 매우 미세한 스크래치 라인들 */}
-      <div 
-        className="absolute top-[25%] left-[45%] w-[35px] h-[0.2px] bg-gray-400/15"
-        style={{ transform: 'rotate(-95deg)' }}
-      />
-      <div 
-        className="absolute top-[85%] right-[25%] w-[70px] h-[0.2px] bg-gradient-to-r from-transparent to-gray-400/20"
-        style={{ transform: 'rotate(110deg) skewX(-15deg)' }}
-      />
-      <div 
-        className="absolute top-[45%] left-[60%] w-[40px] h-[0.15px] bg-gray-400/10"
-        style={{ transform: 'rotate(-155deg) skewY(35deg)' }}
-      />
-
-      {/* Main content with enhanced transparency effects for video interaction */}
-      <motion.div
-        className="hero-content text-center z-10 px-6 w-full flex flex-col items-center justify-center"
-        style={{ y, opacity }}
-      >
-        <motion.h1
-          className="hero-title font-['Playfair_Display'] font-black mb-12 tracking-[-0.02em] leading-[0.85] transition-all duration-1000 ease-out"
-          style={{
-            fontSize: 'clamp(4rem, 10vw, 10rem)',
-            textShadow: '0 4px 20px rgba(0,0,0,0.1)'
-          }}
-          initial="hidden"
-          animate="visible"
-        >
-          {titleText.split('').map((letter, i) => (
-            <motion.span
-              key={i}
-              custom={i}
-              variants={titleLetterVariants}
-              className="inline-block"
-              style={{
-                background: 'linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 25%, #8B7D6B 50%, #4a4a4a 75%, #1a1a1a 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                backgroundSize: '200% auto',
-                animation: 'gradient-shift 4s ease infinite',
-              }}
-              whileHover={{
-                scale: 1.1,
-                transition: { duration: 0.2 }
-              }}
-            >
-              {letter}
-            </motion.span>
-          ))}
-        </motion.h1>
-
-        <motion.p
-          className="hero-subtitle text-2xl tracking-[0.4em] uppercase mb-16 font-light"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-          style={{
-            background: 'linear-gradient(90deg, #3a3a3a 0%, #6a6a6a 50%, #3a3a3a 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.05))',
-          }}
-        >
-          THE ROOM OF [ ]
-        </motion.p>
-
+      {/* MAIN CONTENT - CENTERED */}
+      <div className="absolute inset-0 flex items-center justify-center z-10">
         <motion.div
-          className="hero-description max-w-3xl mx-auto mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
+          className="text-center px-6"
+          style={{ y, opacity }}
         >
-          <motion.p
-            className="text-xl md:text-2xl leading-relaxed font-light"
+          {/* REDUX TITLE */}
+          <motion.h1
+            className="font-['Playfair_Display'] font-black mb-12 tracking-[-0.02em] leading-[0.85] transition-all duration-1000 ease-out"
             style={{
-              background: 'linear-gradient(135deg, #4a4a4a 0%, #7a7a7a 100%)',
+              fontSize: 'clamp(4rem, 10vw, 10rem)',
+              textShadow: '0 4px 20px rgba(0,0,0,0.1)'
+            }}
+            initial="hidden"
+            animate="visible"
+          >
+            {titleText.split('').map((letter, i) => (
+              <motion.span
+                key={i}
+                custom={i}
+                variants={titleLetterVariants}
+                className="inline-block"
+                style={{
+                  background: 'linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 25%, #8B7D6B 50%, #4a4a4a 75%, #1a1a1a 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  backgroundSize: '200% auto',
+                  animation: 'gradient-shift 4s ease infinite',
+                }}
+                whileHover={{
+                  scale: 1.1,
+                  transition: { duration: 0.2 }
+                }}
+              >
+                {letter}
+              </motion.span>
+            ))}
+          </motion.h1>
+
+          {/* SUBTITLE */}
+          <motion.p
+            className="text-2xl tracking-[0.4em] uppercase mb-16 font-light"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            style={{
+              background: 'linear-gradient(90deg, #3a3a3a 0%, #6a6a6a 50%, #3a3a3a 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              lineHeight: '2',
+              filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.05))',
             }}
           >
-            5인의 패션 디자이너가 만들어가는 창작 집단.<br />
-            개인의 경계를 넘어 하나의 비전을 그리다.
+            THE ROOM OF [ ]
           </motion.p>
-        </motion.div>
 
-        {/* Action buttons */}
-        <motion.div
-          className="hero-actions flex flex-col sm:flex-row gap-8 justify-center items-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.6, duration: 0.8 }}
-        >
-          <motion.button
-            onClick={navigateToAbout}
-            className="group relative px-12 py-5 backdrop-blur-md uppercase tracking-[0.3em] text-sm font-semibold overflow-hidden"
-            style={{
-              background: 'linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(139, 125, 107, 0.9) 100%)',
-              border: '2px solid rgba(255, 255, 255, 0.1)',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
-            }}
-            whileHover={{ scale: 1.05, boxShadow: '0 12px 40px rgba(0, 0, 0, 0.3)' }}
-            whileTap={{ scale: 0.98 }}
+          {/* DESCRIPTION */}
+          <motion.div
+            className="max-w-3xl mx-auto mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
           >
-            <motion.span className="relative z-10 text-white font-medium">Discover REDUX</motion.span>
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-[#8B7D6B] to-[#6B5D4B]"
-              initial={{ x: '-100%' }}
-              whileHover={{ x: 0 }}
-              transition={{ duration: 0.3 }}
-            />
-          </motion.button>
+            <p
+              className="text-xl md:text-2xl leading-relaxed font-light"
+              style={{
+                background: 'linear-gradient(135deg, #4a4a4a 0%, #7a7a7a 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                lineHeight: '2',
+              }}
+            >
+              5인의 패션 디자이너가 만들어가는 창작 집단.<br />
+              개인의 경계를 넘어 하나의 비전을 그리다.
+            </p>
+          </motion.div>
 
-          <motion.button
-            onClick={navigateToExhibitions}
-            className="group relative px-12 py-5 backdrop-blur-md uppercase tracking-[0.3em] text-sm font-semibold overflow-hidden"
-            style={{
-              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 245, 245, 0.9) 100%)',
-              border: '2px solid rgba(26, 26, 26, 0.2)',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-            }}
-            whileHover={{ scale: 1.05, boxShadow: '0 12px 40px rgba(0, 0, 0, 0.2)' }}
-            whileTap={{ scale: 0.98 }}
+          {/* ACTION BUTTONS */}
+          <motion.div
+            className="flex flex-col sm:flex-row gap-8 justify-center items-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.6, duration: 0.8 }}
           >
-            <motion.span className="relative z-10 text-gray-800">Exhibitions</motion.span>
+            <motion.button
+              onClick={navigateToAbout}
+              className="group px-10 py-4 bg-gradient-to-r from-[#8B7D6B] to-[#A39993] text-white uppercase tracking-[0.2em] text-sm font-medium relative overflow-hidden transition-all duration-500"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="relative z-10">Discover Story</span>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a] to-[#2a2a2a]"
+                initial={{ x: '-100%' }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.button>
+
+            <motion.button
+              onClick={navigateToDesigners}
+              className="group px-10 py-4 border-2 border-gray-700 text-gray-700 uppercase tracking-[0.2em] text-sm font-medium relative overflow-hidden transition-all duration-500"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="relative z-10 group-hover:text-white transition-colors duration-300">Meet Creators</span>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-gray-700 to-gray-900"
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.button>
+          </motion.div>
+
+          {/* SCROLL INDICATOR */}
+          <motion.div
+            className="absolute bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer"
+            onClick={scrollToExplore}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2, duration: 0.8 }}
+          >
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-gray-900 to-gray-700"
-              initial={{ x: '-100%' }}
-              whileHover={{ x: 0 }}
-              transition={{ duration: 0.3 }}
-            />
-            <motion.span
-              className="absolute inset-0 flex items-center justify-center text-white font-medium"
-              initial={{ opacity: 0 }}
-              whileHover={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
+              className="flex flex-col items-center gap-2 text-gray-600 hover:text-[#8B7D6B] transition-colors duration-300"
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
-              Exhibitions
-            </motion.span>
-          </motion.button>
+              <span className="text-xs uppercase tracking-[0.2em]">Explore</span>
+              <ChevronDown size={20} />
+            </motion.div>
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
 
-      {/* 비디오 컨트롤 - 간소화된 버전 */}
-      {!videoError && (
-        <div className="absolute bottom-20 right-8 z-30">
-          {isVideoVisible ? (
-            // X 버튼 - 비디오 끄기 (미니멀 디자인)
-            <button
-              onClick={hideVideo}
-              className="w-12 h-12 bg-white/80 hover:bg-white/90 backdrop-blur-md border border-gray-300 rounded-full flex items-center justify-center text-gray-700 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-400 shadow-lg"
-              title="비디오 끄기"
-              aria-label="비디오 끄기"
-            >
-              <span className="text-lg font-bold">×</span>
-            </button>
-          ) : (
-            // 재생 버튼 - 비디오 켜기 (미니멀 디자인)
-            <button
-              onClick={showVideo}
-              className="w-12 h-12 bg-white/80 hover:bg-white/90 backdrop-blur-md border border-gray-300 rounded-full flex items-center justify-center text-gray-700 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-400 shadow-lg"
-              title="비디오 재생"
-              aria-label="비디오 재생"
-            >
-              <span className="text-lg font-bold ml-0.5">▶</span>
-            </button>
-          )}
-        </div>
-      )}
-
-
-      {/* CMS 버튼 for admin - video management */}
-      {isAuthenticated && (
-        <div className="absolute top-20 right-8 z-30">
-          <DirectCMS
-            slotId="main-hero-video"
-            currentUrl={heroVideoUrl}
-            type="video"
-            onUpload={cmsUpload}
-            onDelete={cmsDelete}
-            isAdminMode={true}
-            placeholder="Hero Video"
-          />
-        </div>
-      )}
-    </motion.section>
-  );
-}
-
-const HeroSectionWithStyles = () => (
-  <>
-    <HeroSection />
-    <style jsx global>{`
-        /* 그라데이션 애니메이션 */
+      {/* Gradient animation keyframes */}
+      <style jsx global>{`
         @keyframes gradient-shift {
-          0% {
+          0%, 100% {
             background-position: 0% 50%;
           }
           50% {
             background-position: 100% 50%;
           }
-          100% {
-            background-position: 0% 50%;
-          }
-        }
-
-        .animate-gradient {
-          animation: gradient-shift 4s ease infinite;
-        }
-
-        /* 홈페이지에서 Navigation 투명하게 만들기 */
-        body:has(.hero-section) .redux-nav:not(.redux-nav--scrolled) {
-          background: transparent !important;
-          backdrop-filter: none !important;
-          border-bottom: none !important;
-        }
-
-        body:has(.hero-section) .redux-nav:not(.redux-nav--scrolled) .redux-nav__logo {
-          background: linear-gradient(135deg, #3a3a3a 0%, #6a6a6a 50%, #8B7D6B 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        body:has(.hero-section) .redux-nav:not(.redux-nav--scrolled) .redux-nav__link {
-          color: #5a5a5a;
-          opacity: 0.9;
-        }
-
-        body:has(.hero-section) .redux-nav:not(.redux-nav--scrolled) .redux-nav__link:hover {
-          color: #8B7D6B;
-          opacity: 1;
-        }
-
-        body:has(.hero-section) .redux-nav:not(.redux-nav--scrolled) .redux-nav__toggle-line {
-          background: #5a5a5a;
-        }
-
-        /* 완전히 새로운 모바일 최적화 - 깨짐 방지 */
-        @media (max-width: 768px) {
-          .hero-section {
-            height: 100vh !important;
-            height: 100dvh !important;
-            width: 100vw !important;
-            max-width: 100vw !important;
-            overflow-x: hidden !important;
-            position: relative !important;
-            padding: 0 !important;
-            margin: 0 !important;
-          }
-          
-          .hero-content {
-            width: 100% !important;
-            max-width: 100vw !important;
-            padding: 0 20px !important;
-            margin: 0 !important;
-            position: absolute !important;
-            top: 50% !important;
-            left: 50% !important;
-            transform: translate(-50%, -50%) !important;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: center !important;
-            align-items: center !important;
-            text-align: center !important;
-            box-sizing: border-box !important;
-          }
-          
-          .hero-title {
-            font-size: clamp(2rem, 10vw, 3.5rem) !important;
-            margin-bottom: 1rem !important;
-            line-height: 0.9 !important;
-            font-weight: 700 !important;
-            letter-spacing: -0.01em !important;
-            width: 100% !important;
-            max-width: 100% !important;
-            word-break: keep-all !important;
-            overflow-wrap: break-word !important;
-          }
-          
-          .hero-subtitle {
-            font-size: clamp(0.75rem, 2.5vw, 0.9rem) !important;
-            margin-bottom: 1.5rem !important;
-            letter-spacing: 0.2em !important;
-            opacity: 0.9 !important;
-            width: 100% !important;
-            max-width: 90vw !important;
-          }
-          
-          .hero-description {
-            margin-bottom: 2rem !important;
-            width: 100% !important;
-            max-width: 90vw !important;
-          }
-          
-          .hero-description p {
-            font-size: 0.85rem !important;
-            line-height: 1.5 !important;
-            width: 100% !important;
-            max-width: 280px !important;
-            margin: 0 auto !important;
-          }
-          
-          .hero-actions {
-            flex-direction: column !important;
-            gap: 1rem !important;
-            align-items: center !important;
-            width: 100% !important;
-            max-width: 90vw !important;
-          }
-          
-          .hero-actions button {
-            width: 100% !important;
-            max-width: 260px !important;
-            padding: 14px 24px !important;
-            font-size: 0.8rem !important;
-            min-height: 48px !important;
-            border-width: 2px !important;
-            font-weight: 500 !important;
-            letter-spacing: 0.1em !important;
-            transition: all 0.3s ease !important;
-            box-sizing: border-box !important;
-          }
-          
-          /* 비디오 컨트롤 모바일 최적화 */
-          .hero-section .absolute.bottom-20.right-8 {
-            bottom: 100px !important;
-            right: 20px !important;
-            z-index: 50 !important;
-          }
-          
-          .hero-section .absolute.bottom-20.right-8 button {
-            width: 44px !important;
-            height: 44px !important;
-            font-size: 14px !important;
-            min-height: 44px !important;
-            min-width: 44px !important;
-            touch-action: manipulation !important;
-          }
-          
-          /* CMS 버튼 모바일 최적화 */
-          .hero-section .absolute.top-20.right-8 {
-            top: 80px !important;
-            right: 20px !important;
-            z-index: 50 !important;
-          }
-          
-          /* 스크롤 인디케이터 모바일 위치 */
-          .hero-section .absolute.bottom-8.left-1\\/2 {
-            bottom: 20px !important;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            z-index: 40 !important;
-          }
-        }
-        
-        /* 매우 작은 화면 (iPhone SE 등) */
-        @media (max-width: 375px) {
-          .hero-content {
-            padding: 0 15px !important;
-          }
-          
-          .hero-title {
-            font-size: clamp(1.8rem, 8vw, 2.5rem) !important;
-          }
-          
-          .hero-subtitle {
-            font-size: clamp(0.7rem, 2vw, 0.8rem) !important;
-            letter-spacing: 0.15em !important;
-          }
-          
-          .hero-description p {
-            font-size: 0.8rem !important;
-            max-width: 250px !important;
-          }
-          
-          .hero-actions button {
-            max-width: 240px !important;
-            padding: 12px 20px !important;
-            font-size: 0.75rem !important;
-            min-height: 44px !important;
-          }
-        }
-        
-        /* 가로모드 모바일 대응 */
-        @media (max-width: 768px) and (orientation: landscape) {
-          .hero-section {
-            height: 100vh !important;
-          }
-          
-          .hero-content {
-            padding: 0 30px !important;
-          }
-          
-          .hero-title {
-            font-size: clamp(2rem, 8vw, 3rem) !important;
-            margin-bottom: 0.5rem !important;
-          }
-          
-          .hero-subtitle {
-            margin-bottom: 1rem !important;
-          }
-          
-          .hero-description {
-            margin-bottom: 1.5rem !important;
-          }
-          
-          .hero-actions {
-            flex-direction: row !important;
-            gap: 1rem !important;
-            justify-content: center !important;
-          }
-          
-          .hero-actions button {
-            width: auto !important;
-            max-width: none !important;
-            padding: 12px 24px !important;
-            font-size: 0.8rem !important;
-          }
-        }
-        
-        @media (max-width: 480px) {
-          .hero-title {
-            font-size: clamp(1.8rem, 12vw, 3.5rem) !important;
-          }
-          
-          .hero-subtitle {
-            font-size: 0.8rem !important;
-            letter-spacing: 0.15em !important;
-          }
-          
-          .hero-description p {
-            font-size: 0.85rem !important;
-            max-width: 280px !important;
-          }
-          
-          .hero-actions button {
-            padding: 12px 20px !important;
-            font-size: 0.75rem !important;
-            max-width: 240px !important;
-          }
-          
-          .hero-content {
-            padding: 0 15px !important;
-          }
-        }
-        
-        @media (max-width: 375px) {
-          .hero-title {
-            font-size: clamp(1.6rem, 12vw, 3rem) !important;
-          }
-          
-          .hero-subtitle {
-            font-size: 0.75rem !important;
-          }
-          
-          .hero-description p {
-            font-size: 0.8rem !important;
-            max-width: 260px !important;
-          }
-          
-          .hero-actions button {
-            padding: 10px 18px !important;
-            font-size: 0.7rem !important;
-            max-width: 220px !important;
-          }
-        }
-        
-        /* Prevent flash of unstyled content */
-        .hero-section {
-          min-height: 100vh;
-          min-height: 100dvh;
-        }
-        
-        /* Video optimization */
-        video {
-          will-change: transform;
-        }
-        
-        /* Performance optimizations */
-        .hero-content * {
-          will-change: auto;
-        }
-        
-        /* 텍스트 투명 효과 애니메이션 */
-        @keyframes textGlow {
-          0% {
-            filter: contrast(1.2) brightness(1.1) saturate(1.1);
-            text-shadow: 0 0 40px rgba(255,255,255,0.2), 0 0 80px rgba(255,255,255,0.1);
-            background: linear-gradient(45deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7), rgba(255,255,255,0.95));
-          }
-          50% {
-            filter: contrast(1.4) brightness(1.3) saturate(1.2);
-            text-shadow: 0 0 50px rgba(255,255,255,0.35), 0 0 100px rgba(255,255,255,0.2), 0 0 150px rgba(255,255,255,0.1);
-            background: linear-gradient(45deg, rgba(255,255,255,1), rgba(255,255,255,0.8), rgba(255,255,255,1));
-          }
-          100% {
-            filter: contrast(1.3) brightness(1.2) saturate(1.15);
-            text-shadow: 0 0 60px rgba(255,255,255,0.4), 0 0 120px rgba(255,255,255,0.25);
-            background: linear-gradient(45deg, rgba(255,255,255,0.95), rgba(255,255,255,0.75), rgba(255,255,255,0.98));
-          }
-        }
-
-        @keyframes subtitleGlow {
-          0% {
-            opacity: 0.8;
-            text-shadow: 0 0 20px rgba(255,255,255,0.3), 0 0 40px rgba(255,255,255,0.15);
-            filter: brightness(1.1) contrast(1.1);
-          }
-          50% {
-            opacity: 0.95;
-            text-shadow: 0 0 30px rgba(255,255,255,0.45), 0 0 60px rgba(255,255,255,0.25), 0 0 90px rgba(255,255,255,0.1);
-            filter: brightness(1.3) contrast(1.2);
-          }
-          100% {
-            opacity: 0.9;
-            text-shadow: 0 0 25px rgba(255,255,255,0.4), 0 0 50px rgba(255,255,255,0.2);
-            filter: brightness(1.2) contrast(1.15);
-          }
-        }
-
-        /* Reduce motion for users who prefer it */
-        @media (prefers-reduced-motion: reduce) {
-          * {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-          }
         }
       `}</style>
-  </>
-);
-
-export default HeroSectionWithStyles;
+    </motion.section>
+  );
+}
