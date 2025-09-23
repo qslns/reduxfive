@@ -123,12 +123,12 @@ export default function VisualArtPage() {
 
         <div className="hero-content text-center z-[1]">
           <h1
-            className="hero-title font-thin uppercase text-gray-900 opacity-0 transform translate-y-[50px] animate-[heroFade_1.5s_ease_forwards] tracking-[0.2em]"
+            className="hero-title font-thin uppercase text-gray-900 tracking-[0.2em]"
             style={{ fontSize: 'clamp(60px, 10vw, 160px)', textShadow: '0 0 30px rgba(0,0,0,0.1)' }}
           >
             Visual Art
           </h1>
-          <p className="hero-subtitle text-base tracking-[3px] text-[#8B7D6B] mt-5 opacity-0 animate-[heroFade_1.5s_ease_forwards] [animation-delay:0.3s]">
+          <p className="hero-subtitle text-base tracking-[3px] text-[#8B7D6B] mt-5">
             Beyond Fashion, Into Art
           </p>
         </div>

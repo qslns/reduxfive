@@ -100,12 +100,12 @@ export default function CollectivePage() {
 
         <div className="hero-content text-center z-[1] text-gray-900">
           <h1
-            className="hero-title font-thin uppercase mb-5 opacity-0 transform translate-y-[50px] animate-[heroFade_1.5s_ease_forwards] tracking-[0.4em]"
+            className="hero-title font-thin uppercase mb-5 tracking-[0.4em]"
             style={{ fontSize: 'clamp(80px, 12vw, 200px)', textShadow: '0 0 30px rgba(0,0,0,0.1)' }}
           >
             REDUX
           </h1>
-          <p className="hero-subtitle text-lg tracking-[4px] opacity-0 animate-[heroFade_1.5s_ease_forwards] [animation-delay:0.3s] text-[#8B7D6B]">
+          <p className="hero-subtitle text-lg tracking-[4px] text-[#8B7D6B]">
             FIVE MINDS, ONE VISION
           </p>
         </div>
