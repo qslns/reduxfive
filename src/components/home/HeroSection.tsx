@@ -239,9 +239,9 @@ function HeroSection() {
         style={{ y, opacity }}
       >
         <motion.h1
-          className="hero-title font-['Playfair_Display'] font-black mb-12 tracking-[-0.02em] leading-[0.85] transition-all duration-1000 ease-out"
+          className="hero-title font-['Playfair_Display'] font-black mb-12 tracking-[-0.02em] leading-[0.85] transition-all duration-1000 ease-out flex justify-center"
           style={{
-            fontSize: 'clamp(5rem, 12vw, 10rem)',
+            fontSize: 'clamp(4rem, 10vw, 10rem)',
             textShadow: '0 4px 20px rgba(0,0,0,0.1)'
           }}
           initial="hidden"
@@ -259,6 +259,7 @@ function HeroSection() {
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
                 backgroundSize: '200% auto',
+                animation: 'gradient-shift 4s ease infinite',
               }}
               whileHover={{
                 scale: 1.1,

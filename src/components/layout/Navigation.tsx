@@ -306,13 +306,16 @@ export default function Navigation() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
-      <div 
+      {/* Mobile Menu - 부드러운 슬라이드 애니메이션 */}
+      <motion.div
         id="mobile-menu"
         className={`redux-nav__mobile ${mobileMenuActive ? 'redux-nav__mobile--active' : ''}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="mobile-menu-title"
+        initial={{ x: '100%' }}
+        animate={{ x: mobileMenuActive ? 0 : '100%' }}
+        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
         <div className="redux-nav__mobile-content">
           {/* Mobile Menu Header with Close Button */}
@@ -417,7 +420,7 @@ export default function Navigation() {
           onClick={closeMobileMenu}
           aria-hidden="true"
         />
-      </div>
+      </motion.div>
 
       {/* Enhanced CSS with BEM naming */}
       <style jsx global>{`

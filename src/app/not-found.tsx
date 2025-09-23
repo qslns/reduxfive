@@ -1,91 +1,142 @@
 /**
- * 404 페이지 - 향상된 에러 처리
+ * 404 페이지 - REDUX 브랜드 정체성을 반영한 디자인
  */
+'use client';
 
 import Link from 'next/link';
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: '페이지를 찾을 수 없습니다',
-  description: '요청하신 페이지를 찾을 수 없습니다. REDUX 홈페이지로 돌아가세요.',
-};
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 export default function NotFound() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const reduxLetters = ['R', 'E', 'D', 'U', 'X'];
+
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center px-4">
-      <div className="text-center max-w-2xl">
-        {/* 404 Animation */}
-        <div className="mb-8">
-          <h1 className="text-[150px] md:text-[200px] font-bold text-white/10 font-['Playfair_Display'] leading-none">
-            404
-          </h1>
-          <div className="relative -mt-20 md:-mt-32">
-            <h2 className="text-4xl md:text-6xl font-light text-white font-['Playfair_Display'] tracking-wide">
-              Lost in the VOID
-            </h2>
-          </div>
-        </div>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-white via-gray-50 to-white overflow-hidden">
+      {/* 배경 장식 요소 */}
+      <div className="absolute inset-0">
+        <div className="absolute top-[20%] left-[10%] w-[200px] h-[200px] border border-gray-200 rounded-full opacity-30" />
+        <div className="absolute bottom-[20%] right-[10%] w-[150px] h-[150px] border-2 border-gray-200 opacity-20" />
+        <div className="absolute top-[50%] right-[20%] w-[100px] h-[1px] bg-gradient-to-r from-[#8B7D6B]/30 to-transparent transform rotate-45" />
+        <div className="absolute bottom-[40%] left-[15%] w-[80px] h-[1px] bg-gradient-to-l from-[#8B7D6B]/30 to-transparent transform -rotate-12" />
+      </div>
 
-        {/* Message */}
-        <div className="mb-12">
-          <p className="text-xl md:text-2xl text-gray-400 mb-4">
-            페이지를 찾을 수 없습니다
-          </p>
-          <p className="text-gray-500 max-w-md mx-auto leading-relaxed">
-            요청하신 페이지가 존재하지 않거나 이동되었을 수 있습니다. 
-            아래 링크를 통해 다른 페이지로 이동해보세요.
-          </p>
-        </div>
+      {mounted && (
+        <motion.div
+          className="relative z-10 text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* 404 텍스트 - REDUX 스타일 */}
+          <motion.div className="mb-8">
+            <motion.h1
+              className="text-[10rem] md:text-[12rem] font-['Playfair_Display'] font-black leading-none"
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.8, 0.25, 1] }}
+            >
+              <span className="bg-gradient-to-r from-[#1a1a1a] via-[#8B7D6B] to-[#1a1a1a] bg-clip-text text-transparent">404</span>
+            </motion.h1>
 
-        {/* Navigation Links */}
-        <div className="space-y-4 mb-12">
-          <Link
-            href="/"
-            className="inline-block px-8 py-4 bg-white text-black rounded-lg hover:bg-gray-100 transition-all duration-300 font-medium text-lg hover:scale-105 transform"
+            {/* REDUX 글자 애니메이션 */}
+            <div className="flex justify-center gap-2 mt-4">
+              {reduxLetters.map((letter, index) => (
+                <motion.span
+                  key={index}
+                  className="text-2xl md:text-3xl font-['Playfair_Display'] font-bold text-[#8B7D6B]"
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
+                >
+                  {letter}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.h2
+            className="text-xl md:text-2xl font-light text-gray-600 mb-4 tracking-wider uppercase"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.3, duration: 0.5 }}
           >
-            홈페이지로 돌아가기
-          </Link>
-          
-          <div className="flex flex-wrap justify-center gap-4 mt-8">
+            Page Not Found
+          </motion.h2>
+
+          <motion.p
+            className="text-gray-500 mb-12 max-w-md mx-auto leading-relaxed"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5, duration: 0.5 }}
+          >
+            The room you're looking for doesn't exist.<br />
+            Let's navigate back to the creative space.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.7, duration: 0.5 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Link
+              href="/"
+              className="inline-block px-12 py-4 bg-gradient-to-r from-[#8B7D6B] to-[#A39993] text-white uppercase tracking-[0.2em] text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
+            >
+              <span className="relative z-10">Return Home</span>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a] to-[#2a2a2a]"
+                initial={{ x: '-100%' }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.3 }}
+              />
+            </Link>
+          </motion.div>
+
+          {/* 추가 네비게이션 링크 */}
+          <motion.div
+            className="flex flex-wrap justify-center gap-4 mt-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2, duration: 0.5 }}
+          >
             <Link
               href="/about"
-              className="px-6 py-2 border border-white/20 text-white hover:bg-white/10 rounded transition-all duration-300"
+              className="text-sm text-gray-500 hover:text-[#8B7D6B] transition-colors duration-300 uppercase tracking-wider"
             >
               About
             </Link>
+            <span className="text-gray-300">•</span>
             <Link
               href="/designers"
-              className="px-6 py-2 border border-white/20 text-white hover:bg-white/10 rounded transition-all duration-300"
+              className="text-sm text-gray-500 hover:text-[#8B7D6B] transition-colors duration-300 uppercase tracking-wider"
             >
               Designers
             </Link>
+            <span className="text-gray-300">•</span>
             <Link
               href="/exhibitions"
-              className="px-6 py-2 border border-white/20 text-white hover:bg-white/10 rounded transition-all duration-300"
+              className="text-sm text-gray-500 hover:text-[#8B7D6B] transition-colors duration-300 uppercase tracking-wider"
             >
               Exhibitions
             </Link>
+            <span className="text-gray-300">•</span>
             <Link
               href="/contact"
-              className="px-6 py-2 border border-white/20 text-white hover:bg-white/10 rounded transition-all duration-300"
+              className="text-sm text-gray-500 hover:text-[#8B7D6B] transition-colors duration-300 uppercase tracking-wider"
             >
               Contact
             </Link>
-          </div>
-        </div>
-
-        {/* Additional Help */}
-        <div className="text-sm text-gray-600">
-          <p>문제가 지속되면 <Link href="/contact" className="text-gray-400 hover:text-white underline">연락처</Link>를 통해 문의해주세요.</p>
-        </div>
-
-        {/* Background Pattern */}
-        <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-40 w-80 h-80 border border-white/5 rounded-full"></div>
-          <div className="absolute -bottom-40 -left-40 w-96 h-96 border border-white/5 rounded-full"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-white/5 rounded-full"></div>
-        </div>
-      </div>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 }

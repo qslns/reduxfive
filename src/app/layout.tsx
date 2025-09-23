@@ -33,6 +33,7 @@ import SkipToContent from '../components/ui/SkipToContent';
 import ClientMobileOptimizer from '../components/ui/ClientMobileOptimizer';
 import AISearch from '../components/ui/AISearch';
 import DebugPanel from '../components/debug/DebugPanel';
+import BackToTop from '../components/ui/BackToTop';
 
 export default function RootLayout({
   children,
@@ -156,6 +157,8 @@ export default function RootLayout({
           <AISearch />
           {/* 디버그 패널 - 개발 환경에서만 표시 */}
           <DebugPanel />
+          {/* Back to Top 버튼 */}
+          <BackToTop />
         {/* </GlobalErrorBoundary> */}
         
         {/* 전역 에러 처리 시스템 */}

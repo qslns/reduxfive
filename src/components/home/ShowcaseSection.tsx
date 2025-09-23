@@ -207,38 +207,22 @@ export default function ShowcaseSection() {
                 />
               </motion.div>
               
-              {/* Overlay */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-center justify-center"
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="text-center text-white">
-                  <motion.h3
-                    className="font-['Playfair_Display'] text-2xl font-bold tracking-wider mb-2"
-                    initial={{ y: 20, opacity: 0 }}
-                    whileHover={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.1, duration: 0.3 }}
-                  >
+              {/* Overlay - 이전 버전 스타일 복원 및 개선 */}
+              <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
+                <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                  <h3 className="font-['Playfair_Display'] font-semibold text-lg tracking-[0.1em] mb-1 text-gray-900">
                     {designer.name}
-                  </motion.h3>
-                  <motion.div
-                    className="h-[2px] w-16 bg-white mx-auto mb-2"
-                    initial={{ scaleX: 0 }}
-                    whileHover={{ scaleX: 1 }}
-                    transition={{ delay: 0.2, duration: 0.3 }}
-                  />
-                  <motion.p
-                    className="text-sm tracking-[0.2em] uppercase"
-                    initial={{ y: 10, opacity: 0 }}
-                    whileHover={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.3, duration: 0.3 }}
-                  >
+                  </h3>
+                  <div className="h-[1px] w-12 bg-gradient-to-r from-[#8B7D6B] to-[#A39993] mb-2 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                  <p className="text-sm text-gray-700 tracking-wider uppercase font-light">
                     {designer.role}
-                  </motion.p>
+                  </p>
                 </div>
-              </motion.div>
+                {/* 중앙 View 텍스트 */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                  <span className="text-[#8B7D6B] font-medium text-sm tracking-[0.3em] uppercase">View Profile</span>
+                </div>
+              </div>
 
               {/* CMS 버튼 for admin */}
               {isAuthenticated && (
@@ -294,46 +278,28 @@ export default function ShowcaseSection() {
                 />
               </motion.div>
               
-              {/* Overlay */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-center justify-center"
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="text-center text-white">
-                  <motion.span
-                    className="text-xs bg-[#8B7D6B] text-white px-3 py-1 rounded-full uppercase tracking-wider font-medium mb-4 inline-block"
-                    initial={{ y: -10, opacity: 0 }}
-                    whileHover={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
+              {/* Overlay - 전시 카드 스타일 개선 */}
+              <div className="absolute inset-0 bg-gradient-to-t from-white/98 via-white/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
+                {/* Exhibition 배지 */}
+                <div className="absolute top-4 left-4">
+                  <span className="text-xs bg-gradient-to-r from-[#8B7D6B] to-[#A39993] text-white px-3 py-1 rounded uppercase tracking-wider font-medium shadow-md">
                     Exhibition
-                  </motion.span>
-                  <motion.h3
-                    className="font-['Playfair_Display'] text-2xl font-bold tracking-wider mb-2"
-                    initial={{ y: 20, opacity: 0 }}
-                    whileHover={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.1, duration: 0.3 }}
-                  >
-                    {exhibition.name}
-                  </motion.h3>
-                  <motion.div
-                    className="h-[2px] w-16 bg-white mx-auto mb-2"
-                    initial={{ scaleX: 0 }}
-                    whileHover={{ scaleX: 1 }}
-                    transition={{ delay: 0.2, duration: 0.3 }}
-                  />
-                  <motion.p
-                    className="text-sm tracking-[0.1em]"
-                    initial={{ y: 10, opacity: 0 }}
-                    whileHover={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.3, duration: 0.3 }}
-                  >
-                    {exhibition.description}
-                  </motion.p>
+                  </span>
                 </div>
-              </motion.div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                  <h3 className="font-['Playfair_Display'] font-semibold text-lg tracking-[0.1em] mb-1 bg-gradient-to-r from-[#8B7D6B] to-[#6B5D4B] bg-clip-text text-transparent">
+                    {exhibition.name}
+                  </h3>
+                  <div className="h-[1px] w-12 bg-gradient-to-r from-[#8B7D6B] to-[#A39993] mb-2 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                  <p className="text-sm text-gray-700 tracking-wider font-light">
+                    {exhibition.description}
+                  </p>
+                </div>
+                {/* 중앙 View 텍스트 */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                  <span className="text-[#8B7D6B] font-medium text-sm tracking-[0.3em] uppercase">View Exhibition</span>
+                </div>
+              </div>
 
               {/* CMS 버튼 for admin */}
               {isAuthenticated && (
