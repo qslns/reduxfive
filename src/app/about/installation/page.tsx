@@ -197,12 +197,12 @@ export default function InstallationPage() {
 
         <div className="hero-content absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-[1]">
           <h1
-            className="hero-title font-thin uppercase text-gray-900 opacity-0 transform translate-y-[50px] animate-[heroFade_1.5s_ease_forwards] tracking-[0.3em]"
+            className="hero-title font-thin uppercase text-gray-900 tracking-[0.3em]"
             style={{ fontSize: 'clamp(60px, 10vw, 180px)', textShadow: '0 0 30px rgba(0,0,0,0.1)' }}
           >
             Process
           </h1>
-          <p className="hero-subtitle text-base tracking-[3px] text-[#8B7D6B] mt-5 opacity-0 animate-[heroFade_1.5s_ease_forwards] [animation-delay:0.3s]">
+          <p className="hero-subtitle text-base tracking-[3px] text-[#8B7D6B] mt-5">
             Five Roles, One Exhibition
           </p>
         </div>
