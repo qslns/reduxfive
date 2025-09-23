@@ -94,7 +94,6 @@ export default function Navigation() {
       return;
     }
 
-    console.log('🔴 모바일 메뉴 닫기 호출됨'); // 디버그용
 
     // 즉시 상태 변경
     setMobileMenuActive(false);
@@ -106,7 +105,6 @@ export default function Navigation() {
     document.body.style.width = '';
     document.body.style.height = '';
 
-    console.log('✅ 모바일 메뉴 완전히 닫힘');
   }, [mobileMenuActive]);
 
   // ESC key handler for mobile menu
@@ -127,7 +125,6 @@ export default function Navigation() {
   useEffect(() => {
     // 모바일에서만 작동
     if (typeof window !== 'undefined' && window.innerWidth <= 768 && mobileMenuActive) {
-      console.log('🔄 경로 변경으로 인한 메뉴 닫기:', pathname);
       closeMobileMenu();
     }
   }, [pathname]); // closeMobileMenu는 dependency에서 제거
@@ -147,7 +144,6 @@ export default function Navigation() {
       const isToggleClick = target.closest('.redux-nav__toggle');
 
       if (!isMenuClick && !isToggleClick) {
-        console.log('🔄 전역 클릭으로 인한 메뉴 닫기');
         closeMobileMenu();
       }
     };
@@ -209,8 +205,6 @@ export default function Navigation() {
                 aria-haspopup="true"
                 aria-expanded="false"
                 onClick={(e) => {
-                  console.log('🅰️ Navigation - About 링크 클릭');
-                  console.log('   preventDefault 호출 여부:', e.defaultPrevented);
                   // 명시적으로 preventDefault를 호출하지 않음
                 }}
               >
@@ -222,7 +216,6 @@ export default function Navigation() {
                   className="redux-nav__dropdown-item"
                   role="menuitem"
                   onClick={(e) => {
-                    console.log('🎬 Fashion Film 링크 클릭');
                     // preventDefault를 호출하지 않음
                   }}
                 >Fashion Film</Link>
@@ -231,9 +224,6 @@ export default function Navigation() {
                   className="redux-nav__dropdown-item"
                   role="menuitem"
                   onClick={(e) => {
-                    console.log('🧠 Memory 링크 클릭');
-                    console.log('   현재 경로:', pathname);
-                    console.log('   대상 경로:', e.currentTarget.href);
                     // preventDefault를 호출하지 않음 - Next.js Link가 처리하도록 함
                   }}
                 >Memory</Link>

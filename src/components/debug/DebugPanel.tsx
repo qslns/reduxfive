@@ -21,15 +21,6 @@ export default function DebugPanel() {
         const logEntry = `[${new Date().toISOString().substr(11, 8)}] Link clicked: ${link.href} | Prevented: ${e.defaultPrevented}`;
         setClickLog(prev => [...prev.slice(-9), logEntry]);
 
-        // 콘솔에도 출력
-        console.log('🔗 LINK CLICK DEBUG:', {
-          href: link.href,
-          className: link.className,
-          preventDefault: e.defaultPrevented,
-          stopPropagation: e.cancelBubble,
-          currentTarget: e.currentTarget,
-          target: e.target
-        });
       }
     };
 

@@ -33,16 +33,12 @@ export default function GalleryCMS({
     const url = uploadUrl.trim();
     if (url && currentImages.length < maxImages) {
       try {
-        console.log('GalleryCMS handleUpload:', url);
         onUpload(url);
         setUploadUrl('');
         setIsUploadMode(false);
-        console.log('Upload successful, clearing form');
       } catch (error) {
-        console.error('Upload failed in GalleryCMS:', error);
       }
     } else {
-      console.warn('Upload failed - invalid URL or max images reached:', { url, currentLength: currentImages.length, maxImages });
     }
   };
 

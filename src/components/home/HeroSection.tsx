@@ -77,8 +77,8 @@ export default function HeroSection({
       const timer = setTimeout(() => {
         if (videoRef.current) {
           videoRef.current.currentTime = 0;
-          videoRef.current.play().catch((error) => {
-            console.warn('Video play failed:', error);
+          videoRef.current.play().catch(() => {
+            // Video play failed silently
           });
         }
       }, 200);

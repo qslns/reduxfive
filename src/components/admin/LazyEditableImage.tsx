@@ -2,6 +2,7 @@
 
 import { lazy, Suspense } from 'react';
 import { Skeleton } from '../ui/Skeleton';
+import OptimizedImage from '../ui/OptimizedImage';
 
 // 동적으로 EditableImage 로드
 const EditableImageComponent = lazy(() => import('./EditableImage'));
@@ -26,7 +27,6 @@ interface LazyEditableImageProps {
 export default function LazyEditableImage(props: LazyEditableImageProps) {
   if (!props.enableCMS) {
     // CMS 모드가 아니면 일반 이미지 컴포넌트 사용
-    const OptimizedImage = require('../ui/OptimizedImage').default;
     return (
       <OptimizedImage
         src={props.src}
