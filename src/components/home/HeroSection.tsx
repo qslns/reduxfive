@@ -151,20 +151,21 @@ export default function HeroSection({
       {/* Overlay gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/20" />
 
-      {/* Video Toggle Button */}
-      <motion.button
-        onClick={toggleVideo}
-        className="absolute top-8 right-8 z-20 px-4 py-2 bg-black/50 hover:bg-black/70 text-white rounded-full backdrop-blur-sm transition-all duration-300"
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <span className="text-sm font-light tracking-wider">
-          {isVideoVisible ? '영상 끄기' : '영상 켜기'}
-        </span>
-      </motion.button>
+      {/* Video/Image Toggle Buttons - Bottom Left */}
+      <div className="absolute bottom-8 left-8 z-20 flex flex-col gap-2">
+        <button
+          onClick={() => setIsVideoVisible(true)}
+          className={`px-4 py-2 ${isVideoVisible ? 'bg-[#8B7D6B]' : 'bg-gray-800/80 hover:bg-gray-900/90'} text-white text-sm rounded-md backdrop-blur-sm transition-all duration-200`}
+        >
+          애니메이션 이미지
+        </button>
+        <button
+          onClick={() => setIsVideoVisible(false)}
+          className={`px-4 py-2 ${!isVideoVisible ? 'bg-[#8B7D6B]' : 'bg-gray-800/80 hover:bg-gray-900/90'} text-white text-sm rounded-md backdrop-blur-sm transition-all duration-200`}
+        >
+          로고 이미지
+        </button>
+      </div>
 
       {/* Decorative elements */}
       <div className="absolute top-[35%] left-[10%] w-[250px] h-[250px] border border-gray-300/30 rounded-full" />
