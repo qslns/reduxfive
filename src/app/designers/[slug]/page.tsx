@@ -102,7 +102,7 @@ export default function DesignerPage({ params }: Props) {
     <main className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       {/* Navigation Bar */}
       <nav className="fixed top-0 left-0 right-0 bg-white/98 backdrop-blur-sm z-40 border-b border-gray-200 shadow-sm">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-3 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link href="/" className="text-gray-900 font-bold text-xl tracking-wider hover:text-[#8B7D6B] transition-all duration-300">
               REDUX
@@ -128,7 +128,7 @@ export default function DesignerPage({ params }: Props) {
       {/* Main Content */}
       <div className="pt-16">
         {/* Hero Section - Designer Profile */}
-        <section className="min-h-screen flex items-center py-12 px-4 sm:px-6 lg:px-8">
+        <section className="min-h-screen flex items-center py-8 sm:py-12 px-3 sm:px-6 lg:px-8">
           <div className="container mx-auto max-w-7xl">
             {/* Designer Number Badge */}
             <div className="mb-8 flex justify-center lg:justify-start">
@@ -142,7 +142,7 @@ export default function DesignerPage({ params }: Props) {
               {/* Text Content */}
               <div className="order-2 lg:order-1 space-y-8">
                 <div className="space-y-4">
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 tracking-wider animate-fade-in">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 tracking-wider animate-fade-in">
                     {designer.name}
                   </h1>
                   <div className="space-y-2">
@@ -156,7 +156,7 @@ export default function DesignerPage({ params }: Props) {
                 </div>
 
                 <div className="prose prose-gray max-w-none animate-fade-in animation-delay-200">
-                  <p className="text-gray-700 text-base md:text-lg leading-[1.8] font-light">
+                  <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-[1.6] sm:leading-[1.8] font-light">
                     {designer.bio}
                   </p>
                 </div>
@@ -179,13 +179,13 @@ export default function DesignerPage({ params }: Props) {
                   )}
 
                   {/* Action Buttons */}
-                  <div className="flex gap-4 pt-4">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
                     {designer.videoUrl && (
                       <a
                         href={designer.videoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-3 bg-[#8B7D6B]/10 border border-[#8B7D6B]/30 text-[#8B7D6B] rounded-lg hover:bg-[#8B7D6B]/20 transition-all duration-300 flex items-center gap-2 shadow-sm hover:shadow-md"
+                        className="px-4 sm:px-6 py-2.5 sm:py-3 bg-[#8B7D6B]/10 border border-[#8B7D6B]/30 text-[#8B7D6B] rounded-lg hover:bg-[#8B7D6B]/20 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-md text-sm sm:text-base"
                       >
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z"/>
@@ -195,7 +195,7 @@ export default function DesignerPage({ params }: Props) {
                     )}
                     <button
                       onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
-                      className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:border-gray-500 hover:text-gray-900 transition-all duration-300 shadow-sm hover:shadow-md"
+                      className="px-4 sm:px-6 py-2.5 sm:py-3 border border-gray-300 text-gray-700 rounded-lg hover:border-gray-500 hover:text-gray-900 transition-all duration-300 shadow-sm hover:shadow-md text-sm sm:text-base text-center"
                     >
                       View Portfolio ↓
                     </button>
@@ -251,7 +251,7 @@ export default function DesignerPage({ params }: Props) {
         </section>
 
         {/* Portfolio Section */}
-        <section id="portfolio" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 via-white to-gray-50">
+        <section id="portfolio" className="py-12 sm:py-16 md:py-20 px-3 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 via-white to-gray-50">
           <div className="container mx-auto max-w-7xl">
             {/* Section Header */}
             <div className="text-center mb-16 space-y-4">
@@ -265,11 +265,11 @@ export default function DesignerPage({ params }: Props) {
             </div>
 
             {/* Masonry Grid */}
-            <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+            <div className="columns-1 xs:columns-2 sm:columns-2 lg:columns-3 xl:columns-4 gap-2 sm:gap-3 md:gap-4 space-y-2 sm:space-y-3 md:space-y-4">
               {portfolioImages.map((image, index) => (
                 <div
                   key={index}
-                  className="relative break-inside-avoid cursor-pointer group overflow-hidden rounded-xl mb-4 animate-fade-in"
+                  className="relative break-inside-avoid cursor-pointer group overflow-hidden rounded-lg sm:rounded-xl mb-2 sm:mb-3 md:mb-4 animate-fade-in"
                   style={{ animationDelay: `${index * 50}ms` }}
                   onClick={() => openLightbox(index)}
                 >
@@ -280,7 +280,7 @@ export default function DesignerPage({ params }: Props) {
                       width={400}
                       height={600}
                       className="w-full h-auto object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-110"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      sizes="(max-width: 480px) 100vw, (max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     />
 
                     {/* Hover Overlay */}

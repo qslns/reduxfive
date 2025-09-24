@@ -35,11 +35,11 @@ function DesignerCard({ designer, index, isAuthenticated, onClick }: DesignerCar
   const hasDisplayImage = !!displayImage;
 
   return (
-    <div 
-      className="designer-card relative h-[65vh] min-h-[450px] max-h-[600px] overflow-hidden cursor-pointer bg-gray-50 transition-all duration-[600ms] ease-out hover:transform hover:scale-[1.002] hover:z-10 shadow-md hover:shadow-xl"
+    <div
+      className="designer-card relative h-[50vh] sm:h-[55vh] md:h-[60vh] lg:h-[65vh] min-h-[350px] sm:min-h-[400px] md:min-h-[450px] max-h-[500px] sm:max-h-[550px] md:max-h-[600px] overflow-hidden cursor-pointer bg-gray-50 transition-all duration-[600ms] ease-out hover:transform hover:scale-[1.002] hover:z-10 shadow-md hover:shadow-xl"
       onClick={onClick}
       style={{
-        borderRight: (index + 1) % 3 !== 0 ? '1px solid rgba(0, 0, 0, 0.05)' : 'none',
+        borderRight: '1px solid rgba(0, 0, 0, 0.05)',
         borderBottom: '1px solid rgba(0, 0, 0, 0.05)',
       }}
     >
@@ -63,41 +63,41 @@ function DesignerCard({ designer, index, isAuthenticated, onClick }: DesignerCar
       </div>
       
       
-      <span 
-        className="absolute top-[40px] right-[40px] text-[120px] font-light text-gray-300 transition-all duration-[600ms] ease-out"
+      <span
+        className="absolute top-[20px] sm:top-[30px] md:top-[40px] right-[20px] sm:right-[30px] md:right-[40px] text-[60px] sm:text-[80px] md:text-[100px] lg:text-[120px] font-light text-gray-300 transition-all duration-[600ms] ease-out"
       >
         {designer.number}
       </span>
       
       {/* Film indicator for designers with videos */}
       {designer.hasVideo && (
-        <div 
-          className="absolute top-[40px] left-[40px] w-[40px] h-[40px] bg-white/80 backdrop-blur-[10px] rounded-full flex items-center justify-center text-gray-700 shadow-sm transition-all duration-[600ms] ease-out"
+        <div
+          className="absolute top-[20px] sm:top-[30px] md:top-[40px] left-[20px] sm:left-[30px] md:left-[40px] w-[30px] h-[30px] sm:w-[35px] sm:h-[35px] md:w-[40px] md:h-[40px] bg-white/80 backdrop-blur-[10px] rounded-full flex items-center justify-center text-gray-700 shadow-sm transition-all duration-[600ms] ease-out text-xs sm:text-sm md:text-base"
         >
           ▶
         </div>
       )}
       
-      <div 
-        className="absolute bottom-0 left-0 w-full p-[60px_40px] bg-gradient-to-t from-white/95 via-white/80 to-transparent transform translate-y-[60%] transition-transform duration-[600ms] ease-out"
+      <div
+        className="absolute bottom-0 left-0 w-full p-[30px_20px] sm:p-[40px_30px] md:p-[50px_35px] lg:p-[60px_40px] bg-gradient-to-t from-white/95 via-white/80 to-transparent transform translate-y-[60%] transition-transform duration-[600ms] ease-out"
       >
-        <h3 
-          className="text-[32px] font-light tracking-[3px] text-gray-900 mb-[10px]"
+        <h3
+          className="text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] font-light tracking-[2px] sm:tracking-[2.5px] md:tracking-[3px] text-gray-900 mb-[6px] sm:mb-[8px] md:mb-[10px]"
         >
           {designer.name}
         </h3>
-        <p 
-          className="text-[16px] tracking-[2px] text-gray-800 uppercase mb-[8px] font-medium"
+        <p
+          className="text-[12px] sm:text-[14px] md:text-[16px] tracking-[1.5px] sm:tracking-[1.8px] md:tracking-[2px] text-gray-800 uppercase mb-[4px] sm:mb-[6px] md:mb-[8px] font-medium"
         >
           {designer.mainRole}
         </p>
-        <p 
-          className="text-[12px] tracking-[1px] text-gray-600 uppercase mb-[20px]"
+        <p
+          className="text-[10px] sm:text-[11px] md:text-[12px] tracking-[0.8px] sm:tracking-[0.9px] md:tracking-[1px] text-gray-600 uppercase mb-[10px] sm:mb-[15px] md:mb-[20px]"
         >
           {designer.role}
         </p>
-        <p 
-          className="text-[16px] text-gray-700 mb-[30px] opacity-90"
+        <p
+          className="text-[12px] sm:text-[14px] md:text-[16px] text-gray-700 mb-[15px] sm:mb-[20px] md:mb-[25px] lg:mb-[30px] opacity-90 line-clamp-2"
         >
           {designer.brand}
         </p>
@@ -206,12 +206,12 @@ export default function DesignersPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 text-gray-900">
       {/* Hero Section */}
-      <section 
+      <section
         className="hero-section flex items-center justify-center relative overflow-hidden"
         style={{
-          marginTop: '80px',
-          height: '50vh',
-          minHeight: '400px',
+          marginTop: '60px',
+          height: '40vh',
+          minHeight: '300px',
         }}
       >
         <div 
@@ -220,17 +220,17 @@ export default function DesignersPage() {
             background: 'linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%)',
           }}
         ></div>
-        <div className="text-center z-10">
+        <div className="text-center z-10 px-4">
           <h1
-            className="hero-title font-['Playfair_Display'] font-light tracking-[0.2em] mb-5"
+            className="hero-title font-['Playfair_Display'] font-light tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.2em] mb-3 sm:mb-4 md:mb-5"
             style={{
-              fontSize: 'clamp(48px, 8vw, 80px)'
+              fontSize: 'clamp(32px, 7vw, 80px)'
             }}
           >
             {heroTitle}
           </h1>
           <p
-            className="hero-subtitle text-[18px] text-gray-600 tracking-[2px]"
+            className="hero-subtitle text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] text-gray-600 tracking-[1px] sm:tracking-[1.5px] md:tracking-[2px]"
           >
             {heroSubtitle}
           </p>
@@ -238,12 +238,12 @@ export default function DesignersPage() {
       </section>
 
       {/* Designer Grid */}
-      <section 
-        className="designers-container py-[120px] px-[40px]"
+      <section
+        className="designers-container py-[40px] sm:py-[60px] md:py-[80px] lg:py-[120px] px-[16px] sm:px-[24px] md:px-[32px] lg:px-[40px]"
       >
         <div className="max-w-[1600px] mx-auto">
-          <div 
-            className="designers-grid grid grid-cols-3 gap-0 relative max-[1024px]:grid-cols-2 max-[768px]:grid-cols-1"
+          <div
+            className="designers-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 relative"
           >
             {designerDisplayData.map((designer, index) => {
               return (

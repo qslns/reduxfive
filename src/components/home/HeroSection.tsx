@@ -204,7 +204,7 @@ function HeroSection() {
       />
 
       {/* Main content with enhanced transparency effects for video interaction */}
-      <div className="hero-content text-center z-10 px-6 max-w-4xl mx-auto">
+      <div className="hero-content text-center z-10 px-4 sm:px-6 max-w-4xl mx-auto">
         <h1
           className="hero-title font-['Playfair_Display'] font-bold mb-8 tracking-[-0.02em] leading-[0.85] transition-all duration-1000 ease-out animate-gradient"
           style={{
@@ -252,10 +252,10 @@ function HeroSection() {
         </div>
 
         {/* Action buttons */}
-        <div className="hero-actions flex flex-col sm:flex-row gap-6 justify-center items-center">
+        <div className="hero-actions flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center w-full sm:w-auto">
           <button
             onClick={navigateToAbout}
-            className="group relative px-8 py-4 backdrop-blur-md uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden"
+            className="group relative px-6 sm:px-8 py-3 sm:py-4 backdrop-blur-md uppercase tracking-[0.15em] sm:tracking-[0.2em] text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden w-full sm:w-auto max-w-[280px] sm:max-w-none"
             style={{
               background: 'linear-gradient(135deg, rgba(43, 43, 43, 0.85) 0%, rgba(139, 125, 107, 0.85) 100%)',
               border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -268,7 +268,7 @@ function HeroSection() {
           
           <button
             onClick={navigateToExhibitions}
-            className="group relative px-8 py-4 backdrop-blur-md uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden"
+            className="group relative px-6 sm:px-8 py-3 sm:py-4 backdrop-blur-md uppercase tracking-[0.15em] sm:tracking-[0.2em] text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden w-full sm:w-auto max-w-[280px] sm:max-w-none"
             style={{
               background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.25) 100%)',
               border: '1px solid rgba(90, 90, 90, 0.3)',
@@ -281,26 +281,26 @@ function HeroSection() {
 
       {/* 비디오 컨트롤 - 간소화된 버전 */}
       {!videoError && (
-        <div className="absolute bottom-20 right-8 z-30">
+        <div className="absolute bottom-16 sm:bottom-20 right-4 sm:right-8 z-30">
           {isVideoVisible ? (
             // X 버튼 - 비디오 끄기 (미니멀 디자인)
             <button
               onClick={hideVideo}
-              className="w-12 h-12 bg-white/80 hover:bg-white/90 backdrop-blur-md border border-gray-300 rounded-full flex items-center justify-center text-gray-700 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-400 shadow-lg"
+              className="w-10 h-10 sm:w-12 sm:h-12 bg-white/80 hover:bg-white/90 backdrop-blur-md border border-gray-300 rounded-full flex items-center justify-center text-gray-700 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-400 shadow-lg"
               title="비디오 끄기"
               aria-label="비디오 끄기"
             >
-              <span className="text-lg font-bold">×</span>
+              <span className="text-base sm:text-lg font-bold">×</span>
             </button>
           ) : (
             // 재생 버튼 - 비디오 켜기 (미니멀 디자인)
             <button
               onClick={showVideo}
-              className="w-12 h-12 bg-white/80 hover:bg-white/90 backdrop-blur-md border border-gray-300 rounded-full flex items-center justify-center text-gray-700 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-400 shadow-lg"
+              className="w-10 h-10 sm:w-12 sm:h-12 bg-white/80 hover:bg-white/90 backdrop-blur-md border border-gray-300 rounded-full flex items-center justify-center text-gray-700 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-gray-400 shadow-lg"
               title="비디오 재생"
               aria-label="비디오 재생"
             >
-              <span className="text-lg font-bold ml-0.5">▶</span>
+              <span className="text-sm sm:text-lg font-bold ml-0.5">▶</span>
             </button>
           )}
         </div>

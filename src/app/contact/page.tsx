@@ -191,7 +191,7 @@ export default function ContactPage() {
     <>
 
       {/* Contact Hero - 비대칭 아방가르드 디자인 */}
-      <section className="contact-hero relative min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-white overflow-hidden pt-[80px]">
+      <section className="contact-hero relative min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-white overflow-hidden pt-[60px] sm:pt-[70px] md:pt-[80px]">
         {/* 비대칭 배경 요소들 */}
         <div className="absolute inset-0">
           <div className="absolute top-[12%] left-[8%] w-[250px] h-[1px] bg-gradient-to-r from-transparent via-gray-900/15 to-transparent transform rotate-[35deg] animate-[slideInLeft_2s_ease_forwards]"></div>
@@ -205,14 +205,14 @@ export default function ContactPage() {
           }}></div>
         </div>
 
-        <div className="contact-hero-content relative z-10 text-center px-10 max-w-6xl mx-auto">
+        <div className="contact-hero-content relative z-10 text-center px-4 sm:px-6 md:px-8 lg:px-10 max-w-6xl mx-auto">
           {/* 비대칭 데코레이티브 라인 */}
           <div className="absolute -top-[80px] left-1/2 transform -translate-x-1/2 w-[1px] h-[60px] bg-gradient-to-b from-transparent to-gray-900/30 animate-[dropIn_1.5s_ease_forwards] max-[768px]:hidden"></div>
 
           {/* 메인 타이틀 */}
-          <h1 className="contact-hero-title font-['Playfair_Display'] font-bold text-gray-900 mb-8 leading-[0.85] opacity-0 animate-[glitchIn_2.5s_ease_forwards]"
+          <h1 className="contact-hero-title font-['Playfair_Display'] font-bold text-gray-900 mb-4 sm:mb-6 md:mb-8 leading-[0.85] opacity-0 animate-[glitchIn_2.5s_ease_forwards]"
               style={{
-                fontSize: 'clamp(50px, 12vw, 140px)',
+                fontSize: 'clamp(40px, 10vw, 140px)',
                 letterSpacing: '-0.02em',
                 textShadow: '0 0 40px rgba(0,0,0,0.05)',
                 wordWrap: 'break-word',
@@ -236,9 +236,9 @@ export default function ContactPage() {
           {/* 비대칭 서브타이틀 */}
           <div className="relative mb-12">
             <div className="absolute -left-[200px] top-1/2 transform -translate-y-1/2 w-[120px] h-[1px] bg-gradient-to-r from-transparent to-gray-900/30 opacity-0 animate-[slideInLeft_1s_ease_forwards] [animation-delay:1.8s] max-[768px]:hidden"></div>
-            <p className="contact-hero-subtitle font-['Inter'] text-gray-700 tracking-[0.4em] uppercase opacity-0 animate-[fadeInUp_1s_ease_forwards] [animation-delay:1.5s]"
+            <p className="contact-hero-subtitle font-['Inter'] text-gray-700 tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] uppercase opacity-0 animate-[fadeInUp_1s_ease_forwards] [animation-delay:1.5s]"
                style={{
-                 fontSize: 'clamp(14px, 2vw, 18px)',
+                 fontSize: 'clamp(12px, 2vw, 18px)',
                  fontWeight: 300,
                  wordWrap: 'break-word',
                  overflowWrap: 'break-word',
@@ -251,9 +251,9 @@ export default function ContactPage() {
 
           {/* 인터랙티브 CTA */}
           <div className="opacity-0 animate-[bounceIn_1s_ease_forwards] [animation-delay:2s]">
-            <div className="inline-flex items-center gap-4 bg-gray-100 border border-gray-300 rounded-full px-8 py-4 shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="inline-flex items-center gap-2 sm:gap-3 md:gap-4 bg-gray-100 border border-gray-300 rounded-full px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 shadow-sm hover:shadow-md transition-all duration-300">
               <div className="w-[8px] h-[8px] bg-[#8B7D6B] rounded-full animate-pulse"></div>
-              <span className="text-gray-700 font-['Inter'] text-sm tracking-[2px] uppercase font-light">
+              <span className="text-gray-700 font-['Inter'] text-xs sm:text-sm tracking-[1px] sm:tracking-[1.5px] md:tracking-[2px] uppercase font-light">
                 {ctaText}
               </span>
               <svg className="w-4 h-4 text-gray-600 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -271,14 +271,14 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Main - 비대칭 레이아웃 재설계 */}
-      <section className="contact-main relative py-32 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
+      <section className="contact-main relative py-16 sm:py-24 md:py-32 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
         {/* 배경 데코레이션 */}
         <div className="absolute inset-0">
           <div className="absolute top-[20%] right-[10%] w-[150px] h-[1px] bg-gradient-to-r from-transparent to-gray-300/50 transform -rotate-12"></div>
           <div className="absolute bottom-[30%] left-[5%] w-[100px] h-[100px] border border-gray-200/50 transform rotate-45"></div>
         </div>
 
-        <div className="contact-container max-w-7xl mx-auto px-10 relative z-10">
+        <div className="contact-container max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 relative z-10">
           {/* 비대칭 그리드 레이아웃 */}
           <div className="grid grid-cols-12 gap-8 items-start max-[1024px]:grid-cols-1 max-[1024px]:gap-16">
 
@@ -287,7 +287,7 @@ export default function ContactPage() {
               {/* 섹션 헤더 */}
               <div className="relative mb-16">
                 <div className="absolute -left-4 top-0 w-[2px] h-[80px] bg-gradient-to-b from-[#8B7D6B]/50 to-transparent"></div>
-                <h2 className="contact-info-title font-['Playfair_Display'] font-bold text-gray-900 mb-4 leading-[0.9]" style={{ fontSize: 'clamp(32px, 5vw, 48px)' }}>
+                <h2 className="contact-info-title font-['Playfair_Display'] font-bold text-gray-900 mb-3 sm:mb-4 leading-[0.9]" style={{ fontSize: 'clamp(28px, 4vw, 48px)' }}>
                   {sectionTitle.split('\\n').map((line: string, index: number) => (
                     <span key={index}>
                       {index === 0 ? line : <span className="text-gray-600 font-light">{line}</span>}

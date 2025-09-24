@@ -79,7 +79,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Hero Section - Navigation 제거, 메인 Navigation 사용 */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden pt-[80px]">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden pt-[60px] sm:pt-[70px] md:pt-[80px]">
         {/* Background texture */}
         <div 
           className="absolute inset-0 opacity-[0.03]"
@@ -98,34 +98,34 @@ export default function AboutPage() {
           style={{ transform: 'rotate(30deg)', borderRadius: '25%' }}
         />
         
-        <div className="text-center z-10 px-6">
-          <h1 
-            className="font-['Playfair_Display'] font-bold text-gray-900 mb-8 tracking-[-0.02em] leading-[0.85]"
-            style={{ 
-              fontSize: 'clamp(3rem, 8vw, 8rem)',
+        <div className="text-center z-10 px-4 sm:px-6">
+          <h1
+            className="font-['Playfair_Display'] font-bold text-gray-900 mb-4 sm:mb-6 md:mb-8 tracking-[-0.02em] leading-[0.85]"
+            style={{
+              fontSize: 'clamp(2.5rem, 7vw, 8rem)',
               textShadow: '0 0 30px rgba(255,255,255,0.1)'
             }}
           >
             WHO REDUX?
           </h1>
-          <p className="text-gray-700 text-xl tracking-[0.3em] uppercase">
+          <p className="text-gray-700 text-sm sm:text-base md:text-lg lg:text-xl tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em] uppercase">
             패션 디자이너 콜렉티브
           </p>
         </div>
       </section>
 
       {/* Introduction Section */}
-      <section className="py-20 px-10">
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 lg:px-10">
         <div className="max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 
-                className="font-['Playfair_Display'] font-bold text-gray-900 mb-8 tracking-[-0.02em] leading-[0.9]"
-                style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}
+              <h2
+                className="font-['Playfair_Display'] font-bold text-gray-900 mb-4 sm:mb-6 md:mb-8 tracking-[-0.02em] leading-[0.9]"
+                style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}
               >
                 우리는<br />REDUX<br />입니다
               </h2>
-              <div className="space-y-6 text-gray-700 text-lg leading-relaxed">
+              <div className="space-y-4 sm:space-y-5 md:space-y-6 text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed">
                 <p>
                   REDUX는 5인의 패션 디자이너가 모여 만든 창작 집단.
                   패션과 예술, 그리고 인간적 표현의 경계를 탐구한다.
@@ -154,10 +154,10 @@ export default function AboutPage() {
       </section>
 
       {/* Categories Grid Section */}
-      <section className="py-20 px-10">
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 lg:px-10">
         <div className="max-w-[1600px] mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="font-['Playfair_Display'] text-4xl font-light text-gray-900 mb-4 tracking-[0.05em]">
+          <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <h2 className="font-['Playfair_Display'] text-2xl sm:text-3xl md:text-4xl font-light text-gray-900 mb-3 sm:mb-4 tracking-[0.05em]">
               EXPLORE
             </h2>
             <div className="w-20 h-[1px] bg-[#8B7D6B] mx-auto"></div>
@@ -194,11 +194,11 @@ export default function AboutPage() {
                     
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-lg">
-                      <div className="absolute bottom-6 left-6 right-6 text-gray-800">
-                        <h3 className="text-2xl font-['Playfair_Display'] font-medium tracking-[0.1em] mb-2 text-[#8B7D6B]">
+                      <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 text-gray-800">
+                        <h3 className="text-lg sm:text-xl md:text-2xl font-['Playfair_Display'] font-medium tracking-[0.08em] sm:tracking-[0.1em] mb-1 sm:mb-2 text-[#8B7D6B]">
                           {category.name}
                         </h3>
-                        <p className="text-sm opacity-90 leading-relaxed text-gray-700">
+                        <p className="text-xs sm:text-sm opacity-90 leading-relaxed text-gray-700 line-clamp-2 sm:line-clamp-none">
                           {category.description}
                         </p>
                       </div>

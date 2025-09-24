@@ -62,39 +62,39 @@ export default function ExhibitionsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-white to-gray-50 text-gray-900">
       {/* Main Content - Navigation은 layout.tsx에서 렌더링됨 */}
-      <div className="pt-[100px]">
+      <div className="pt-[60px] sm:pt-[80px] md:pt-[100px]">
         {/* Hero Section */}
-        <section className="relative h-[70vh] min-h-[500px] overflow-hidden flex items-center justify-center bg-gradient-to-br from-gray-50 to-white">
-          <div className="text-center">
+        <section className="relative h-[60vh] sm:h-[65vh] md:h-[70vh] min-h-[400px] sm:min-h-[450px] md:min-h-[500px] overflow-hidden flex items-center justify-center bg-gradient-to-br from-gray-50 to-white">
+          <div className="text-center px-4">
             <h1
-              className="font-['Playfair_Display'] font-bold text-gray-900 mb-8 tracking-[-0.02em] leading-[0.9]"
+              className="font-['Playfair_Display'] font-bold text-gray-900 mb-4 sm:mb-6 md:mb-8 tracking-[-0.02em] leading-[0.9]"
               style={{
-                fontSize: 'clamp(3rem, 8vw, 6rem)',
+                fontSize: 'clamp(2.5rem, 7vw, 6rem)',
                 textShadow: '0 4px 20px rgba(0,0,0,0.1)'
               }}
             >
               EXHIBITIONS
             </h1>
-            <p className="text-gray-600 text-xl tracking-[0.2em] uppercase">
+            <p className="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl tracking-[0.15em] sm:tracking-[0.2em] uppercase px-4">
               Redefining Fashion Through Space
             </p>
           </div>
         </section>
 
         {/* CINE MODE Section */}
-        <section id="cine-mode" className="py-20 px-10 bg-white shadow-sm">
+        <section id="cine-mode" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 lg:px-10 bg-white shadow-sm">
           <div className="max-w-[1600px] mx-auto">
             {/* Content Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center mb-8 sm:mb-12 md:mb-16">
               {/* Text Content */}
               <div>
                 <h2
-                  className="font-['Playfair_Display'] font-bold text-gray-900 mb-8 tracking-[-0.02em] leading-[0.9]"
-                  style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}
+                  className="font-['Playfair_Display'] font-bold text-gray-900 mb-4 sm:mb-6 md:mb-8 tracking-[-0.02em] leading-[0.9]"
+                  style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}
                 >
                   CINE<br />MODE
                 </h2>
-                <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
+                <div className="space-y-4 sm:space-y-5 md:space-y-6 text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed">
                   <p>
                     REDUX의 'CINE MODE' 패션 필름 전시회는 단순한 스타일 전시를 넘어 영상에 각자의 이야기를 담아 관객들과의 유대감 형성에 집중한 전시입니다.
                   </p>
@@ -103,7 +103,7 @@ export default function ExhibitionsPage() {
                   </p>
                 </div>
                 <button
-                  className="mt-8 px-8 py-4 border-2 border-[#8B7D6B] text-[#8B7D6B] bg-transparent hover:bg-[#8B7D6B] hover:text-white transition-all duration-300 tracking-[0.1em] uppercase shadow-md hover:shadow-lg"
+                  className="mt-6 sm:mt-8 px-6 sm:px-8 py-3 sm:py-4 border-2 border-[#8B7D6B] text-[#8B7D6B] bg-transparent hover:bg-[#8B7D6B] hover:text-white transition-all duration-300 tracking-[0.08em] sm:tracking-[0.1em] uppercase shadow-md hover:shadow-lg text-sm sm:text-base"
                   onClick={() => alert('Exhibition Details Coming Soon')}
                 >
                   Explore Exhibition
@@ -147,7 +147,7 @@ export default function ExhibitionsPage() {
             </div>
 
             {/* Gallery Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
               {[
                 { num: 1, cms: cinemode1CMS },
                 { num: 2, cms: cinemode2CMS },
@@ -231,12 +231,12 @@ export default function ExhibitionsPage() {
               {/* Text Content */}
               <div className="order-1 lg:order-2">
                 <h2
-                  className="font-['Playfair_Display'] font-bold text-gray-900 mb-8 tracking-[-0.02em] leading-[0.9]"
-                  style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}
+                  className="font-['Playfair_Display'] font-bold text-gray-900 mb-4 sm:mb-6 md:mb-8 tracking-[-0.02em] leading-[0.9]"
+                  style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}
                 >
                   THE ROOM<br />OF <span className="text-[#8B7D6B]">[ ]</span>
                 </h2>
-                <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
+                <div className="space-y-4 sm:space-y-5 md:space-y-6 text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed">
                   <p>
                     패션 필름, 텍스타일 아트, 인터랙션 디자인, 공간 인스톨레이션 등 다양한 매체를 통해 각 디자이너의 서로 다른 컨셉으로 전시를 풀어냅니다.
                   </p>
@@ -260,7 +260,7 @@ export default function ExhibitionsPage() {
                   </div>
                 </div>
                 <button
-                  className="mt-8 px-8 py-4 border-2 border-[#8B7D6B] text-[#8B7D6B] bg-transparent hover:bg-[#8B7D6B] hover:text-white transition-all duration-300 tracking-[0.1em] uppercase shadow-md hover:shadow-lg"
+                  className="mt-6 sm:mt-8 px-6 sm:px-8 py-3 sm:py-4 border-2 border-[#8B7D6B] text-[#8B7D6B] bg-transparent hover:bg-[#8B7D6B] hover:text-white transition-all duration-300 tracking-[0.08em] sm:tracking-[0.1em] uppercase shadow-md hover:shadow-lg text-sm sm:text-base"
                   onClick={() => window.open('https://naver.me/GnK4CyeV', '_blank')}
                 >
                   전시 안내
@@ -269,7 +269,7 @@ export default function ExhibitionsPage() {
             </div>
 
             {/* Gallery Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
               {[
                 { num: 1, cms: theroom1CMS, fallback: '/images/exhibitions/theroom/qslna_dawn_alleyway_low-angle_28_mm_R13_2025_layered_denim-ov_828e4c6e-0b81-4949-8c96-7e241f9a3c03_0.png' },
                 { num: 2, cms: theroom2CMS, fallback: '/images/exhibitions/theroom/qslna_minimalist_concrete_courtyard_high-key_daylight_overcas_85d5cd51-4cd3-40e8-9111-12e1bf3c2bdd_0.png' },

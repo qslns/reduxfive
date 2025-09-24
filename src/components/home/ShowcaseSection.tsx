@@ -91,7 +91,7 @@ export default function ShowcaseSection() {
   const actualDesigners = designers.slice(0, 5); // 5명만 표시
 
   return (
-    <section className="showcase-section py-20 px-10 bg-gradient-to-b from-white to-gray-50 min-h-screen flex items-center">
+    <section className="showcase-section py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-10 bg-gradient-to-b from-white to-gray-50 min-h-screen flex items-center">
       <div className="max-w-7xl mx-auto w-full">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
@@ -106,13 +106,13 @@ export default function ShowcaseSection() {
         </div>
 
         {/* Showcase Grid */}
-        <div className="showcase-grid grid grid-cols-2 md:grid-cols-4 gap-6 auto-rows-fr">
+        <div className="showcase-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3 md:gap-4 lg:gap-6 auto-rows-fr">
           {/* Designers */}
           {designers.map((designer, index) => (
             <Link
               key={designer.id}
               href={designer.link}
-              className="showcase-item group relative overflow-hidden bg-white aspect-square transition-all duration-500 hover:scale-105 hover:z-10"
+              className="showcase-item group relative overflow-hidden bg-white aspect-square transition-all duration-500 hover:scale-105 hover:z-10 rounded-sm sm:rounded-md shadow-sm hover:shadow-xl"
               style={{
                 animation: `fadeInUp 0.8s ease forwards`,
                 animationDelay: `${index * 100}ms`,
@@ -123,17 +123,17 @@ export default function ShowcaseSection() {
                 src={designer.cms.currentUrl || `/images/profile/${designer.name.replace(' ', ' ')}.${designer.id === 'kimbomin' || designer.id === 'kimgyeongsu' ? 'webp' : designer.id === 'choieunsol' ? 'jpeg' : 'jpg'}`}
                 alt={designer.name}
                 fill={true}
-                sizes="(max-width: 768px) 50vw, 25vw"
+                sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
                 className="object-cover transition-all duration-700 group-hover:scale-110 filter brightness-95 group-hover:brightness-100"
               />
               
               {/* Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="absolute bottom-4 left-4 right-4 text-gray-900">
-                  <h3 className="font-medium text-sm tracking-[0.1em] mb-1">
+                <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-2 sm:left-3 md:left-4 right-2 sm:right-3 md:right-4 text-gray-900">
+                  <h3 className="font-medium text-[10px] sm:text-xs md:text-sm tracking-[0.05em] sm:tracking-[0.1em] mb-0.5 sm:mb-1 truncate">
                     {designer.name}
                   </h3>
-                  <p className="text-xs text-gray-700">
+                  <p className="text-[8px] sm:text-[10px] md:text-xs text-gray-700 truncate">
                     {designer.role}
                   </p>
                 </div>
@@ -167,7 +167,7 @@ export default function ShowcaseSection() {
             <Link
               key={exhibition.id}
               href={exhibition.link}
-              className="showcase-item group relative overflow-hidden bg-white aspect-square transition-all duration-500 hover:scale-105 hover:z-10"
+              className="showcase-item group relative overflow-hidden bg-white aspect-square transition-all duration-500 hover:scale-105 hover:z-10 rounded-sm sm:rounded-md shadow-sm hover:shadow-xl"
               style={{
                 animation: `fadeInUp 0.8s ease forwards`,
                 animationDelay: `${(designers.length + index) * 100}ms`,
@@ -178,24 +178,24 @@ export default function ShowcaseSection() {
                 src={exhibition.cms.currentUrl || `/images/exhibitions/${exhibition.id}/1.jpg`}
                 alt={exhibition.name}
                 fill={true}
-                sizes="(max-width: 768px) 50vw, 25vw"
+                sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
                 className="object-cover transition-all duration-700 group-hover:scale-110 filter brightness-95 group-hover:brightness-100"
               />
               
               {/* Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-white/98 via-white/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="absolute bottom-4 left-4 right-4 text-gray-900">
-                  <h3 className="font-['Playfair_Display'] font-medium text-sm tracking-[0.1em] mb-1 text-[#8B7D6B]">
+                <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-2 sm:left-3 md:left-4 right-2 sm:right-3 md:right-4 text-gray-900">
+                  <h3 className="font-['Playfair_Display'] font-medium text-[10px] sm:text-xs md:text-sm tracking-[0.05em] sm:tracking-[0.1em] mb-0.5 sm:mb-1 text-[#8B7D6B] truncate">
                     {exhibition.name}
                   </h3>
-                  <p className="text-xs text-gray-700">
+                  <p className="text-[8px] sm:text-[10px] md:text-xs text-gray-700 truncate">
                     {exhibition.description}
                   </p>
                 </div>
                 
                 {/* Exhibition indicator */}
-                <div className="absolute top-4 left-4">
-                  <span className="text-xs bg-[#8B7D6B] text-white px-2 py-1 rounded uppercase tracking-wider font-medium">
+                <div className="absolute top-2 sm:top-3 md:top-4 left-2 sm:left-3 md:left-4">
+                  <span className="text-[8px] sm:text-[10px] md:text-xs bg-[#8B7D6B] text-white px-1.5 sm:px-2 py-0.5 sm:py-1 rounded uppercase tracking-wider font-medium">
                     Exhibition
                   </span>
                 </div>
@@ -226,10 +226,10 @@ export default function ShowcaseSection() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-16">
-          <Link 
+        <div className="text-center mt-8 sm:mt-12 md:mt-16">
+          <Link
             href="/about"
-            className="inline-block px-8 py-4 border border-gray-300 text-gray-900 uppercase tracking-[0.2em] text-sm font-medium transition-all duration-300 hover:bg-gray-900 hover:text-white hover:scale-105 shadow-sm hover:shadow-lg"
+            className="inline-block px-6 sm:px-8 py-3 sm:py-4 border border-gray-300 text-gray-900 uppercase tracking-[0.15em] sm:tracking-[0.2em] text-xs sm:text-sm font-medium transition-all duration-300 hover:bg-gray-900 hover:text-white hover:scale-105 shadow-sm hover:shadow-lg"
           >
             더 알아보기
           </Link>

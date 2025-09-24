@@ -661,10 +661,12 @@ export default function Navigation() {
         .redux-nav__mobile {
           position: fixed !important;
           top: 0 !important;
-          left: 0 !important;
+          right: 0 !important;
           width: 100% !important;
+          max-width: 100vw !important;
           height: 100vh !important;
           height: 100dvh !important;
+          height: -webkit-fill-available !important;
           z-index: 10000 !important;
           transform: translateX(100%) !important;
           transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
@@ -672,6 +674,7 @@ export default function Navigation() {
           opacity: 0 !important;
           visibility: hidden !important;
           pointer-events: none !important;
+          overflow-x: hidden !important;
         }
 
         .redux-nav__mobile--active {
@@ -697,13 +700,15 @@ export default function Navigation() {
           height: 100%;
           background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 248, 248, 0.95) 100%);
           backdrop-filter: blur(30px);
+          -webkit-backdrop-filter: blur(30px);
           display: flex;
           flex-direction: column;
-          align-items: center;
+          align-items: stretch;
           gap: 0;
           padding: 0;
           overflow-y: auto;
           -webkit-overflow-scrolling: touch;
+          overscroll-behavior: contain;
         }
         
         /* Mobile Menu Header */
@@ -762,12 +767,13 @@ export default function Navigation() {
 
         .redux-nav__mobile-item {
           width: 100%;
-          padding: 0 24px;
+          padding: 0 20px;
           opacity: 0;
           transform: translateY(20px);
           animation: fadeInUp 0.4s ease forwards;
           animation-delay: calc(var(--index, 0) * 0.05s);
           border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+          box-sizing: border-box;
         }
         
         .redux-nav__mobile-item--home {
@@ -904,13 +910,22 @@ export default function Navigation() {
         /* Responsive Design */
         @media (max-width: 768px) {
           .redux-nav {
-            padding: 15px 20px;
+            padding: 15px 16px;
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            width: 100%;
+            box-sizing: border-box;
           }
-          
+
+          .redux-nav__container {
+            padding: 0;
+            width: 100%;
+            box-sizing: border-box;
+          }
+
           .redux-nav--scrolled {
-            padding: 12px 20px;
+            padding: 12px 16px;
           }
           
           .redux-nav__menu {
@@ -942,22 +957,28 @@ export default function Navigation() {
 
         @media (max-width: 480px) {
           .redux-nav {
-            padding: 12px 15px;
+            padding: 12px 12px;
           }
-          
+
           .redux-nav--scrolled {
-            padding: 10px 15px;
+            padding: 10px 12px;
           }
 
           .redux-nav__mobile-content {
-            padding: 60px 15px 30px;
-            gap: 20px;
+            padding: 0;
+            gap: 0;
           }
 
           .redux-nav__mobile-button,
           .redux-nav__mobile-item > a {
-            font-size: 18px;
-            padding: 12px 20px;
+            font-size: 16px;
+            padding: 16px 20px;
+            min-height: 56px;
+          }
+
+          .redux-nav__mobile-submenu a {
+            font-size: 14px;
+            padding: 14px 20px 14px 40px;
           }
         }
 
