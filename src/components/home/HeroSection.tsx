@@ -246,8 +246,8 @@ function HeroSection() {
               opacity: 0.95,
             }}
           >
-            5인의 패션 디자이너가 만들어가는 창작 집단.<br />
-            개인의 경계를 넘어 하나의 비전을 그리다.
+            FIVE MINDS, ONE VISION<br />
+            현재상의 패션을 창조하는 5인의 디자이너 집단
           </p>
         </div>
 

@@ -106,7 +106,7 @@ export default function CollectivePage() {
             REDUX
           </h1>
           <p className="hero-subtitle text-lg tracking-[4px] text-[#8B7D6B]">
-            FIVE MINDS, ONE VISION
+            BEYOND FASHION, CREATING MEMORIES
           </p>
         </div>
       </section>
