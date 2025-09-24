@@ -33,25 +33,7 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    // Log the form submission for debugging
-    console.log('Contact Form Submission:', {
-      name,
-      email,
-      subject,
-      message,
-      timestamp: new Date().toISOString(),
-      ip: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown'
-    });
 
-    // 임시: API 키 없이도 폼 데이터는 저장하고 성공 응답
-    console.log('✅ CONTACT FORM DATA SAVED:', {
-      name,
-      email, 
-      subject,
-      message,
-      timestamp: new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }),
-      status: 'RECEIVED - CHECK SERVER LOGS'
-    });
 
     // Check if Resend API key is configured
     if (!process.env.RESEND_API_KEY) {
@@ -119,7 +101,6 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      console.log('✅ Email sent successfully:', data);
 
     } catch (emailError) {
       console.error('Email sending error:', emailError);

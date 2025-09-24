@@ -33,8 +33,6 @@ export async function DELETE(request: NextRequest) {
     const deleted = cmsStorage.delete(slotId);
 
     if (deleted) {
-      console.log(`CMS Data Deleted: ${slotId} at ${timestamp || new Date().toISOString()}`);
-      
       return NextResponse.json({
         success: true,
         data: {

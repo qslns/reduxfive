@@ -221,7 +221,6 @@ export const dbHelpers = {
 export async function initializeDB() {
   try {
     await db.healthCheck();
-    console.log('Database initialized successfully');
   } catch (error) {
     console.error('Failed to initialize database:', error);
   }
@@ -233,7 +232,6 @@ export async function seedDatabase() {
   
   // 이미 데이터가 있으면 시드하지 않음
   if (stats.totalRecords > 0) {
-    console.log('Database already seeded');
     return;
   }
 
@@ -263,7 +261,6 @@ export async function seedDatabase() {
       }
     });
 
-    console.log('Database seeded successfully');
   } catch (error) {
     console.error('Failed to seed database:', error);
   }

@@ -47,8 +47,6 @@ export async function POST(request: NextRequest) {
 
     cmsStorage.set(slotId, saveData);
 
-    // 로그 기록
-    console.log(`CMS Data Saved: ${slotId} (${type || 'single'}) at ${saveData.lastModified}`);
 
     return NextResponse.json({
       success: true,
