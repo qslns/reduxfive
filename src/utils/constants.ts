@@ -99,61 +99,6 @@ export const DESIGNERS: Designer[] = [
   },
 ];
 
-export const PROJECTS: Project[] = [
-  {
-    id: 'redux-2024-collection',
-    title: 'REDUX 2024 Collection',
-    titleKo: 'REDUX 2024 컬렉션',
-    description: 'A revolutionary collection that challenges the boundaries between fashion and art.',
-    descriptionKo: '패션과 예술의 경계에 도전하는 혁신적인 컬렉션입니다.',
-    category: 'collective',
-    designers: ['choi-eunsol', 'park-parang'],
-    images: [
-      'https://ik.imagekit.io/t914/redux/collective/main-cover.jpg',
-      'https://ik.imagekit.io/t914/redux/collective/image-1.jpg',
-      'https://ik.imagekit.io/t914/redux/collective/image-2.jpg',
-    ],
-    videoUrl: 'https://ik.imagekit.io/t914/redux/videos/redux-2024-collection.mp4',
-    date: '2024-03-15',
-    featured: true,
-    order: 1,
-  },
-  {
-    id: 'visual-art-exhibition',
-    title: 'Visual Art Exhibition',
-    titleKo: '비주얼 아트 전시',
-    description: 'An immersive visual art experience exploring the intersection of fashion and contemporary art.',
-    descriptionKo: '패션과 현대 예술의 교차점을 탐구하는 몰입형 비주얼 아트 경험입니다.',
-    category: 'visual-art',
-    designers: ['park-parang', 'kim-bomin'],
-    images: [
-      'https://ik.imagekit.io/t914/redux/visual-art/Collective_Vision.png',
-      'https://ik.imagekit.io/t914/redux/visual-art/Digital_Dreams.png',
-      'https://ik.imagekit.io/t914/redux/visual-art/Form_&_Void.png',
-    ],
-    date: '2024-02-10',
-    featured: true,
-    order: 2,
-  },
-  {
-    id: 'memory-installation',
-    title: 'Memory Installation',
-    titleKo: '기억의 설치미술',
-    description: 'An interactive installation exploring the relationship between memory, identity, and fashion.',
-    descriptionKo: '기억, 정체성, 그리고 패션 사이의 관계를 탐구하는 인터랙티브 설치 작품입니다.',
-    category: 'installation',
-    designers: ['lee-taehyeon', 'kim-gyeongsu'],
-    images: [
-      'https://ik.imagekit.io/t914/redux/memory/IMG_7237.jpg',
-      'https://ik.imagekit.io/t914/redux/memory/IMG_3452.JPG',
-      'https://ik.imagekit.io/t914/redux/memory/IMG_5380.JPG',
-    ],
-    date: '2024-01-20',
-    featured: false,
-    order: 3,
-  },
-];
-
 export const CATEGORIES = {
   collective: {
     id: 'collective',
@@ -255,7 +200,7 @@ export const CATEGORIES = {
   },
 } as const;
 
-export const EXHIBITIONS: Exhibition[] = [
+export const PROJECTS: Exhibition[] = [
   {
     id: 'redux-showcase-2024',
     title: 'REDUX Showcase 2024',

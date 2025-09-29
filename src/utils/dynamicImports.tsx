@@ -62,7 +62,7 @@ export const loadUIComponents = async () => {
 export const loadPageComponents = {
   loadAboutContent: () => import('@/components/about/AboutContent'),
   loadContactForm: () => import('@/components/contact/ContactForm'),
-  loadExhibitionsTimeline: () => import('@/components/exhibitions/ExhibitionsTimeline'),
+  loadProjectsTimeline: () => import('@/components/projects/ProjectsTimeline'),
 };
 
 // 청크 이름을 지정한 동적 import

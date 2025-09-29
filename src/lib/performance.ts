@@ -330,7 +330,7 @@ export const splitPoints = {
     home: () => import('@/app/page'),
     about: () => import('@/app/about/page'),
     designers: () => import('@/app/designers/page'),
-    exhibitions: () => import('@/app/exhibitions/page'),
+    projects: () => import('@/app/projects/page'),
     contact: () => import('@/app/contact/page'),
     admin: () => import('@/app/admin/page')
   },

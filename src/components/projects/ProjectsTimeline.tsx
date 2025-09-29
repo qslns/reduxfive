@@ -2,19 +2,20 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { EXHIBITIONS } from '../../utils/constants';
+import { PROJECTS } from '../../utils/constants';
 import { cn } from '../../lib/utils';
 import { Calendar, MapPin, Users } from 'lucide-react';
+import type { Exhibition } from '../../types';
 
-export default function ExhibitionsTimeline() {
+export default function ProjectsTimeline() {
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   
-  // Get unique years from exhibitions
-  const years = Array.from(new Set(EXHIBITIONS.map(e => e.year))).sort((a, b) => b - a);
+  // Get unique years from projects
+  const years = Array.from(new Set(PROJECTS.map(e => e.year))).sort((a, b) => b - a);
   
-  const filteredExhibitions = selectedYear 
-    ? EXHIBITIONS.filter(e => e.year === selectedYear)
-    : EXHIBITIONS;
+  const filteredProjects = selectedYear
+    ? PROJECTS.filter(e => e.year === selectedYear)
+    : PROJECTS;
 
   return (
     <section className="section-padding">
@@ -53,11 +54,11 @@ export default function ExhibitionsTimeline() {
           {/* Vertical Line */}
           <div className="absolute left-6 sm:left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-zinc-800" />
           
-          {/* Exhibition Items */}
+          {/* Project Items */}
           <div className="space-y-12">
-            {filteredExhibitions.map((exhibition, index) => (
+            {filteredProjects.map((project, index) => (
               <div
-                key={exhibition.id}
+                key={project.id}
                 className={cn(
                   'relative flex items-center',
                   index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
@@ -73,11 +74,11 @@ export default function ExhibitionsTimeline() {
                 )}>
                   <div className="bg-zinc-900 rounded-lg overflow-hidden">
                     {/* Image */}
-                    {exhibition.images.length > 0 && (
+                    {project.images.length > 0 && (
                       <div className="relative aspect-video">
                         <Image
-                          src={exhibition.images[0]}
-                          alt={exhibition.title}
+                          src={project.images[0]}
+                          alt={project.title}
                           fill
                           className="object-cover"
                           sizes="(max-width: 768px) 100vw, 50vw"
@@ -87,31 +88,31 @@ export default function ExhibitionsTimeline() {
                     
                     {/* Details */}
                     <div className="p-4 sm:p-6">
-                      <h3 className="text-xl sm:text-2xl font-semibold mb-2">{exhibition.title}</h3>
-                      <p className="text-gray-400 mb-3 sm:mb-4 text-sm sm:text-base">{exhibition.titleKo}</p>
+                      <h3 className="text-xl sm:text-2xl font-semibold mb-2">{project.title}</h3>
+                      <p className="text-gray-400 mb-3 sm:mb-4 text-sm sm:text-base">{project.titleKo}</p>
                       
                       <div className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-500">
                         <div className="flex items-center gap-2">
                           <Calendar className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-                          <span className="text-xs sm:text-sm">{exhibition.startDate} - {exhibition.endDate}</span>
+                          <span className="text-xs sm:text-sm">{project.startDate} - {project.endDate}</span>
                         </div>
                         
                         <div className="flex items-center gap-2">
                           <MapPin className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-                          <span className="text-xs sm:text-sm">{exhibition.venue}</span>
+                          <span className="text-xs sm:text-sm">{project.venue}</span>
                         </div>
                         
-                        {exhibition.participants.length > 0 && (
+                        {project.participants.length > 0 && (
                           <div className="flex items-start gap-2">
                             <Users className="w-3 h-3 sm:w-4 sm:h-4 mt-0.5 flex-shrink-0" />
-                            <span className="text-xs sm:text-sm">{exhibition.participants.join(', ')}</span>
+                            <span className="text-xs sm:text-sm">{project.participants.join(', ')}</span>
                           </div>
                         )}
                       </div>
                       
-                      {exhibition.description && (
+                      {project.description && (
                         <p className="mt-3 sm:mt-4 text-gray-400 text-sm sm:text-base leading-relaxed">
-                          {exhibition.description}
+                          {project.description}
                         </p>
                       )}
                     </div>
@@ -123,7 +124,7 @@ export default function ExhibitionsTimeline() {
         </div>
 
         {/* Empty State */}
-        {filteredExhibitions.length === 0 && (
+        {filteredProjects.length === 0 && (
           <div className="text-center py-12 sm:py-20 px-4">
             <p className="text-gray-400 text-sm sm:text-base">
               선택한 연도의 전시가 없습니다.

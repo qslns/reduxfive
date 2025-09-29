@@ -127,12 +127,10 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 sm:space-y-5 md:space-y-6 text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed">
                 <p>
-                  REDUX는 5인의 패션 디자이너가 모여 만든 창작 집단.
-                  패션과 예술, 그리고 인간적 표현의 경계를 탐구한다.
+                  2025년 패션디자인 분야 5인의 디자이너들이 모여 패션과 동시대 예술의 융합을 탐구하는 프로젝트에서 출발한 창작그룹 REDUX는 장르 간의 경계를 허무는 새로운 시각적 실험을 이어가고 있습니다.
                 </p>
                 <p>
-                  패션 필름, 공간 설치, 재료 탐구를 통해
-                  순간을 넘어서는 경험을 창조한다.
+                  REDUX는 패션을 기반으로 디지털패션 미디어아트, 설치미술, 패션포토그라피 등 다양한 표현방식을 결합하여 단일한 장르에 머물지 않고, 경계가 사라진 자리에서 새롭게 태어나는 이미지와 경험을 시각예술로 표현합니다.
                 </p>
               </div>
             </div>
@@ -140,12 +138,12 @@ export default function AboutPage() {
             <div className="space-y-8">
               <div>
                 <h3 className="text-2xl font-['Playfair_Display'] font-light text-[#8B7D6B] mb-4 tracking-[0.1em]">
-                  철학
+                  VISION
                 </h3>
                 <div className="space-y-4 text-gray-500">
-                  <p>경계는 질문하기 위해 존재한다.</p>
-                  <p>개인의 목소리가 모여 집단의 울림이 된다.</p>
-                  <p>찰나의 순간들이 영원한 기억으로 남는다.</p>
+                  <p>장르의 경계를 넘어 새로운 시각적 언어 창조</p>
+                  <p>패션과 예술의 융합을 통한 혁신적 표현 탐구</p>
+                  <p>개인의 창의성이 모여 집단의 시너지로 발현</p>
                 </div>
               </div>
             </div>

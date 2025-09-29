@@ -7,8 +7,8 @@ import { useSimpleAuth } from '../../hooks/useSimpleAuth';
 import { useSimpleCMS } from '../../hooks/useSimpleCMS';
 import DirectCMS from '../../components/cms/DirectCMS';
 
-// Simplified Exhibitions Page
-export default function ExhibitionsPage() {
+// Simplified Projects Page
+export default function ProjectsPage() {
   const router = useRouter();
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState('');
@@ -17,17 +17,17 @@ export default function ExhibitionsPage() {
   // CMS integration
   const { isAuthenticated } = useSimpleAuth();
   
-  // CMS slots for exhibition galleries
-  const cinemode1CMS = useSimpleCMS('exhibition-cinemode-1', '/images/exhibitions/cinemode/1.jpg');
-  const cinemode2CMS = useSimpleCMS('exhibition-cinemode-2', '/images/exhibitions/cinemode/2.jpg');
-  const cinemode3CMS = useSimpleCMS('exhibition-cinemode-3', '/images/exhibitions/cinemode/3.jpg');
-  const cinemode4CMS = useSimpleCMS('exhibition-cinemode-4', '/images/exhibitions/cinemode/4.jpg');
+  // CMS slots for project galleries
+  const cinemode1CMS = useSimpleCMS('project-cinemode-1', '/images/projects/cinemode/1.jpg');
+  const cinemode2CMS = useSimpleCMS('project-cinemode-2', '/images/projects/cinemode/2.jpg');
+  const cinemode3CMS = useSimpleCMS('project-cinemode-3', '/images/projects/cinemode/3.jpg');
+  const cinemode4CMS = useSimpleCMS('project-cinemode-4', '/images/projects/cinemode/4.jpg');
   
   // THE ROOM OF [ ] 실제 존재하는 이미지들 사용
-  const theroom1CMS = useSimpleCMS('exhibition-theroom-1', '/images/exhibitions/theroom/qslna_dawn_alleyway_low-angle_28_mm_R13_2025_layered_denim-ov_828e4c6e-0b81-4949-8c96-7e241f9a3c03_0.png');
-  const theroom2CMS = useSimpleCMS('exhibition-theroom-2', '/images/exhibitions/theroom/qslna_minimalist_concrete_courtyard_high-key_daylight_overcas_85d5cd51-4cd3-40e8-9111-12e1bf3c2bdd_0.png');
-  const theroom3CMS = useSimpleCMS('exhibition-theroom-3', '/images/exhibitions/theroom/qslna_mirror-box_installation_four_polished_steel_walls_refle_4ffced5d-0e8e-41c6-a7ad-8f08583b1c72_2.png');
-  const theroom4CMS = useSimpleCMS('exhibition-theroom-4', '/images/exhibitions/theroom/qslna_split-frame_triptych_left_strip--front_close-crop_of_ma_25f1d65c-d800-4e74-9a72-5919d703eeb2_1.png');
+  const theroom1CMS = useSimpleCMS('project-theroom-1', '/images/projects/theroom/qslna_dawn_alleyway_low-angle_28_mm_R13_2025_layered_denim-ov_828e4c6e-0b81-4949-8c96-7e241f9a3c03_0.png');
+  const theroom2CMS = useSimpleCMS('project-theroom-2', '/images/projects/theroom/qslna_minimalist_concrete_courtyard_high-key_daylight_overcas_85d5cd51-4cd3-40e8-9111-12e1bf3c2bdd_0.png');
+  const theroom3CMS = useSimpleCMS('project-theroom-3', '/images/projects/theroom/qslna_mirror-box_installation_four_polished_steel_walls_refle_4ffced5d-0e8e-41c6-a7ad-8f08583b1c72_2.png');
+  const theroom4CMS = useSimpleCMS('project-theroom-4', '/images/projects/theroom/qslna_split-frame_triptych_left_strip--front_close-crop_of_ma_25f1d65c-d800-4e74-9a72-5919d703eeb2_1.png');
   
 
   const openLightbox = (imageSrc: string, imageAlt: string) => {
@@ -73,7 +73,7 @@ export default function ExhibitionsPage() {
                 textShadow: '0 4px 20px rgba(0,0,0,0.1)'
               }}
             >
-              EXHIBITIONS
+              PROJECTS
             </h1>
             <p className="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl tracking-[0.15em] sm:tracking-[0.2em] uppercase px-4">
               Redefining Fashion Through Space
@@ -104,23 +104,23 @@ export default function ExhibitionsPage() {
                 </div>
                 <button
                   className="mt-6 sm:mt-8 px-6 sm:px-8 py-3 sm:py-4 border-2 border-[#8B7D6B] text-[#8B7D6B] bg-transparent hover:bg-[#8B7D6B] hover:text-white transition-all duration-300 tracking-[0.08em] sm:tracking-[0.1em] uppercase shadow-md hover:shadow-lg text-sm sm:text-base"
-                  onClick={() => alert('Exhibition Details Coming Soon')}
+                  onClick={() => alert('Project Details Coming Soon')}
                 >
-                  Explore Exhibition
+                  Explore Project
                 </button>
               </div>
               
               {/* Featured Image */}
               <div className="relative">
                 <OptimizedImage
-                  src={cinemode1CMS.currentUrl || "/images/exhibitions/cinemode/1.jpg"}
-                  alt="CINE MODE Exhibition"
+                  src={cinemode1CMS.currentUrl || "/images/projects/cinemode/1.jpg"}
+                  alt="CINE MODE Project"
                   width={600}
                   height={400}
                   priority={true}
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="w-full h-auto object-cover cursor-pointer transition-all duration-[600ms] hover:scale-[1.02] shadow-lg hover:shadow-xl rounded-lg"
-                  onClick={() => openLightbox(cinemode1CMS.currentUrl || '/images/exhibitions/cinemode/1.jpg', 'CINE MODE Exhibition')}
+                  onClick={() => openLightbox(cinemode1CMS.currentUrl || '/images/projects/cinemode/1.jpg', 'CINE MODE Project')}
                 />
                 
                 {/* CMS 오버레이 */}
@@ -133,7 +133,7 @@ export default function ExhibitionsPage() {
                     }}
                   >
                     <DirectCMS
-                      slotId="exhibition-cinemode-1"
+                      slotId="project-cinemode-1"
                       currentUrl={cinemode1CMS.currentUrl}
                       type="image"
                       onUpload={cinemode1CMS.handleUpload}
@@ -156,12 +156,12 @@ export default function ExhibitionsPage() {
               ].map(({ num, cms }) => (
                 <div key={num} className="relative aspect-square overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                   <OptimizedImage
-                    src={cms.currentUrl || `/images/exhibitions/cinemode/${num}.jpg`}
+                    src={cms.currentUrl || `/images/projects/cinemode/${num}.jpg`}
                     alt={`CINE MODE Gallery ${num}`}
                     fill={true}
                     sizes="(max-width: 768px) 50vw, 25vw"
                     className="object-cover cursor-pointer transition-all duration-[600ms] hover:scale-[1.1]"
-                    onClick={() => openLightbox(cms.currentUrl || `/images/exhibitions/cinemode/${num}.jpg`, `CINE MODE Gallery ${num}`)}
+                    onClick={() => openLightbox(cms.currentUrl || `/images/projects/cinemode/${num}.jpg`, `CINE MODE Gallery ${num}`)}
                   />
                   
                   {/* CMS 버튼 for admin */}
@@ -174,7 +174,7 @@ export default function ExhibitionsPage() {
                       }}
                     >
                       <DirectCMS
-                        slotId={`exhibition-cinemode-${num}`}
+                        slotId={`project-cinemode-${num}`}
                         currentUrl={cms.currentUrl}
                         type="image"
                         onUpload={cms.handleUpload}
@@ -197,13 +197,13 @@ export default function ExhibitionsPage() {
               {/* Featured Image */}
               <div className="relative order-2 lg:order-1">
                 <OptimizedImage
-                  src={theroom1CMS.currentUrl || '/images/exhibitions/theroom/qslna_dawn_alleyway_low-angle_28_mm_R13_2025_layered_denim-ov_828e4c6e-0b81-4949-8c96-7e241f9a3c03_0.png'}
-                  alt="THE ROOM OF [ ] Exhibition"
+                  src={theroom1CMS.currentUrl || '/images/projects/theroom/qslna_dawn_alleyway_low-angle_28_mm_R13_2025_layered_denim-ov_828e4c6e-0b81-4949-8c96-7e241f9a3c03_0.png'}
+                  alt="THE ROOM OF [ ] Project"
                   width={600}
                   height={400}
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="w-full h-auto object-cover cursor-pointer transition-all duration-[600ms] hover:scale-[1.02] shadow-lg hover:shadow-xl rounded-lg"
-                  onClick={() => openLightbox(theroom1CMS.currentUrl || '/images/exhibitions/theroom/qslna_dawn_alleyway_low-angle_28_mm_R13_2025_layered_denim-ov_828e4c6e-0b81-4949-8c96-7e241f9a3c03_0.png', 'THE ROOM OF [ ] Exhibition')}
+                  onClick={() => openLightbox(theroom1CMS.currentUrl || '/images/projects/theroom/qslna_dawn_alleyway_low-angle_28_mm_R13_2025_layered_denim-ov_828e4c6e-0b81-4949-8c96-7e241f9a3c03_0.png', 'THE ROOM OF [ ] Project')}
                 />
                 
                 {/* CMS 오버레이 */}
@@ -216,7 +216,7 @@ export default function ExhibitionsPage() {
                     }}
                   >
                     <DirectCMS
-                      slotId="exhibition-theroom-1"
+                      slotId="project-theroom-1"
                       currentUrl={theroom1CMS.currentUrl}
                       type="image"
                       onUpload={theroom1CMS.handleUpload}
@@ -271,10 +271,10 @@ export default function ExhibitionsPage() {
             {/* Gallery Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
               {[
-                { num: 1, cms: theroom1CMS, fallback: '/images/exhibitions/theroom/qslna_dawn_alleyway_low-angle_28_mm_R13_2025_layered_denim-ov_828e4c6e-0b81-4949-8c96-7e241f9a3c03_0.png' },
-                { num: 2, cms: theroom2CMS, fallback: '/images/exhibitions/theroom/qslna_minimalist_concrete_courtyard_high-key_daylight_overcas_85d5cd51-4cd3-40e8-9111-12e1bf3c2bdd_0.png' },
-                { num: 3, cms: theroom3CMS, fallback: '/images/exhibitions/theroom/qslna_mirror-box_installation_four_polished_steel_walls_refle_4ffced5d-0e8e-41c6-a7ad-8f08583b1c72_2.png' },
-                { num: 4, cms: theroom4CMS, fallback: '/images/exhibitions/theroom/qslna_split-frame_triptych_left_strip--front_close-crop_of_ma_25f1d65c-d800-4e74-9a72-5919d703eeb2_1.png' }
+                { num: 1, cms: theroom1CMS, fallback: '/images/projects/theroom/qslna_dawn_alleyway_low-angle_28_mm_R13_2025_layered_denim-ov_828e4c6e-0b81-4949-8c96-7e241f9a3c03_0.png' },
+                { num: 2, cms: theroom2CMS, fallback: '/images/projects/theroom/qslna_minimalist_concrete_courtyard_high-key_daylight_overcas_85d5cd51-4cd3-40e8-9111-12e1bf3c2bdd_0.png' },
+                { num: 3, cms: theroom3CMS, fallback: '/images/projects/theroom/qslna_mirror-box_installation_four_polished_steel_walls_refle_4ffced5d-0e8e-41c6-a7ad-8f08583b1c72_2.png' },
+                { num: 4, cms: theroom4CMS, fallback: '/images/projects/theroom/qslna_split-frame_triptych_left_strip--front_close-crop_of_ma_25f1d65c-d800-4e74-9a72-5919d703eeb2_1.png' }
               ].map(({ num, cms, fallback }) => (
                 <div key={num} className="relative aspect-square overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                   <OptimizedImage
@@ -296,7 +296,7 @@ export default function ExhibitionsPage() {
                       }}
                     >
                       <DirectCMS
-                        slotId={`exhibition-theroom-${num}`}
+                        slotId={`project-theroom-${num}`}
                         currentUrl={cms.currentUrl}
                         type="image"
                         onUpload={cms.handleUpload}
@@ -312,14 +312,14 @@ export default function ExhibitionsPage() {
           </div>
         </section>
 
-        {/* Future Exhibitions Section */}
+        {/* Future Projects Section */}
         <section className="py-20 px-10 bg-white">
           <div className="max-w-[1600px] mx-auto text-center">
             <h2
               className="font-['Playfair_Display'] font-bold text-gray-900 mb-8 tracking-[-0.02em] leading-[0.9]"
               style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)' }}
             >
-              FUTURE<br />EXHIBITIONS
+              FUTURE<br />PROJECTS
             </h2>
             <div className="max-w-[600px] mx-auto space-y-6 text-gray-600 text-lg leading-relaxed mb-8">
               <p>

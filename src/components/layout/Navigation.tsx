@@ -253,20 +253,20 @@ export default function Navigation() {
               </div>
             </li>
 
-            {/* Exhibitions Menu */}
+            {/* Projects Menu */}
             <li className="redux-nav__item" role="none">
               <Link
-                href="/exhibitions"
+                href="/projects"
                 className="redux-nav__link"
                 role="menuitem"
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                Exhibitions
+                Projects
               </Link>
-              <div className="redux-nav__dropdown" role="menu" aria-label="Exhibitions submenu">
-                <Link href="/exhibitions#cine-mode" className="redux-nav__dropdown-item" role="menuitem">CINE MODE</Link>
-                <Link href="/exhibitions#the-room" className="redux-nav__dropdown-item" role="menuitem">THE ROOM OF [ ]</Link>
+              <div className="redux-nav__dropdown" role="menu" aria-label="Projects submenu">
+                <Link href="/projects#cine-mode" className="redux-nav__dropdown-item" role="menuitem">CINE MODE</Link>
+                <Link href="/projects#the-room" className="redux-nav__dropdown-item" role="menuitem">THE ROOM OF [ ]</Link>
               </div>
             </li>
 
@@ -388,9 +388,9 @@ export default function Navigation() {
             </div>
           </div>
 
-          {/* Exhibitions Mobile Menu */}
+          {/* Projects Mobile Menu */}
           <div className="redux-nav__mobile-item">
-            <Link href="/exhibitions" onClick={closeMobileMenu}>Exhibitions</Link>
+            <Link href="/projects" onClick={closeMobileMenu}>Projects</Link>
           </div>
 
           {/* Contact Mobile Menu */}

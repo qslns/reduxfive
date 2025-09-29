@@ -29,7 +29,7 @@ import PageTransition from '../components/ui/PageTransition';
 // import InitialLoadingScreen from '@/components/ui/InitialLoadingScreen';
 // import GlobalErrorBoundary from '@/components/ui/GlobalErrorBoundary';
 import MobileAdminPanel from '../components/admin/MobileAdminPanel';
-import SkipToContent from '../components/ui/SkipToContent';
+// import SkipToContent from '../components/ui/SkipToContent'; // Removed as requested
 import ClientMobileOptimizer from '../components/ui/ClientMobileOptimizer';
 import AISearch from '../components/ui/AISearch';
 import DebugPanel from '../components/debug/DebugPanel';
@@ -141,7 +141,6 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased bg-white text-gray-900 overflow-x-hidden">
-        <SkipToContent />
         {/* <InitialLoadingScreen /> */}
         <ClientMobileOptimizer />
         {/* <GlobalErrorBoundary> */}
