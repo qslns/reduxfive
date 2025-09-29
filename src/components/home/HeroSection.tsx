@@ -14,6 +14,8 @@ function HeroSection() {
   const [isClient, setIsClient] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const [isVideoVisible, setIsVideoVisible] = useState(true);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoCanPlay, setVideoCanPlay] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   
   // CMS integration
@@ -26,30 +28,53 @@ function HeroSection() {
     setIsClient(true);
   }, []);
 
-  // 비디오 로드 처리
+  // 최적화된 비디오 로드 처리
   useEffect(() => {
     if (!isClient || !videoRef.current) return;
 
     const video = videoRef.current;
-    
-    const handleLoadedData = () => {
+
+    const handleLoadedMetadata = () => {
+      setVideoLoaded(true);
+    };
+
+    const handleCanPlay = () => {
+      setVideoCanPlay(true);
       setVideoError(false);
-      // 자동 재생 시도
+      // 비디오 준비되면 자동 재생
       video.play().catch(() => {
-        // 자동 재생 실패시 무시 (사용자가 수동으로 재생 가능)
+        // Auto-play failed silently
       });
     };
 
     const handleError = () => {
       setVideoError(true);
+      setVideoCanPlay(false);
     };
 
-    video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('loadedmetadata', handleLoadedMetadata);
+    video.addEventListener('canplay', handleCanPlay);
     video.addEventListener('error', handleError);
 
+    // Intersection Observer로 뷰포트에 들어올 때만 로드
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && video.paused) {
+            video.load();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(video);
+
     return () => {
-      video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('error', handleError);
+      observer.disconnect();
     };
   }, [isClient, heroVideoUrl]);
 
@@ -57,8 +82,8 @@ function HeroSection() {
     router.push('/about');
   };
 
-  const navigateToExhibitions = () => {
-    router.push('/exhibitions');
+  const navigateToProjects = () => {
+    router.push('/projects');
   };
 
   // 비디오 컨트롤 함수들 - 간소화
@@ -79,8 +104,8 @@ function HeroSection() {
       const timer = setTimeout(() => {
         if (videoRef.current) {
           videoRef.current.currentTime = 0; // 처음부터 재생
-          videoRef.current.play().catch((error) => {
-            console.warn('Video play failed:', error);
+          videoRef.current.play().catch(() => {
+            // Video play failed silently
           });
         }
       }, 200);
@@ -110,18 +135,31 @@ function HeroSection() {
 
   return (
     <section className="hero-section relative h-screen flex items-center justify-center bg-white overflow-hidden">
-      {/* Background Video */}
+      {/* Background Video with optimized loading */}
       {!videoError && isVideoVisible && (
-        <video
-          ref={videoRef}
-          className="absolute top-0 left-0 w-full h-full object-cover opacity-60"
-          muted
-          loop
-          playsInline
-          preload="auto"
-        >
-          <source src={heroVideoUrl || '/VIDEO/main.mp4'} type="video/mp4" />
-        </video>
+        <>
+          {/* Loading indicator while video loads */}
+          {!videoCanPlay && (
+            <div className="absolute inset-0 bg-gradient-to-b from-gray-100 to-white flex items-center justify-center">
+              <div className="animate-pulse">
+                <div className="w-16 h-16 border-4 border-gray-300 border-t-gray-600 rounded-full animate-spin"></div>
+              </div>
+            </div>
+          )}
+          <video
+            ref={videoRef}
+            className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ${
+              videoCanPlay ? 'opacity-60' : 'opacity-0'
+            }`}
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/images/hero-background/background.png"
+          >
+            <source src={heroVideoUrl || '/VIDEO/main.mp4'} type="video/mp4" />
+          </video>
+        </>
       )}
 
       {/* Background Image (when video is hidden or error) */}
@@ -267,7 +305,7 @@ function HeroSection() {
           </button>
           
           <button
-            onClick={navigateToExhibitions}
+            onClick={navigateToProjects}
             className="group relative px-6 sm:px-8 py-3 sm:py-4 backdrop-blur-md uppercase tracking-[0.15em] sm:tracking-[0.2em] text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-2xl overflow-hidden w-full sm:w-auto max-w-[280px] sm:max-w-none"
             style={{
               background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.25) 100%)',

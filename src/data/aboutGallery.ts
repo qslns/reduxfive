@@ -40,7 +40,7 @@ export const aboutGalleries: CategoryGallery[] = [
         description: 'Dynamic fashion film by Lee Taehyeon'
       },
       {
-        src: '/images/exhibitions/cinemode/1.jpg',
+        src: '/images/projects/cinemode/1.jpg',
         alt: 'Fashion Film - Exhibition Scene',
         title: 'Exhibition Moments',
         description: 'Fashion film from REDUX exhibition'

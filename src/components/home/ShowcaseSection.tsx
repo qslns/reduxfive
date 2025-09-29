@@ -21,9 +21,9 @@ export default function ShowcaseSection() {
   const choiEunsolCMS = useSimpleCMS('main-designer-profile-choieunsol', '/images/profile/Choi Eunsol.jpeg');
   const kimGyeongsuCMS = useSimpleCMS('main-designer-profile-kimgyeongsu', '/images/profile/Kim Gyeongsu.webp');
   
-  // SimpleCMS 슬롯 - 전시 프리뷰 이미지들
-  const cinemodeCMS = useSimpleCMS('main-exhibition-cinemode', '/images/exhibitions/cinemode/1.jpg');
-  const theroomCMS = useSimpleCMS('main-exhibition-theroom', '/images/exhibitions/theroom/qslna_mirror-box_installation_four_polished_steel_walls_refle_4ffced5d-0e8e-41c6-a7ad-8f08583b1c72_2.png');
+  // SimpleCMS 슬롯 - 프로젝트 프리뷰 이미지들
+  const cinemodeCMS = useSimpleCMS('main-project-cinemode', '/images/projects/cinemode/1.jpg');
+  const theroomCMS = useSimpleCMS('main-project-theroom', '/images/projects/theroom/qslna_mirror-box_installation_four_polished_steel_walls_refle_4ffced5d-0e8e-41c6-a7ad-8f08583b1c72_2.png');
   
   // 디자이너 데이터
   const designers = [
@@ -64,21 +64,21 @@ export default function ShowcaseSection() {
     }
   ];
 
-  // 전시 데이터
-  const exhibitions = [
+  // 프로젝트 데이터
+  const projects = [
     {
       id: 'cinemode',
       name: 'CINE MODE',
       description: '패션 필름',
       cms: cinemodeCMS,
-      link: '/exhibitions#cine-mode'
+      link: '/projects#cine-mode'
     },
     {
       id: 'theroom',
       name: 'THE ROOM OF [ ]',
       description: '설치 미술',
       cms: theroomCMS,
-      link: '/exhibitions#the-room'
+      link: '/projects#the-room'
     }
   ];
 
@@ -162,11 +162,11 @@ export default function ShowcaseSection() {
             </Link>
           ))}
 
-          {/* Exhibitions */}
-          {exhibitions.map((exhibition, index) => (
+          {/* Projects */}
+          {projects.map((project, index) => (
             <Link
-              key={exhibition.id}
-              href={exhibition.link}
+              key={project.id}
+              href={project.link}
               className="showcase-item group relative overflow-hidden bg-white aspect-square transition-all duration-500 hover:scale-105 hover:z-10 rounded-sm sm:rounded-md shadow-sm hover:shadow-xl"
               style={{
                 animation: `fadeInUp 0.8s ease forwards`,
@@ -175,8 +175,8 @@ export default function ShowcaseSection() {
               }}
             >
               <OptimizedImage
-                src={exhibition.cms.currentUrl || `/images/exhibitions/${exhibition.id}/1.jpg`}
-                alt={exhibition.name}
+                src={project.cms.currentUrl || `/images/projects/${project.id}/1.jpg`}
+                alt={project.name}
                 fill={true}
                 sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
                 className="object-cover transition-all duration-700 group-hover:scale-110 filter brightness-95 group-hover:brightness-100"
@@ -186,17 +186,17 @@ export default function ShowcaseSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-white/98 via-white/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                 <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-2 sm:left-3 md:left-4 right-2 sm:right-3 md:right-4 text-gray-900">
                   <h3 className="font-['Playfair_Display'] font-medium text-[10px] sm:text-xs md:text-sm tracking-[0.05em] sm:tracking-[0.1em] mb-0.5 sm:mb-1 text-[#8B7D6B] truncate">
-                    {exhibition.name}
+                    {project.name}
                   </h3>
                   <p className="text-[8px] sm:text-[10px] md:text-xs text-gray-700 truncate">
-                    {exhibition.description}
+                    {project.description}
                   </p>
                 </div>
                 
-                {/* Exhibition indicator */}
+                {/* Project indicator */}
                 <div className="absolute top-2 sm:top-3 md:top-4 left-2 sm:left-3 md:left-4">
                   <span className="text-[8px] sm:text-[10px] md:text-xs bg-[#8B7D6B] text-white px-1.5 sm:px-2 py-0.5 sm:py-1 rounded uppercase tracking-wider font-medium">
-                    Exhibition
+                    Project
                   </span>
                 </div>
               </div>
@@ -211,13 +211,13 @@ export default function ShowcaseSection() {
                   }}
                 >
                   <DirectCMS
-                    slotId={`main-exhibition-${exhibition.id}`}
-                    currentUrl={exhibition.cms.currentUrl}
+                    slotId={`main-project-${project.id}`}
+                    currentUrl={project.cms.currentUrl}
                     type="image"
-                    onUpload={exhibition.cms.handleUpload}
-                    onDelete={exhibition.cms.handleDelete}
+                    onUpload={project.cms.handleUpload}
+                    onDelete={project.cms.handleDelete}
                     isAdminMode={true}
-                    placeholder={exhibition.name}
+                    placeholder={project.name}
                   />
                 </div>
               )}

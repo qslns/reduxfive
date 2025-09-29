@@ -25,9 +25,9 @@ export default function InstallationPage() {
   const digitalCMS = useSimpleCMS('about-installation-digital', '/images/process/디지털  웹 디자인.png');
   
   // CMS 슬롯들 - 갤러리 슬라이드 이미지들
-  const gallerySlide1CMS = useSimpleCMS('about-installation-gallery1', '/images/exhibitions/cinemode/behind.jpg');
-  const gallerySlide2CMS = useSimpleCMS('about-installation-gallery2', '/images/exhibitions/cinemode/exhibition.jpg');
-  const gallerySlide3CMS = useSimpleCMS('about-installation-gallery3', '/images/exhibitions/cinemode/opening.jpg');
+  const gallerySlide1CMS = useSimpleCMS('about-installation-gallery1', '/images/projects/cinemode/1.jpg');
+  const gallerySlide2CMS = useSimpleCMS('about-installation-gallery2', '/images/projects/cinemode/2.jpg');
+  const gallerySlide3CMS = useSimpleCMS('about-installation-gallery3', '/images/projects/cinemode/3.jpg');
 
   // Ensure client-side rendering
   useEffect(() => {
@@ -162,23 +162,23 @@ export default function InstallationPage() {
 
   // 갤러리 슬라이드 데이터 - CMS 통합
   const gallerySlides = [
-    { 
-      title: 'CINE MODE - Behind', 
-      location: '전시 준비 과정', 
-      image: gallerySlide1CMS.currentUrl || '/images/exhibitions/cinemode/behind.jpg',
-      cms: gallerySlide1CMS 
+    {
+      title: 'CINE MODE - Scene 1',
+      location: '프로젝트 준비 과정',
+      image: gallerySlide1CMS.currentUrl || '/images/projects/cinemode/1.jpg',
+      cms: gallerySlide1CMS
     },
-    { 
-      title: 'CINE MODE - Exhibition', 
-      location: '전시 공간', 
-      image: gallerySlide2CMS.currentUrl || '/images/exhibitions/cinemode/exhibition.jpg',
-      cms: gallerySlide2CMS 
+    {
+      title: 'CINE MODE - Scene 2',
+      location: '프로젝트 공간',
+      image: gallerySlide2CMS.currentUrl || '/images/projects/cinemode/2.jpg',
+      cms: gallerySlide2CMS
     },
-    { 
-      title: 'CINE MODE - Opening', 
-      location: '오프닝 현장', 
-      image: gallerySlide3CMS.currentUrl || '/images/exhibitions/cinemode/opening.jpg',
-      cms: gallerySlide3CMS 
+    {
+      title: 'CINE MODE - Scene 3',
+      location: '오프닝 현장',
+      image: gallerySlide3CMS.currentUrl || '/images/projects/cinemode/3.jpg',
+      cms: gallerySlide3CMS
     }
   ];
 

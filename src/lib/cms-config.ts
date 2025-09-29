@@ -167,7 +167,7 @@ export const mediaSlots: MediaSlot[] = [
     category: 'main-exhibitions',
     priority: 2,
     supportedFormats: ['jpg', 'jpeg', 'png', 'webp'],
-    currentFiles: ['/images/exhibitions/cinemode/1.jpg'],
+    currentFiles: ['/images/projects/cinemode/1.jpg'],
     page: '/',
     section: 'showcase'
   },
@@ -179,7 +179,7 @@ export const mediaSlots: MediaSlot[] = [
     category: 'main-exhibitions',
     priority: 2,
     supportedFormats: ['jpg', 'jpeg', 'png', 'webp'],
-    currentFiles: ['/images/exhibitions/theroom/qslna_mirror-box_installation_four_polished_steel_walls_refle_4ffced5d-0e8e-41c6-a7ad-8f08583b1c72_2.png'],
+    currentFiles: ['/images/projects/theroom/qslna_mirror-box_installation_four_polished_steel_walls_refle_4ffced5d-0e8e-41c6-a7ad-8f08583b1c72_2.png'],
     page: '/',
     section: 'showcase'
   },
@@ -257,12 +257,12 @@ export const mediaSlots: MediaSlot[] = [
     maxFiles: 10,
     supportedFormats: ['jpg', 'jpeg', 'png', 'webp'],
     currentFiles: [
-      '/images/exhibitions/cinemode/1.jpg',
-      '/images/exhibitions/cinemode/2.jpg',
-      '/images/exhibitions/cinemode/3.jpg',
-      '/images/exhibitions/cinemode/4.jpg'
+      '/images/projects/cinemode/1.jpg',
+      '/images/projects/cinemode/2.jpg',
+      '/images/projects/cinemode/3.jpg',
+      '/images/projects/cinemode/4.jpg'
     ],
-    page: '/exhibitions',
+    page: '/projects',
     section: 'cinemode-gallery'
   },
 
@@ -277,12 +277,12 @@ export const mediaSlots: MediaSlot[] = [
     maxFiles: 10,
     supportedFormats: ['jpg', 'jpeg', 'png', 'webp'],
     currentFiles: [
-      '/images/exhibitions/theroom/qslna_dawn_alleyway_low-angle_28_mm_R13_2025_layered_denim-ov_828e4c6e-0b81-4949-8c96-7e241f9a3c03_0.png',
-      '/images/exhibitions/theroom/qslna_minimalist_concrete_courtyard_high-key_daylight_overcas_85d5cd51-4cd3-40e8-9111-12e1bf3c2bdd_0.png',
-      '/images/exhibitions/theroom/qslna_mirror-box_installation_four_polished_steel_walls_refle_4ffced5d-0e8e-41c6-a7ad-8f08583b1c72_2.png',
-      '/images/exhibitions/theroom/qslna_split-frame_triptych_left_strip--front_close-crop_of_ma_25f1d65c-d800-4e74-9a72-5919d703eeb2_1.png'
+      '/images/projects/theroom/qslna_dawn_alleyway_low-angle_28_mm_R13_2025_layered_denim-ov_828e4c6e-0b81-4949-8c96-7e241f9a3c03_0.png',
+      '/images/projects/theroom/qslna_minimalist_concrete_courtyard_high-key_daylight_overcas_85d5cd51-4cd3-40e8-9111-12e1bf3c2bdd_0.png',
+      '/images/projects/theroom/qslna_mirror-box_installation_four_polished_steel_walls_refle_4ffced5d-0e8e-41c6-a7ad-8f08583b1c72_2.png',
+      '/images/projects/theroom/qslna_split-frame_triptych_left_strip--front_close-crop_of_ma_25f1d65c-d800-4e74-9a72-5919d703eeb2_1.png'
     ],
-    page: '/exhibitions',
+    page: '/projects',
     section: 'theroom-gallery'
   },
 
